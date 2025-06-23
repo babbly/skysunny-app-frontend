@@ -1,0 +1,17 @@
+/node_modules/
+
+# logs
+*.log
+
+# iOS
+/ios/Pods/
+/ios/build/
+
+# Android
+/android/.gradle/
+/android/app/build/
+/android/build/
+
+# 기타
+*.keystore
+.env
