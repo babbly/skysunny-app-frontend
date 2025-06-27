@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import color from '../../res/color';
 import layout, { scaleFont, scaleHeight, scaleWidth } from '../../res/layout';
@@ -6,18 +6,11 @@ import layout, { scaleFont, scaleHeight, scaleWidth } from '../../res/layout';
 
 export default function StudyTime({ navigation }) {
 
+    const [activeTab, setActiveTab] = useState('study');
 
     const back = () => {
         navigation.goBack();
     }
-
-    const detail = () => {
-
-        navigation.navigate('HistoryDetail', {
-            // id: itemId
-        });
-
-    };
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: color.white }}>
@@ -43,40 +36,38 @@ export default function StudyTime({ navigation }) {
 
 
             {/* 상단바 */}
-            <View style={{
-                paddingVertical: scaleHeight(15),
-                paddingHorizontal: scaleWidth(15),
-            }}>
-                <View style={{
-                    flexDirection: 'row',
-                }}>
-                    <TouchableOpacity style={{
-                        backgroundColor: color.mainColor,
-                        width: scaleWidth(78.75),
-                        height: scaleHeight(36),
-                        borderRadius: 4,
-                        justifyContent: 'center',
-                        borderWidth: 1,
-                        marginRight: scaleWidth(5)
-                    }}
-                        onPress={detail}>
-                        <Text style={{
-                            textAlign: 'center',
-                        }}>공부시간</Text>
+            <View style={{ paddingVertical: scaleHeight(15), paddingHorizontal: scaleWidth(15) }}>
+                <View style={{ flexDirection: 'row' }}>
+                    <TouchableOpacity
+                        style={{
+                            backgroundColor: activeTab === 'study' ? color.mainColor : color.buttonGray,
+                            borderWidth: activeTab === 'study' ? 1 : 0,
+                            width: scaleWidth(78.75),
+                            height: scaleHeight(36),
+                            borderRadius: 4,
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            marginRight: scaleWidth(5),
+                        }}
+                        onPress={() => setActiveTab('study')}
+                    >
+                        <Text>공부시간</Text>
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={{
-                        backgroundColor: color.buttonGray,
-                        width: scaleWidth(117),
-                        height: scaleHeight(36),
-                        borderRadius: 4,
-                        justifyContent: 'center',
-                        marginRight: scaleWidth(5)
-                    }}
-                        onPress={detail}>
-                        <Text style={{
-                            textAlign: 'center',
-                        }}>원 평균 출석일 수</Text>
+                    <TouchableOpacity
+                        style={{
+                            backgroundColor: activeTab === 'attendance' ? color.mainColor : color.buttonGray,
+                            borderWidth: activeTab === 'attendance' ? 1 : 0,
+                            width: scaleWidth(117),
+                            height: scaleHeight(36),
+                            borderRadius: 4,
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            marginRight: scaleWidth(5),
+                        }}
+                        onPress={() => setActiveTab('attendance')}
+                    >
+                        <Text>원 평균 출석일 수</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -84,93 +75,86 @@ export default function StudyTime({ navigation }) {
 
             {/* 공부시간 */}
             <View style={[layout.container, { backgroundColor: color.white }]}>
-                <View style={{
-                    width: scaleWidth(320),
-                    borderRadius: 6,
-                    borderWidth: 1,
-                    borderColor: "#dbdcdd",
-                    backgroundColor: color.white,
-                    paddingHorizontal: scaleWidth(20),
-                    paddingVertical: scaleHeight(20),
-                    flexDirection: 'row',
-                    justifyContent: 'center',
-                    marginVertical: scaleHeight(20),
-                }}>
-                    <View style={{
-                        width: scaleWidth(160),
-                        alignItems: 'center'
-                    }}>
-                        <Text style={{
-                            color: '#979797',
-                            fontSize: scaleFont(14),
-                            lineHeight: scaleFont(18)
-                        }}>총 공부시간</Text>
-                        <Text
-                            style={{
-                                fontWeight: '700',
-                                fontSize: scaleFont(18),
-                                lineHeight: scaleFont(26)
-                            }}>21:30</Text>
-                    </View>
-                    <View style={{
-                        width: scaleWidth(160),
-                        alignItems: 'center'
+                {activeTab === 'study' && (
+                    <>
+                        <View style={styles.timeBox}>
+                            <View style={styles.timeBox2}>
+                                <Text style={styles.mainText}>총 공부시간</Text>
+                                <Text style={styles.timeText}>21:30</Text>
+                            </View>
+                            <View style={styles.timeBox2}>
+                                <Text style={styles.mainText}>평균 공부시간</Text>
+                                <Text style={styles.timeText}>04:00</Text>
+                            </View>
+                        </View>
 
-                    }}>
-                        <Text style={{
-                            color: '#979797',
-                            fontSize: scaleFont(14),
-                            lineHeight: scaleFont(18)
-                        }}>평균 공부시간</Text>
-                        <Text style={{
-                            fontWeight: '700',
-                            fontSize: scaleFont(18),
-                            lineHeight: scaleFont(26)
-                        }}>04:00</Text>
-                    </View>
-                </View>
+                        <View style={{
+                            width: scaleWidth(330),
+                            borderWidth: 1,
+                            height: scaleHeight(290),
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                        }}>
+                            <Text>그래프 공간</Text>
+                        </View>
+                        <View style={styles.timeBox}>
+                            <View style={{ width: scaleWidth(160), alignItems: 'center' }}>
+                                <Text style={styles.mainText}>월 평균 공부시간</Text>
+                                <Text style={styles.timeText}>21:30</Text>
+                            </View>
+                        </View>
+                    </>
+                )}
 
-                <View style={{
-                    width: scaleWidth(330),
-                    borderWidth: 1,
-                    height: scaleHeight(290)
-                }}>
-                    <Text>그래프 공간</Text>
-                </View>
-                <View style={{
-                    width: scaleWidth(320),
-                    borderRadius: 6,
-                    borderWidth: 1,
-                    borderColor: "#dbdcdd",
-                    backgroundColor: "#fff",
-                    paddingHorizontal: scaleWidth(20),
-                    paddingVertical: scaleHeight(20),
-                    flexDirection: 'row',
-                    justifyContent: 'center',
-                    marginVertical: scaleHeight(20),
-                }}>
-                    <View style={{
-                        width: scaleWidth(160),
-                        alignItems: 'center'
-                    }}>
-                        <Text style={{
-                            color: '#979797',
-                            fontSize: scaleFont(14),
-                            lineHeight: scaleFont(18)
-                        }}>월 평균 공부시간</Text>
-                        <Text
-                            style={{
-                                fontWeight: '700',
-                                fontSize: scaleFont(18),
-                                lineHeight: scaleFont(26)
-                            }}>21:30</Text>
-                    </View>
-                </View>
+                {activeTab === 'attendance' && (
+                    <>
+                        <View style={styles.timeBox}>
+                            <View style={{ width: scaleWidth(160), alignItems: 'center' }}>
+                                <Text style={styles.mainText}>월 평균 공부시간</Text>
+                                <Text style={styles.timeText}>21:30</Text>
+                            </View>
+                        </View>
+                        <View style={{
+                            width: scaleWidth(330),
+                            borderWidth: 1,
+                            height: scaleHeight(290),
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                        }}>
+                            <Text>그래프 공간</Text>
+                        </View>
+                    </>
+                )}
             </View>
-        </SafeAreaView >
+        </SafeAreaView>
     );
 }
 
 const styles = StyleSheet.create({
-    container: { flex: 1, justifyContent: 'center', alignItems: 'center' },
+    timeBox: {
+        width: scaleWidth(320),
+        borderRadius: 6,
+        borderWidth: 1,
+        borderColor: "#dbdcdd",
+        backgroundColor: "#fff",
+        paddingHorizontal: scaleWidth(20),
+        paddingVertical: scaleHeight(20),
+        flexDirection: 'row',
+        justifyContent: 'center',
+        marginVertical: scaleHeight(20),
+    },
+    timeBox2: {
+        width: scaleWidth(160),
+        alignItems: 'center',
+    },
+    mainText: {
+        color: '#979797',
+        fontSize: scaleFont(14),
+        lineHeight: scaleFont(18),
+    },
+    timeText: {
+        fontWeight: '700',
+        fontSize: scaleFont(18),
+        lineHeight: scaleFont(26),
+    },
 });
