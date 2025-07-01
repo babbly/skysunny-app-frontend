@@ -8,7 +8,7 @@ const noticeList = [
         id: 1,
         title: '3월 공지안내',
         date: '2022-03-07',
-        content: '3월 공지사항 내용입니다.',
+        content: '3월 공지사항 내용입니다.3월 공지사항 내용입니다.3월 공지사항 내용입니다.3월 공지사항 내용입니다.3월 공지사항 내용입니다.3월 공지사항 내용입니다.3월 공지사항 내용입니다.3월 공지사항 내용입니다.3월 공지사항 내용입니다.',
     },
     {
         id: 2,
@@ -27,9 +27,6 @@ const noticeList = [
 export default function Notice({ navigation }) {
     const [openNotices, setOpenNotices] = useState([]);
 
-    const back = () => {
-        navigation.goBack();
-    };
 
     const toggleNotice = (id) => {
         setOpenNotices((prev) =>
@@ -42,33 +39,33 @@ export default function Notice({ navigation }) {
 
         return (
             <View style={{ marginBottom: scaleHeight(20) }}>
-                <View
-                    style={{
-                        width: scaleWidth(310),
-                        flexDirection: 'row',
-                        justifyContent: 'space-between',
-                        alignItems: 'center',
-                    }}
-                >
-                    <View>
-                        <Text style={{
-                            fontWeight: '500',
-                            fontSize: scaleFont(15),
-                            lineHeight: scaleFont(24),
-                            marginBottom: 5,
-                        }}>
-                            {item.title}
-                        </Text>
-                        <Text style={{
-                            fontWeight: '350',
-                            fontSize: scaleFont(12),
-                            lineHeight: scaleFont(18),
-                            color: '#777',
-                        }}>
-                            {item.date}
-                        </Text>
-                    </View>
-                    <TouchableOpacity onPress={() => toggleNotice(item.id)}>
+                <TouchableOpacity onPress={() => toggleNotice(item.id)}>
+                    <View
+                        style={{
+                            width: scaleWidth(310),
+                            flexDirection: 'row',
+                            justifyContent: 'space-between',
+                            alignItems: 'center',
+                        }}
+                    >
+                        <View>
+                            <Text style={{
+                                fontWeight: '500',
+                                fontSize: scaleFont(15),
+                                lineHeight: scaleFont(24),
+                                marginBottom: 5,
+                            }}>
+                                {item.title}
+                            </Text>
+                            <Text style={{
+                                fontWeight: '350',
+                                fontSize: scaleFont(12),
+                                lineHeight: scaleFont(18),
+                                color: '#777',
+                            }}>
+                                {item.date}
+                            </Text>
+                        </View>
                         <Image
                             source={require('../../img/common/underarrow.png')}
                             style={{
@@ -78,8 +75,8 @@ export default function Notice({ navigation }) {
                             }}
                             resizeMode="contain"
                         />
-                    </TouchableOpacity>
-                </View>
+                    </View>
+                </TouchableOpacity>
 
                 {/* 내용 */}
                 {isOpen && (
@@ -106,7 +103,7 @@ export default function Notice({ navigation }) {
             {/* 상단 바 */}
             <View style={layout.topBar}>
                 <View style={{ flexDirection: 'row' }}>
-                    <TouchableOpacity style={layout.backBox} onPress={back}>
+                    <TouchableOpacity style={layout.backBox} onPress={() => navigation.goBack()}>
                         <Image
                             source={require('../../img/common/backarrow.png')}
                             style={{ width: scaleWidth(24), height: scaleHeight(24) }}

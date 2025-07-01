@@ -4,64 +4,53 @@ import color from '../../res/color';
 import layout, { scaleFont, scaleHeight, scaleWidth } from '../../res/layout';
 
 export default function MyPageTab({ navigation }) {
-    const back = () => {
-        navigation.goBack();
-    }
+
     const myinfo = () => {
-
-        navigation.navigate('MyInfo', {
-            // id: itemId
+        navigation.navigate('MyPageStack', {
+            screen: 'MyInfo'
         });
-
     };
     const payment = () => {
-
-        navigation.navigate('Payment', {
-            // id: itemId
+        navigation.navigate('MyPageStack', {
+            screen: 'Payment'
         });
-
     };
     const studyTime = () => {
-
-        navigation.navigate('StudyTime', {
-            // id: itemId
+        navigation.navigate('MyPageStack', {
+            screen: 'StudyTime'
         });
-
     };
+
     const cafeLike = () => {
-
-        navigation.navigate('CafeLike', {
-            // id: itemId
+        navigation.navigate('MyPageStack', {
+            screen: 'CafeLike'
         });
-
     };
+
     const coupon = () => {
-
-        navigation.navigate('Coupon', {
-            // id: itemId
+        navigation.navigate('MyPageStack', {
+            screen: 'Coupon'
         });
-
     };
-    // const point = () => {
 
-    //     navigation.navigate('HistoryDetail', {
+    //     const point = () => {
+    //     navigation.navigate('MyPageStack', {
+    //         screen: 'Point'
     //     });
-
     // };
+
     const notice = () => {
-
-        navigation.navigate('Notice', {
-            // id: itemId
+        navigation.navigate('MyPageStack', {
+            screen: 'Notice'
         });
-
     };
+
     const faq = () => {
-
-        navigation.navigate('Faq', {
-            // id: itemId
+        navigation.navigate('MyPageStack', {
+            screen: 'Faq'
         });
-
     };
+
     return (
         <SafeAreaView style={{ flex: 1, alignItems: 'center', }}>
             <View style={{
@@ -75,7 +64,7 @@ export default function MyPageTab({ navigation }) {
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', }}>
                     <View style={{ flexDirection: 'row', }}>
                         <TouchableOpacity style={layout.backBox}
-                            onPress={back}>
+                            onPress={() => navigation.goBack()}>
                             <Image
                                 source={require("../../img/common/backarrow.png")}
                                 style={{ width: scaleWidth(24), height: scaleHeight(24) }}
@@ -90,7 +79,7 @@ export default function MyPageTab({ navigation }) {
                     </View>
                     <View>
                         <TouchableOpacity style={layout.backBox}
-                            onPress={back}>
+                            onPress={() => navigation.goBack()}>
                             <Image
                                 source={require("../../img/common/setting.png")}
                                 style={{ width: 21.36, height: 22.26, }}

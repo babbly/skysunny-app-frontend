@@ -8,9 +8,6 @@ export default function StudyTime({ navigation }) {
 
     const [activeTab, setActiveTab] = useState('study');
 
-    const back = () => {
-        navigation.goBack();
-    }
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: color.white }}>
@@ -18,7 +15,7 @@ export default function StudyTime({ navigation }) {
             <View style={layout.topBar}>
                 <View style={{ flexDirection: 'row', }}>
                     <TouchableOpacity style={layout.backBox}
-                        onPress={back}>
+                        onPress={() => navigation.goBack()}>
                         <Image
                             source={require("../../img/common/backarrow.png")}
                             style={{ width: scaleWidth(24), height: scaleHeight(24) }}
@@ -36,38 +33,26 @@ export default function StudyTime({ navigation }) {
 
 
             {/* 상단바 */}
-            <View style={{ paddingVertical: scaleHeight(15), paddingHorizontal: scaleWidth(15) }}>
+            <View style={{ paddingTop: scaleHeight(15), paddingHorizontal: scaleWidth(15) }}>
                 <View style={{ flexDirection: 'row' }}>
                     <TouchableOpacity
-                        style={{
+                        style={[layout.toggleButton, {
                             backgroundColor: activeTab === 'study' ? color.mainColor : color.buttonGray,
                             borderWidth: activeTab === 'study' ? 1 : 0,
-                            width: scaleWidth(78.75),
-                            height: scaleHeight(36),
-                            borderRadius: 4,
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            marginRight: scaleWidth(5),
-                        }}
+                        }]}
                         onPress={() => setActiveTab('study')}
                     >
                         <Text>공부시간</Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity
-                        style={{
+                        style={[layout.toggleButton2, {
                             backgroundColor: activeTab === 'attendance' ? color.mainColor : color.buttonGray,
                             borderWidth: activeTab === 'attendance' ? 1 : 0,
-                            width: scaleWidth(117),
-                            height: scaleHeight(36),
-                            borderRadius: 4,
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            marginRight: scaleWidth(5),
-                        }}
+                        }]}
                         onPress={() => setActiveTab('attendance')}
                     >
-                        <Text>원 평균 출석일 수</Text>
+                        <Text>월 평균 출석일 수</Text>
                     </TouchableOpacity>
                 </View>
             </View>

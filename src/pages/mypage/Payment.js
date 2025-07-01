@@ -23,16 +23,6 @@ export default function Payment({ navigation }) {
         };
     });
 
-    const back = () => {
-        navigation.goBack();
-    }
-
-    const detail = () => {
-        navigation.navigate('HistoryDetail', {
-            // id: itemId
-        });
-
-    };
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: color.white }}>
@@ -41,7 +31,7 @@ export default function Payment({ navigation }) {
             <View style={layout.topBar}>
                 <View style={{ flexDirection: 'row', }}>
                     <TouchableOpacity style={layout.backBox}
-                        onPress={back}>
+                        onPress={() => navigation.goBack()}>
                         <Image
                             source={require("../../img/common/backarrow.png")}
                             style={{ width: scaleWidth(24), height: scaleHeight(24) }}
@@ -234,35 +224,35 @@ export default function Payment({ navigation }) {
                             lineHeight: scaleFont(24),
                         }}>200,000원</Text>
 
-                        <View style={{ flexDirection: 'row' }}>
-                            <View style={{
-                                borderColor: '#e0e0e0',
-                                borderRadius: 4,
-                                borderWidth: 1,
-                                paddingHorizontal: scaleWidth(10),
-                                paddingVertical: scaleHeight(5),
-                                marginRight: 10
-                            }}>
-                                <Text style={{
-                                    fontSize: scaleFont(12),
-                                    justifyContent: 'center',
-                                    color: '#8c8c8c'
-                                }}>환불신청</Text>
-                            </View>
-                            <View style={{
-                                backgroundColor: color.black,
-                                borderRadius: 4,
-                                borderWidth: 1,
-                                paddingHorizontal: scaleWidth(10),
-                                paddingVertical: scaleHeight(5)
-                            }}>
-                                <Text style={{
-                                    fontSize: scaleFont(12),
-                                    justifyContent: 'center',
-                                    color: color.white,
-                                }}>영수증 출력</Text>
-                            </View>
+                        {/* <View style={{ flexDirection: 'row' }}> */}
+                        <View style={{
+                            borderColor: '#e0e0e0',
+                            borderRadius: 4,
+                            borderWidth: 1,
+                            paddingHorizontal: scaleWidth(10),
+                            paddingVertical: scaleHeight(5),
+                            marginRight: 10
+                        }}>
+                            <Text style={{
+                                fontSize: scaleFont(12),
+                                justifyContent: 'center',
+                                color: '#8c8c8c'
+                            }}>환불신청</Text>
                         </View>
+                        {/* <View style={{
+                            backgroundColor: color.black,
+                            borderRadius: 4,
+                            borderWidth: 1,
+                            paddingHorizontal: scaleWidth(10),
+                            paddingVertical: scaleHeight(5)
+                        }}>
+                            <Text style={{
+                                fontSize: scaleFont(12),
+                                justifyContent: 'center',
+                                color: color.white,
+                            }}>영수증 출력</Text>
+                        </View> */}
+                        {/* </View> */}
                     </View>
                 </View>
 
