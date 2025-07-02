@@ -1,17 +1,47 @@
-/node_modules/
+# macOS
+.DS_Store
 
-# logs
-*.log
+# Node
+/node_modules/
+package-lock.json
+yarn.lock
+npm-debug.log*
+yarn-error.log*
+
+# Metro bundler cache
+.expo/
+.expo-shared/
+metro-cache/
+react-native/packager-info.json
+react-native/launchPackager.command
 
 # iOS
-/ios/Pods/
-/ios/build/
+ios/Pods/
+ios/build/
+ios/DerivedData/
+ios/.bundle/
+*.xcodeproj/project.xcworkspace/xcuserdata/
+*.xcworkspace/xcuserdata/
+ios/*.xcworkspace/xcshareddata/WorkspaceSettings.xcsettings
+ios/*.pbxuser
+ios/*.mode1v3
+ios/*.mode2v3
 
 # Android
-/android/.gradle/
-/android/app/build/
-/android/build/
+android/.gradle/
+android/.idea/
+android/app/build/
+android/build/
+android/local.pro
 
-# 기타
-*.keystore
-.env
+# Ruby / CocoaPods vendor stuff
+/vendor/
+
+# Android NDK build artifacts
+android/app/.cxx/
+android/app/debug.keystore
+
+# Xcode workspace and local env
+ios/skysunny.xcworkspace/
+ios/.xcode.env.local
+
