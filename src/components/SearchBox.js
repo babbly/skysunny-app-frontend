@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     input: {
         flex: 1,
         fontSize: scaleFont(14),
-        color: '#000',
+        color: color.black,
     },
 });
 
