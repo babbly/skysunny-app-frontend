@@ -83,7 +83,7 @@ export default function Notice({ navigation }) {
                     <View
                         style={{
                             width: scaleWidth(310),
-                            backgroundColor: '#f6f6f6',
+                            backgroundColor: color.lightGray,
                             borderRadius: 6,
                             padding: 20,
                             marginTop: 10,
@@ -98,7 +98,6 @@ export default function Notice({ navigation }) {
 
     return (
         <SafeAreaView style={{ flex: 1, alignItems: 'center', backgroundColor: color.white }}>
-            <View style={{ paddingTop: scaleHeight(40) }} />
 
             {/* 상단 바 */}
             <View style={layout.topBar}>

@@ -27,7 +27,7 @@ export default function Payment({ navigation }) {
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: color.white }}>
 
-            <View style={{ paddingTop: scaleHeight(40) }}></View>
+            {/* 상단 바 */}
             <View style={layout.topBar}>
                 <View style={{ flexDirection: 'row', }}>
                     <TouchableOpacity style={layout.backBox}
@@ -119,7 +119,7 @@ export default function Payment({ navigation }) {
                         style={{
                             fontSize: scaleFont(12),
                             lineHeight: scaleFont(17),
-                            color: '#666'
+                            color: color.mediumGray
                         }}>환불 및 결제 취소 안내입니다. {"\n"}내용 준비중입니다.</Text>
                 </View>
             </View>
@@ -192,20 +192,20 @@ export default function Payment({ navigation }) {
                                 fontSize: scaleFont(12),
                                 lineHeight: scaleFont(20),
                                 marginRight: 5,
-                                color: '#6e6e6e'
+                                color: color.fontGray
                             }}>200,000 캐시권 |</Text>
 
                             <Text style={{
                                 fontSize: scaleFont(12),
                                 lineHeight: scaleFont(20),
                                 marginRight: 5,
-                                color: '#6e6e6e'
+                                color: color.fontGray
                             }}>30일 |</Text>
 
                             <Text style={{
                                 fontSize: scaleFont(12),
                                 lineHeight: scaleFont(20),
-                                color: '#6e6e6e'
+                                color: color.fontGray
                             }}>좌석당 10% 할인</Text>
 
                         </View>
@@ -287,7 +287,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     searchText: {
-        color: '#fff',
+        color: color.white,
         fontSize: scaleFont(12),
     },
     arrowIcon: {
@@ -296,20 +296,21 @@ const styles = StyleSheet.create({
     },
 });
 
-// RNPickerSelect 전용 스타일
 const pickerSelectStyles = {
     inputIOS: {
         fontSize: scaleFont(12),
-        color: '#000',
+        color: color.black,
+        paddingVertical: scaleHeight(14),
     },
     inputAndroid: {
         fontSize: scaleFont(12),
-        color: '#000',
+        color: color.black,
     },
     iconContainer: {
         position: 'absolute',
-        right: scaleWidth(8),
-        height: scaleHeight(36),
+        top: scaleHeight(10),
+        width: scaleWidth(24),
+        height: scaleHeight(24),
         justifyContent: 'center',
         alignItems: 'center',
     },

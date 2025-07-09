@@ -6,29 +6,21 @@ import layout, { scaleFont, scaleHeight, scaleWidth } from '../../res/layout';
 
 export default function HistoryDetail({ navigation }) {
 
-    const back = () => {
-        navigation.goBack();
-    }
-
-
 
     return (
         <SafeAreaView style={{ flex: 1, alignItems: 'center', backgroundColor: color.white }}>
-            <View style={{ paddingTop: scaleHeight(40) }}></View>
+
+            {/* 상단 바 */}
             <View style={layout.topBar}>
-                <View style={{ flexDirection: 'row', }}>
-                    <TouchableOpacity style={layout.backBox}
-                        onPress={back}>
+                <View style={{ flexDirection: 'row' }}>
+                    <TouchableOpacity style={layout.backBox} onPress={() => navigation.goBack()}>
                         <Image
-                            source={require("../../img/common/backarrow.png")}
-                            style={{ width: 10.06, height: 18.73, }}
+                            source={require('../../img/common/backarrow.png')}
+                            style={{ width: scaleWidth(24), height: scaleHeight(24) }}
                             resizeMode="contain"
                         />
                     </TouchableOpacity>
-                    <View style={{
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                    }}>
+                    <View style={{ justifyContent: 'center', alignItems: 'center' }}>
                         <Text style={layout.topText}>이용내역 상세보기</Text>
                     </View>
                 </View>
@@ -54,7 +46,7 @@ export default function HistoryDetail({ navigation }) {
                                 fontWeight: '400',
                                 fontSize: scaleFont(13),
                                 lineHeight: scaleFont(16),
-                                justifyContent: 'bottom', //세로정렬
+                                justifyContent: 'bottom',
                             }}>캐시정기권</Text>
                         </View>
                         <View style={{ flexDirection: 'row', alignItems: 'center', }}>
@@ -127,7 +119,7 @@ export default function HistoryDetail({ navigation }) {
                         </View>
                     </View>
                     {/* <TouchableOpacity style={{
-                        backgroundColor: '#f4f4f5',
+                        backgroundColor: color.buttonGray,
                         height: 36,
                         borderRadius: 6,
                         paddingVertical: 8,

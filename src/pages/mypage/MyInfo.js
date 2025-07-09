@@ -18,8 +18,8 @@ export default function MyInfo({ navigation }) {
     const [phone, setPhone] = useState('01012345678');
     const [address, setAddress] = useState('인천시 연수구 송도과학로 32');
     const [study, setStudy] = useState('수능');
-    const [guardianPhone, setGuardianPhone] = useState('010-1234-5678');
-    const [guardianId, setGuardianId] = useState('test@test.com');
+    const [parentPhone, setParentPhone] = useState('010-1234-5678');
+    const [parentId, setParentId] = useState('test@test.com');
 
     const FloatingInput = ({ label, value, onChangeText, secureTextEntry, editable = true, placeholder, rightButton, placeholderTextColor }) => (
         <View style={styles.inputContainer}>
@@ -44,7 +44,8 @@ export default function MyInfo({ navigation }) {
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: color.white }}>
-            <View style={{ paddingTop: scaleHeight(40) }} />
+
+            {/* 상단 바 */}
             <View style={layout.topBar}>
                 <View style={{ flexDirection: 'row' }}>
                     <TouchableOpacity style={layout.backBox} onPress={() => navigation.goBack()}>
@@ -95,7 +96,7 @@ export default function MyInfo({ navigation }) {
                         fontSize: scaleFont(12),
                         lineHeight: scaleFont(17),
                         marginBottom: scaleHeight(10),
-                        color: '#666'
+                        color: color.mediumGray
                     }}>- 휴대전화번호를 변경하시려면 본인인증을 완료하고 저장하세요.</Text>
                     <FloatingInput
                         label="주소"
@@ -104,8 +105,8 @@ export default function MyInfo({ navigation }) {
                         rightButton={{ label: '주소검색', onPress: () => alert('주소 검색') }}
                     />
                     <FloatingInput label="하고있는 공부" value={study} onChangeText={setStudy} />
-                    <FloatingInput label="보호자 연락처" value={guardianPhone} onChangeText={setGuardianPhone} />
-                    <FloatingInput label="보호자 아이디" value={guardianId} onChangeText={setGuardianId} />
+                    <FloatingInput label="보호자 연락처" value={parentPhone} onChangeText={setParentPhone} />
+                    <FloatingInput label="보호자 아이디" value={parentId} onChangeText={setParentId} />
 
                 </View>
             </ScrollView>
@@ -117,7 +118,6 @@ const styles = StyleSheet.create({
     inputContainer: {
         position: 'relative',
         width: scaleWidth(320),
-        height: scaleHeight(64),
         marginBottom: scaleHeight(10),
     },
     inputLabel: {
@@ -126,9 +126,9 @@ const styles = StyleSheet.create({
         left: scaleWidth(14),
         fontSize: scaleFont(12),
         lineHeight: scaleFont(16),
-        color: '#444',
+        color: color.lightDarkGray,
         zIndex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: color.white,
         paddingHorizontal: 4,
     },
     input: {
@@ -137,18 +137,20 @@ const styles = StyleSheet.create({
         borderRadius: 4,
         fontSize: scaleFont(14),
         lineHeight: scaleFont(24),
-        paddingTop: scaleHeight(30),
-        // paddingBottom: scaleHeight(10),
+        // paddingTop 대신 paddingVertical 사용
+        paddingTop: Platform.OS === 'ios' ? scaleHeight(10) : scaleHeight(30),
         paddingHorizontal: scaleWidth(18),
-        color: '#262626',
-        backgroundColor: '#fff',
-        height: '100%',
+        color: color.blackGray,
+        backgroundColor: color.white,
+        minHeight: scaleHeight(64),
+        textAlignVertical: 'center',
     },
+
     button: {
         position: 'absolute',
         right: scaleWidth(14),
         top: scaleHeight(19),
-        backgroundColor: '#f6f6f6',
+        backgroundColor: color.lightGray,
         paddingHorizontal: scaleWidth(10),
         paddingVertical: scaleHeight(5),
         borderRadius: 4,
@@ -156,6 +158,6 @@ const styles = StyleSheet.create({
     buttonText: {
         fontSize: scaleFont(12),
         lineHeight: scaleFont(16),
-        color: '#000',
+        color: color.black,
     },
 });

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Image, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import color from '../../res/color';
 import layout, { scaleFont, scaleHeight, scaleWidth } from '../../res/layout';
 
@@ -11,7 +11,8 @@ export default function StudyTime({ navigation }) {
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: color.white }}>
-            <View style={{ paddingTop: scaleHeight(40) }}></View>
+
+            {/* 상단 바 */}
             <View style={layout.topBar}>
                 <View style={{ flexDirection: 'row', }}>
                     <TouchableOpacity style={layout.backBox}
@@ -32,8 +33,8 @@ export default function StudyTime({ navigation }) {
             </View>
 
 
-            {/* 상단바 */}
-            <View style={{ paddingTop: scaleHeight(15), paddingHorizontal: scaleWidth(15) }}>
+            {/* 상단 버튼*/}
+            <View style={{ paddingVertical: scaleHeight(15), paddingHorizontal: scaleWidth(15) }}>
                 <View style={{ flexDirection: 'row' }}>
                     <TouchableOpacity
                         style={[layout.toggleButton, {
@@ -59,7 +60,10 @@ export default function StudyTime({ navigation }) {
 
 
             {/* 공부시간 */}
-            <View style={[layout.container, { backgroundColor: color.white }]}>
+            <ScrollView
+                contentContainerStyle={{ backgroundColor: color.white, paddingBottom: scaleHeight(50), alignItems: 'center' }}
+                showsVerticalScrollIndicator={false}
+            >
                 {activeTab === 'study' && (
                     <>
                         <View style={styles.timeBox}>
@@ -73,13 +77,7 @@ export default function StudyTime({ navigation }) {
                             </View>
                         </View>
 
-                        <View style={{
-                            width: scaleWidth(330),
-                            borderWidth: 1,
-                            height: scaleHeight(290),
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                        }}>
+                        <View style={styles.graphBox}>
                             <Text>그래프 공간</Text>
                         </View>
                         <View style={styles.timeBox}>
@@ -87,6 +85,9 @@ export default function StudyTime({ navigation }) {
                                 <Text style={styles.mainText}>월 평균 공부시간</Text>
                                 <Text style={styles.timeText}>21:30</Text>
                             </View>
+                        </View>
+                        <View style={styles.graphBox}>
+                            <Text>그래프 공간</Text>
                         </View>
                     </>
                 )}
@@ -110,7 +111,7 @@ export default function StudyTime({ navigation }) {
                         </View>
                     </>
                 )}
-            </View>
+            </ScrollView>
         </SafeAreaView>
     );
 }
@@ -126,7 +127,8 @@ const styles = StyleSheet.create({
         paddingVertical: scaleHeight(20),
         flexDirection: 'row',
         justifyContent: 'center',
-        marginVertical: scaleHeight(20),
+        marginBottom: scaleHeight(20),
+
     },
     timeBox2: {
         width: scaleWidth(160),
@@ -142,4 +144,12 @@ const styles = StyleSheet.create({
         fontSize: scaleFont(18),
         lineHeight: scaleFont(26),
     },
+    graphBox: {
+        width: scaleWidth(330),
+        borderWidth: 1,
+        height: scaleHeight(290),
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginBottom: scaleHeight(20)
+    }
 });
