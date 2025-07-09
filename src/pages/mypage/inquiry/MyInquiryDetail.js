@@ -3,13 +3,13 @@ import { Image, SafeAreaView, Text, TouchableOpacity, View } from 'react-native'
 import color from '../../../res/color';
 import layout, { scaleFont, scaleHeight, scaleWidth } from '../../../res/layout';
 
-export default function MyFaqDetail({ route, navigation }) {
+export default function MyInquiryDetail({ route, navigation }) {
 
-    const { faq } = route.params;
+    const { inquiry } = route.params;
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: color.white }}>
-            <View style={{ flex: 1, marginTop: scaleHeight(40) }}>
+            <View style={{ flex: 1, paddingTop: scaleHeight(40) }}>
                 {/* 상단 바 */}
                 <View style={[layout.topBar]}>
                     <View style={{ flexDirection: 'row', justifyContent: 'flex-end', }}>
@@ -22,7 +22,6 @@ export default function MyFaqDetail({ route, navigation }) {
                         </TouchableOpacity>
                     </View>
                 </View>
-
                 {/* 문의 */}
                 <View style={{
                     width: scaleWidth(360),
@@ -35,18 +34,18 @@ export default function MyFaqDetail({ route, navigation }) {
                             borderRadius: 4,
                             paddingHorizontal: 10,
                             paddingVertical: 5,
-                            backgroundColor: faq.answer ? '#e5e5e5' : '#f6f6f6',
+                            backgroundColor: inquiry.answer ? '#e5e5e5' : '#f6f6f6',
                             marginRight: 10,
                             marginBottom: 8
                         }}>
-                            <Text>{faq.answer ? '답변완료' : '답변대기'}</Text>
+                            <Text>{inquiry.answer ? '답변완료' : '답변대기'}</Text>
                         </View>
                         <Text style={{ fontSize: scaleFont(16), fontWeight: 'bold' }}>
-                            {faq.title}
+                            {inquiry.title}
                         </Text>
                     </View>
-                    <Text style={{ color: '#888', marginBottom: 20 }}>{faq.date}</Text>
-                    <Text style={{ fontSize: scaleFont(14), marginBottom: 30 }}>{faq.content}</Text>
+                    <Text style={{ color: '#888', marginBottom: 20 }}>{inquiry.date}</Text>
+                    <Text style={{ fontSize: scaleFont(14), marginBottom: 30 }}>{inquiry.content}</Text>
                 </View>
 
                 {/* 답변 */}
@@ -54,7 +53,7 @@ export default function MyFaqDetail({ route, navigation }) {
                     <View
                         style={{
                             flex: 1,
-                            backgroundColor: '#f6f6f6',
+                            backgroundColor: color.lightGray,
                             paddingHorizontal: 20,
                             paddingTop: 30,
                         }}>
@@ -71,14 +70,14 @@ export default function MyFaqDetail({ route, navigation }) {
                             color: '#2d2d2d',
                             marginBottom: 10
                         }}>
-                            {faq.answer}
+                            {inquiry.answer}
                         </Text>
                         <Text style={{
                             fontSize: scaleFont(12),
                             lineHeight: scaleFont(16),
-                            color: '#6e6e6e'
+                            color: color.fontGray
                         }}>
-                            {faq.answerDate}
+                            {inquiry.answerDate}
                         </Text>
                     </View>
                 </View>

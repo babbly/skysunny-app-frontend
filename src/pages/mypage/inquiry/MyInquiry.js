@@ -4,7 +4,7 @@ import color from '../../../res/color';
 import layout, { scaleFont, scaleHeight, scaleWidth } from '../../../res/layout';
 
 
-const myFaqList = [
+const myInquiryList = [
     {
         id: 1,
         title: '서비스예약 관련 문의 드립니다.',
@@ -31,19 +31,19 @@ const myFaqList = [
     },
 ];
 
-export default function MyFaq({ navigation }) {
-    const [openMyFaqs, setOpenMyFaqs] = useState([]);
+export default function MyInquiry({ navigation }) {
+    const [openMyInquirys, setOpenMyInquirys] = useState([]);
 
 
     const renderItem = ({ item }) => {
-        const isOpen = openMyFaqs.includes(item.id);
+        const isOpen = openMyInquirys.includes(item.id);
 
         return (
             <View style={{ marginBottom: scaleHeight(20) }}>
                 <TouchableOpacity
                     onPress={() => {
                         if (item.answer) {
-                            navigation.navigate('MyFaqDetail', { faq: item });
+                            navigation.navigate('MyInquiryDetail', { inquiry: item });
                         }
                     }}
                 >
@@ -60,12 +60,15 @@ export default function MyFaq({ navigation }) {
                                 <View style={{
                                     borderRadius: 4,
                                     paddingHorizontal: 10,
-                                    paddingVertical: 5,
+                                    paddingVertical: Platform.OS === 'ios' ? scaleHeight(8) : scaleHeight(5),
                                     backgroundColor: item.answer ? '#e5e5e5' : '#f6f6f6',
                                     color: item.answer ? '#6e6e6e' : color.black,
                                     marginRight: 10
                                 }}>
-                                    <Text>{item.answer ? '답변완료' : '답변대기'}</Text>
+                                    <Text style={{
+                                        textAlign: 'center',
+                                        alignItems: 'center'
+                                    }}>{item.answer ? '답변완료' : '답변대기'}</Text>
                                 </View>
                                 <Text style={{
                                     fontWeight: '500',
@@ -88,16 +91,14 @@ export default function MyFaq({ navigation }) {
                             </Text>
                         </View>
                     </View>
-                </TouchableOpacity>
-
-
-            </View>
+                </TouchableOpacity >
+            </View >
         );
     };
 
     return (
         <SafeAreaView style={{ flex: 1, alignItems: 'center', backgroundColor: color.white }}>
-            <View style={{ paddingTop: scaleHeight(40) }} />
+
 
             {/* 상단 바 */}
             <View style={layout.topBar}>
@@ -118,7 +119,7 @@ export default function MyFaq({ navigation }) {
             {/* 리스트 */}
             <FlatList
                 contentContainerStyle={{ paddingVertical: scaleHeight(20) }}
-                data={myFaqList}
+                data={myInquiryList}
                 keyExtractor={(item) => item.id.toString()}
                 renderItem={renderItem}
             />

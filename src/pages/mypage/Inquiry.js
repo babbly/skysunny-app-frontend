@@ -4,12 +4,11 @@ import color from '../../res/color';
 import layout, { scaleFont, scaleHeight, scaleWidth } from '../../res/layout';
 
 
-export default function Faq({ navigation }) {
+export default function Inquiry({ navigation }) {
 
 
     return (
         <SafeAreaView style={{ flex: 1, alignItems: 'center', backgroundColor: color.white }}>
-            <View style={{ paddingTop: scaleHeight(40) }} />
 
             {/* 상단 바 */}
             <View style={layout.topBar}>
@@ -28,7 +27,7 @@ export default function Faq({ navigation }) {
             </View>
 
             <View style={[layout.container, { backgroundColor: color.white }]}>
-                <TouchableOpacity onPress={() => navigation.navigate('AppFaq', {})}>
+                <TouchableOpacity onPress={() => navigation.navigate('AppInquiry', {})}>
                     <View style={styles.menuTab}>
                         <Text style={styles.menuText}> 앱 이용문의</Text>
                         <Image
@@ -41,7 +40,7 @@ export default function Faq({ navigation }) {
                         />
                     </View>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('CoFaq', {})}>
+                <TouchableOpacity onPress={() => navigation.navigate('InquiryType', {})}>
                     <View style={styles.menuTab}>
                         <Text style={styles.menuText}> 입점/제휴문의</Text>
                         <Image
@@ -54,7 +53,7 @@ export default function Faq({ navigation }) {
                         />
                     </View>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('CafeFaq', {})}>
+                <TouchableOpacity onPress={() => navigation.navigate('StoreInquiry', {})}>
                     <View style={styles.menuTab}>
                         <Text style={styles.menuText}> 지점 이용문의</Text>
                         <Image
@@ -67,7 +66,7 @@ export default function Faq({ navigation }) {
                         />
                     </View>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('MyFaq', {})}>
+                <TouchableOpacity onPress={() => navigation.navigate('MyInquiry', {})}>
                     <View style={styles.menuTab}>
                         <Text style={styles.menuText}> 나의 문의내역</Text>
                         <Image

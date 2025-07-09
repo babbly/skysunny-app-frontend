@@ -3,7 +3,7 @@ import { FlatList, Image, SafeAreaView, Text, TouchableOpacity, View } from 'rea
 import color from '../../../res/color';
 import layout, { scaleFont, scaleHeight, scaleWidth } from '../../../res/layout';
 
-const appFaqList = [
+const appInquiryList = [
     {
         id: 1,
         title: '캐시구매 및 사용방법',
@@ -24,22 +24,22 @@ const appFaqList = [
     },
 ];
 
-export default function AppFaq({ navigation }) {
-    const [openAppFaq, setOpenAppFaqs] = useState([]);
+export default function AppInquiry({ navigation }) {
+    const [openAppInquiry, setOpenAppInquirys] = useState([]);
 
 
-    const toggleAppFaq = (id) => {
-        setOpenAppFaqs((prev) =>
+    const toggleAppInquiry = (id) => {
+        setOpenAppInquirys((prev) =>
             prev.includes(id) ? prev.filter((n) => n !== id) : [...prev, id]
         );
     };
 
     const renderItem = ({ item }) => {
-        const isOpen = openAppFaq.includes(item.id);
+        const isOpen = openAppInquiry.includes(item.id);
 
         return (
             <View style={{ justifyContent: 'center', }}>
-                <TouchableOpacity onPress={() => toggleAppFaq(item.id)}>
+                <TouchableOpacity onPress={() => toggleAppInquiry(item.id)}>
                     <View
                         style={{
                             width: scaleWidth(360),
@@ -101,7 +101,6 @@ export default function AppFaq({ navigation }) {
 
     return (
         <SafeAreaView style={{ flex: 1, alignItems: 'center', backgroundColor: color.white }}>
-            <View style={{ paddingTop: scaleHeight(40) }} />
 
             {/* 상단 바 */}
             <View style={layout.topBar}>
@@ -122,7 +121,7 @@ export default function AppFaq({ navigation }) {
             {/* 리스트 */}
             <FlatList
                 contentContainerStyle={{ paddingVertical: scaleHeight(20) }}
-                data={appFaqList}
+                data={appInquiryList}
                 keyExtractor={(item) => item.id.toString()}
                 renderItem={renderItem}
             />
@@ -141,7 +140,7 @@ export default function AppFaq({ navigation }) {
                     <Text style={{
                         fontSize: scaleFont(16),
                         lineHeight: scaleFont(26),
-                        color: '#262626'
+                        color: color.blackGray
                     }}>
                         카카오톡 이용문의
                     </Text>

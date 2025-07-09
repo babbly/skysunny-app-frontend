@@ -31,9 +31,52 @@ const stores = [
         address: '인천 연수구 해돋이로 165 8층 (803호)',
         image: require("../../../img/history/example.png"),
     },
+    {
+        id: 4,
+        name: '시작 스터디카페 인천송도점',
+        address: '인천 연수구 해돋이로 165 8층 (803호)',
+        image: require("../../../img/history/example.png"),
+    },
+    {
+        id: 5,
+        name: '시작 스터디카페 인천송도점',
+        address: '인천 연수구 해돋이로 165 8층 (803호)',
+        image: require("../../../img/history/example.png"),
+    },
+    {
+        id: 6,
+        name: '시작 스터디카페 인천송도점',
+        address: '인천 연수구 해돋이로 165 8층 (803호)',
+        image: require("../../../img/history/example.png"),
+    },
+
+    {
+        id: 7,
+        name: '시작 스터디카페 인천송도점',
+        address: '인천 연수구 해돋이로 165 8층 (803호)',
+        image: require("../../../img/history/example.png"),
+    },
+
+    {
+        id: 8,
+        name: '시작 스터디카페 인천송도점',
+        address: '인천 연수구 해돋이로 165 8층 (803호)',
+        image: require("../../../img/history/example.png"),
+    }, {
+        id: 9,
+        name: '시작 스터디카페 인천송도점',
+        address: '인천 연수구 해돋이로 165 8층 (803호)',
+        image: require("../../../img/history/example.png"),
+    },
+    {
+        id: 10,
+        name: '시작 스터디카페 인천송도점',
+        address: '인천 연수구 해돋이로 165 8층 (803호)',
+        image: require("../../../img/history/example.png"),
+    },
 ];
 
-export default function CafeFaq({ navigation }) {
+export default function StoreInquiry({ navigation }) {
     const [search, setSearch] = useState('');
 
 
@@ -43,7 +86,6 @@ export default function CafeFaq({ navigation }) {
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: color.white }}>
-            <View style={{ paddingTop: scaleHeight(40) }} />
 
             {/* 상단 바 */}
             <View style={layout.topBar}>
@@ -64,7 +106,7 @@ export default function CafeFaq({ navigation }) {
             <ScrollView
                 contentContainerStyle={{
                     paddingHorizontal: scaleWidth(15),
-                    paddingBottom: scaleHeight(100),
+                    paddingBottom: scaleHeight(50),
                 }}
                 keyboardShouldPersistTaps="handled"
             >
@@ -88,7 +130,7 @@ export default function CafeFaq({ navigation }) {
                 {filteredStores.map((store) => (
                     <TouchableOpacity
                         key={store.id}
-                        onPress={() => navigation.navigate('CafeFaqDetail', { store })}
+                        onPress={() => navigation.navigate('StoreInquiryDetail', { store })}
                         style={{
                             flexDirection: 'row',
                             paddingVertical: 10,

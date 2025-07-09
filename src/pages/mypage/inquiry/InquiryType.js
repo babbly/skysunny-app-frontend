@@ -14,11 +14,10 @@ import {
 import color from '../../../res/color';
 import layout, { scaleFont, scaleHeight, scaleWidth } from '../../../res/layout';
 
-export default function CafeFaqDetail({ navigation, route }) {
-
+export default function InquiryType({ navigation }) {
+    const [inquiryMode, setInquiryMode] = useState('join');
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
-    const { store } = route.params;
 
 
     const handleSubmit = () => {
@@ -38,7 +37,6 @@ export default function CafeFaqDetail({ navigation, route }) {
                 style={{ flex: 1 }}
                 behavior={Platform.OS === 'ios' ? 'padding' : undefined}
             >
-                <View style={{ paddingTop: scaleHeight(40) }} />
 
                 {/* 상단 바 */}
                 <View style={layout.topBar}>
@@ -51,7 +49,7 @@ export default function CafeFaqDetail({ navigation, route }) {
                             />
                         </TouchableOpacity>
                         <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                            <Text style={layout.topText}>지점 이용문의</Text>
+                            <Text style={layout.topText}>입점/제휴문의</Text>
                         </View>
                     </View>
                 </View>
@@ -59,37 +57,71 @@ export default function CafeFaqDetail({ navigation, route }) {
                 <ScrollView
                     contentContainerStyle={{
                         paddingHorizontal: scaleWidth(15),
-                        paddingBottom: scaleHeight(100)
+                        paddingBottom: scaleHeight(50)
                     }}
                     keyboardShouldPersistTaps="handled"
                 >
                     {/* 안내 문구 */}
-                    <View style={{ marginTop: 20, }}>
+                    <View style={{ marginTop: 20 }}>
                         <Text style={{
                             marginBottom: 10,
                             fontWeight: '500',
                             fontSize: scaleFont(15),
                             lineHeight: scaleFont(24)
                         }}>
-                            지점 문의 내용을 남겨주세요.
+                            스카스카에게 문의를 남겨주세요.
                         </Text>
-                        <View style={{ flexDirection: 'row', marginBottom: 20 }}>
-                            <Text style={{
-                                fontSize: scaleFont(12),
-                                lineHeight: scaleFont(17),
-                                color: '#666'
-                            }}>
-                                - 매장명 |
-                            </Text>
-                            <Text style={{
-                                fontSize: scaleFont(12),
-                                lineHeight: scaleFont(17),
-                                color: '#666'
-                            }}>{store.name}</Text>
+                        <Text>
+                            - 원하시는 문의 유형을 선택하신 후 작성해주세요.{"\n"}
+                            운영자 검토 후 최대한 신속하게 답변해드릴게요.
+                        </Text>
+                    </View>
+
+                    {/* 입점/제휴 버튼 */}
+                    <View style={{ paddingVertical: scaleHeight(20) }}>
+                        <View style={{ flexDirection: 'row' }}>
+                            <TouchableOpacity
+                                style={{
+                                    borderRadius: 4,
+                                    borderWidth: 1,
+                                    borderColor: inquiryMode === 'join' ? color.black : "#F6F6F6",
+                                    backgroundColor: inquiryMode === 'join' ? color.mainColor : "#F6F6F6",
+                                    paddingVertical: scaleHeight(8),
+                                    paddingHorizontal: scaleWidth(12),
+                                    marginRight: scaleWidth(5),
+                                }}
+                                onPress={() => setInquiryMode('join')}
+                            >
+                                <Text style={{
+                                    textAlign: 'center',
+                                    color: inquiryMode === 'join' ? color.black : color.fontGray
+                                }}>
+                                    입점
+                                </Text>
+                            </TouchableOpacity>
+
+                            <TouchableOpacity
+                                style={{
+                                    borderRadius: 4,
+                                    borderWidth: 1,
+                                    borderColor: inquiryMode === 'cooperate' ? color.black : "#F6F6F6",
+                                    backgroundColor: inquiryMode === 'cooperate' ? color.mainColor : "#F6F6F6",
+                                    paddingVertical: scaleHeight(8),
+                                    paddingHorizontal: scaleWidth(12),
+                                }}
+                                onPress={() => setInquiryMode('cooperate')}
+                            >
+                                <Text style={{
+                                    textAlign: 'center',
+                                    color: inquiryMode === 'cooperate' ? color.black : color.fontGray
+                                }}>
+                                    제휴
+                                </Text>
+                            </TouchableOpacity>
                         </View>
                     </View>
 
-                    {/* 제목 */}
+                    {/* 제목 입력 */}
                     <View style={{ position: 'relative', marginBottom: 10 }}>
                         <Text style={{
                             position: 'absolute',
@@ -97,7 +129,7 @@ export default function CafeFaqDetail({ navigation, route }) {
                             left: 10,
                             fontSize: scaleFont(12),
                             lineHeight: scaleFont(16),
-                            color: '#444',
+                            color: color.lightDarkGray,
                             paddingHorizontal: 4,
                             zIndex: 10,
                         }}>
@@ -116,13 +148,13 @@ export default function CafeFaqDetail({ navigation, route }) {
                                 lineHeight: scaleFont(24),
                                 height: scaleHeight(64),
                                 paddingTop: scaleHeight(18),
-                                color: '#262626'
+                                color: color.blackGray
                             }}
                         />
                     </View>
 
 
-                    {/* 내용 */}
+                    {/* 내용 입력 */}
                     <View>
                         <TextInput
                             value={content}
@@ -159,7 +191,7 @@ export default function CafeFaqDetail({ navigation, route }) {
                         <Text style={{
                             fontSize: scaleFont(16),
                             lineHeight: scaleFont(26),
-                            color: '#262626'
+                            color: color.blackGray
                         }}>
                             제출하기
                         </Text>

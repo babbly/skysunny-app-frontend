@@ -4,12 +4,23 @@ import SearchBox from '../../components/SearchBox';
 import color from '../../res/color';
 import layout, { scaleFont, scaleHeight, scaleWidth } from '../../res/layout';
 
-export default function CafeLike({ navigation }) {
+export default function FavoriteStore({ navigation }) {
+
+    const storeDetail = () => {
+        navigation.navigate('PageStack', {
+            screen: 'StoreDetail'
+        });
+    };
+
+
     const [selectedTab, setSelectedTab] = useState('nearby');
 
     const nearbyData = [
         { id: '1', name: '시작 스터디카페 인천 송도점', distance: '0.5km', walk: '도보 5분' },
         { id: '2', name: '시작 스터디카페 인천 송도점', distance: '0.8km', walk: '도보 8분' },
+        { id: '3', name: '시작 스터디카페 인천 송도점', distance: '0.8km', walk: '도보 8분' },
+        { id: '4', name: '시작 스터디카페 인천 송도점', distance: '0.8km', walk: '도보 8분' },
+        { id: '5', name: '시작 스터디카페 인천 송도점', distance: '0.8km', walk: '도보 8분' },
     ];
     const likedData = [
         { id: '3', name: '시작 스터디카페 인천 송도점', distance: '1.2km', walk: '도보 12분' },
@@ -31,12 +42,13 @@ export default function CafeLike({ navigation }) {
 
     const renderItem = ({ item }) => (
         <View style={{ flexDirection: 'row', height: scaleHeight(130), marginBottom: scaleHeight(15) }}>
-            <View style={{
+            <TouchableOpacity style={{
                 width: scaleWidth(330),
                 backgroundColor: "#fff",
                 borderRadius: 6,
                 flexDirection: 'row'
-            }}>
+            }}
+                onPress={storeDetail}>
                 <Image
                     source={require("../../img/mypage/example.png")}
                     style={{
@@ -88,23 +100,24 @@ export default function CafeLike({ navigation }) {
                         </View>
                     </View>
 
-                    {/* 좌석,지점,사물함 정보 */}
+                    {/* 좌석,스터디룸,사물함 정보 */}
                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                         <Image source={require("../../img/mypage/seat.png")} style={styles.icon} />
                         <Text style={{ fontSize: scaleFont(12), marginRight: 5 }}>30/90 |</Text>
-                        <Image source={require("../../img/mypage/seat2.png")} style={styles.icon} />
+                        <Image source={require("../../img/mypage/studyroom.png")} style={styles.icon} />
                         <Text style={{ fontSize: scaleFont(12), marginRight: 5 }}>01/05 |</Text>
                         <Image source={require("../../img/mypage/locker.png")} style={styles.icon} />
                         <Text style={{ fontSize: scaleFont(12) }}>10/45</Text>
                     </View>
                 </View>
-            </View>
+            </TouchableOpacity>
         </View >
     );
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: color.white, }}>
-            <View style={{ paddingTop: scaleHeight(40) }} />
+            {/* 상단 바 */}
+
             <View style={layout.topBar}>
                 <View style={{ flexDirection: 'row' }}>
                     <TouchableOpacity style={layout.backBox} onPress={() => navigation.goBack()}>
@@ -137,7 +150,7 @@ export default function CafeLike({ navigation }) {
                             }]}
                             onPress={() => setSelectedTab(type)}
                         >
-                            <Text style={{ color: '#000' }}>
+                            <Text style={{ color: color.black }}>
                                 {type === 'nearby' ? '가까운 순' : type === 'liked' ? '내가 찜한 순' : '찜 많은 순'}
                             </Text>
                         </TouchableOpacity>
@@ -147,7 +160,9 @@ export default function CafeLike({ navigation }) {
             </View>
 
             {/* 매장 리스트 */}
-            <View style={{ flex: 1, backgroundColor: '#f6f6f6' }}>
+            <View style={{
+                flex: 1, backgroundColor: color.lightGray
+            }}>
                 <FlatList
                     data={getCurrentData()}
                     keyExtractor={(item) => item.id}
@@ -160,7 +175,7 @@ export default function CafeLike({ navigation }) {
                     showsVerticalScrollIndicator={false}
                 />
             </View>
-        </SafeAreaView>
+        </SafeAreaView >
     );
 }
 const styles = StyleSheet.create({
