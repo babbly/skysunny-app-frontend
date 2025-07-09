@@ -29,6 +29,46 @@ export default function Coupon({ navigation }) {
             minUse: '5,000원 이상 사용가능',
             type: '만료',
         },
+        {
+            id: '3',
+            code: 'DFRM-J8NN-6YLY-FKSD',
+            title: '수험생 특별 할인 쿠폰',
+            store: '시작 스터디카페 인천 송도점',
+            validDays: 10,
+            amount: '5,000원',
+            minUse: '10,000원 이상 사용가능',
+            type: '이용가능',
+        },
+        {
+            id: '4',
+            code: 'DFRM-J8NN-6YLY-FKSD',
+            title: '수험생 특별 할인 쿠폰',
+            store: '시작 스터디카페 인천 송도점',
+            validDays: 10,
+            amount: '5,000원',
+            minUse: '10,000원 이상 사용가능',
+            type: '이용가능',
+        },
+        {
+            id: '5',
+            code: 'DFRM-J8NN-6YLY-FKSD',
+            title: '수험생 특별 할인 쿠폰',
+            store: '시작 스터디카페 인천 송도점',
+            validDays: 10,
+            amount: '5,000원',
+            minUse: '10,000원 이상 사용가능',
+            type: '이용가능',
+        },
+        {
+            id: '6',
+            code: 'DFRM-J8NN-6YLY-FKSD',
+            title: '수험생 특별 할인 쿠폰',
+            store: '시작 스터디카페 인천 송도점',
+            validDays: 10,
+            amount: '5,000원',
+            minUse: '10,000원 이상 사용가능',
+            type: '이용가능',
+        },
     ];
 
     const filteredCoupons = selectedTab === '전체보기'
@@ -146,9 +186,8 @@ export default function Coupon({ navigation }) {
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: color.white }}>
-            <View style={{ paddingTop: scaleHeight(40) }}></View>
 
-            {/* Top Bar */}
+            {/* 상단 바 */}
             <View style={layout.topBar}>
                 <View style={{ flexDirection: 'row' }}>
                     <TouchableOpacity style={layout.backBox} onPress={() => navigation.goBack()}>
@@ -186,7 +225,9 @@ export default function Coupon({ navigation }) {
             </View>
 
             {/* 쿠폰 리스트 */}
-            <View style={{ flex: 1, backgroundColor: '#f6f6f6' }}>
+            <View style={{
+                flex: 1, backgroundColor: color.lightGray
+            }}>
                 <FlatList
                     data={filteredCoupons}
                     renderItem={renderCouponItem}
@@ -198,7 +239,7 @@ export default function Coupon({ navigation }) {
                     showsVerticalScrollIndicator={false}
                 />
             </View>
-        </SafeAreaView>
+        </SafeAreaView >
     );
 }
 
