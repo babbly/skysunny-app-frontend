@@ -6,8 +6,8 @@ import layout, { scaleFont, scaleHeight, scaleWidth } from '../../res/layout';
 
 export default function BuyPass({ navigation }) {
 
-    const buyPass = () => {
-        navigation.navigate('PageStack', { screen: 'BuyPass' });
+    const checkPass = () => {
+        navigation.navigate('PageStack', { screen: 'CheckPass' });
     };
 
     const [selectedType, setSelectedType] = useState(null);
@@ -136,7 +136,7 @@ export default function BuyPass({ navigation }) {
 
             {/* 하단 버튼 */}
             <View style={styles.bottomButtonWrapper}>
-                <TouchableOpacity onPress={buyPass}
+                <TouchableOpacity onPress={checkPass}
                 >
                     <Text style={styles.bottomButtonText}>다음 단계로</Text>
                 </TouchableOpacity>
