@@ -1,12 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { FlatList, Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import color from '../../res/color';
 import layout, { scaleFont, scaleHeight, scaleWidth } from '../../res/layout';
 
 
 
-export default function Coupon({ navigation }) {
-    const [selectedTab, setSelectedTab] = useState('전체보기');
+export default function CheckCoupon({ navigation }) {
 
     const couponData = [
         {
@@ -71,9 +70,7 @@ export default function Coupon({ navigation }) {
         },
     ];
 
-    const filteredCoupons = selectedTab === '전체보기'
-        ? couponData
-        : couponData.filter(coupon => coupon.type === selectedTab);
+    const filteredCoupons = couponData.filter(coupon => coupon.type === '사용가능');
 
 
     const renderCouponItem = ({ item }) => (
@@ -185,6 +182,14 @@ export default function Coupon({ navigation }) {
                     color: color.fontGray,
                 }}>{item.minUse}</Text>
             </View>
+
+
+            <TouchableOpacity
+                style={styles.detailButton}
+                onPress={() => navigation.navigate('HistoryDetail', { id: item.id })}
+            >
+                <Text style={styles.detailText}>이용하기</Text>
+            </TouchableOpacity>
         </View>
     );
 
@@ -202,52 +207,61 @@ export default function Coupon({ navigation }) {
                         />
                     </TouchableOpacity>
                     <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                        <Text style={layout.topText}>쿠폰함</Text>
+                        <Text style={layout.topText}>쿠폰선택</Text>
                     </View>
                 </View>
             </View>
 
-            {/* 상단 탭 */}
-            <View style={{
-                flexDirection: 'row',
-                justifyContent: 'center',
-                flexWrap: 'wrap',
-                paddingVertical: scaleHeight(20),
-            }}>
-                {['전체보기', '이용가능', '만료', '환불'].map(tab => (
-                    <TouchableOpacity
-                        key={tab}
-                        onPress={() => setSelectedTab(tab)}
-                        style={[layout.toggleButton, {
-                            backgroundColor: selectedTab === tab ? color.mainColor : color.buttonGray,
-                            borderWidth: selectedTab === tab ? 1 : 0,
-                            marginBottom: scaleHeight(5),
-                        }]}>
-                        <Text>{tab}</Text>
-                    </TouchableOpacity>
-                ))}
-            </View>
+
 
             {/* 쿠폰 리스트 */}
-            <View style={{
-                flex: 1, backgroundColor: color.lightGray
-            }}>
-                <FlatList
-                    data={filteredCoupons}
-                    renderItem={renderCouponItem}
-                    keyExtractor={item => item.id}
-                    contentContainerStyle={{
-                        alignItems: 'center',
-                        paddingVertical: scaleHeight(20),
-                    }}
-                    showsVerticalScrollIndicator={false}
-                />
+            <View style={{ flex: 1, backgroundColor: color.lightGray }}>
+                {filteredCoupons.length > 0 ? (
+                    <FlatList
+                        data={filteredCoupons}
+                        renderItem={renderCouponItem}
+                        keyExtractor={item => item.id}
+                        contentContainerStyle={{
+                            alignItems: 'center',
+                            paddingVertical: scaleHeight(20),
+                        }}
+                        showsVerticalScrollIndicator={false}
+                    />
+                ) : (
+                    <View style={{ flex: 1, alignItems: 'center', marginTop: scaleHeight(120) }}>
+                        <Image
+                            source={require("../../img/home/noCoupon.png")}
+                            style={{ width: scaleWidth(90), height: scaleHeight(90) }}
+                            resizeMode="contain"
+                        />
+                        <Text style={{
+                            fontSize: scaleFont(14),
+                            lineHeight: scaleFont(16),
+                            color: color.mediumGray,
+                        }}>
+                            사용 가능한 쿠폰이 없어요.
+                        </Text>
+                    </View>
+                )}
             </View>
+
         </SafeAreaView >
     );
 }
 
 
 const styles = StyleSheet.create({
-    container: { flex: 1, justifyContent: 'center', alignItems: 'center' },
+    detailButton: {
+        backgroundColor: color.mainColor,
+        borderWidth: 1,
+        borderColor: color.blackGray,
+        borderRadius: 6,
+        height: scaleHeight(36),
+        justifyContent: 'center',
+        marginTop: scaleHeight(10)
+    },
+    detailText: {
+        textAlign: 'center',
+        color: color.blackGray
+    }
 });
