@@ -1,13 +1,39 @@
-// App.js
+// // App.js
+// import { NavigationContainer } from '@react-navigation/native';
+// import { Provider, useSelector } from 'react-redux';
+// import TabNavigator from './src/pages/common/Navigation';
+// import PageStack from './src/pages/common/PageStack';
+// import store from './src/store/configureStore';
+
+
+// function AppContent() {
+//     const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+
+//     return (
+//         <NavigationContainer>
+//             {isLoggedIn ? <TabNavigator /> : <PageStack />}
+//         </NavigationContainer>
+//     );
+// }
+
+// export default function App() {
+//     return (
+//         <Provider store={store}>
+//             <AppContent />
+//         </Provider>
+//     );
+// }
+
+
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Provider } from 'react-redux';
+
 import TabNavigator from './src/pages/common/Navigation';
 import PageStack from './src/pages/common/PageStack';
-import HistoryDetail from './src/pages/history/HistoryDetail';
-import configureStore from './src/store/configureStore';
+import store from './src/store/configureStore';
 
-const store = configureStore();
+// const store = configureStore();
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -16,7 +42,6 @@ export default function App() {
             <NavigationContainer>
                 <Stack.Navigator screenOptions={{ headerShown: false }}>
                     <Stack.Screen name="MainTabs" component={TabNavigator} />
-                    <Stack.Screen name="HistoryDetail" component={HistoryDetail} />
                     <Stack.Screen name="PageStack" component={PageStack} />
                 </Stack.Navigator>
             </NavigationContainer>
