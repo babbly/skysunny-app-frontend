@@ -2,11 +2,14 @@ import React, { useState } from 'react';
 import { Image, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import BannerSlider from '../../components/BannerSlider';
 import Dialog from '../../components/Dialog';
-import GoogleMapScreen from '../../components/GoogleMap';
 import color from '../../res/color';
 import layout, { scaleFont, scaleHeight, scaleWidth } from '../../res/layout';
 
 export default function StoreDetail({ navigation }) {
+
+    const update = () => {
+        navigation.navigate('PageStack', { screen: 'Update' });
+    };
 
     const out = () => {
         setOutStoreVisbile(false);
@@ -19,8 +22,12 @@ export default function StoreDetail({ navigation }) {
         navigation.navigate('PageStack', { screen: 'OneDayPass' });
     };
 
-    const temp = () => {
-        navigation.navigate('PageStack', { screen: 'TempPass' });
+    const pass = () => {
+        navigation.navigate('PageStack', { screen: 'Pass' });
+    };
+
+    const studyRoom = () => {
+        navigation.navigate('PageStack', { screen: 'StudyRoomPass' });
     };
 
     const [kakaoVisible, setKakaoVisible] = useState(false);
@@ -58,7 +65,7 @@ export default function StoreDetail({ navigation }) {
                             <TouchableOpacity onPress={() => navigation.goBack()}>
                                 <Image
                                     source={require('../../img/home/w-backarrow.png')}
-                                    style={{ width: scaleWidth(24), height: scaleHeight(24) }}
+                                    style={[layout.icon24]}
                                     resizeMode="contain"
                                 />
                             </TouchableOpacity>
@@ -67,14 +74,14 @@ export default function StoreDetail({ navigation }) {
                             <TouchableOpacity onPress={() => navigation.goBack()}>
                                 <Image
                                     source={require('../../img/home/share.png')}
-                                    style={{ width: scaleWidth(24), height: scaleHeight(24), marginRight: 15 }}
+                                    style={[layout.icon24, { marginRight: 15 }]}
                                     resizeMode="contain"
                                 />
                             </TouchableOpacity>
                             <TouchableOpacity onPress={() => navigation.goBack()}>
                                 <Image
-                                    source={require('../../img/home/fav.png')}
-                                    style={{ width: scaleWidth(24), height: scaleHeight(24) }}
+                                    source={require('../../img/home/like.png')}
+                                    style={[layout.icon24]}
                                     resizeMode="contain"
                                 />
                             </TouchableOpacity>
@@ -87,22 +94,22 @@ export default function StoreDetail({ navigation }) {
                 <View style={[layout.container, { backgroundColor: color.white }]}>
                     {/* 매장명 */}
                     <View style={{ width: scaleWidth(200), paddingTop: scaleHeight(20), justifyContent: 'center', alignItems: 'center' }}>
-                        <Text style={{ marginBottom: 5, fontSize: scaleFont(16), lineHeight: scaleFont(24), color: color.black }}> 시작 스터디카페 인천 송도점</Text>
-                        <Text style={{ fontSize: scaleFont(12), lineHeight: scaleFont(16), color: color.black }}>인천 연수구 해돋이로 165 8층 (803호)</Text>
+                        <Text style={{ marginBottom: 5, fontSize: scaleFont(16), lineHeight: scaleFont(24), color: color.black }}>{item.name}</Text>
+                        <Text style={{ fontSize: scaleFont(12), lineHeight: scaleFont(16), color: color.black }}>{item.address}</Text>
                     </View>
                     {/* 좌석,스터디룸,사물함 정보 */}
                     <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: scaleHeight(20) }}>
-                        <Image source={require("../../img/mypage/seat.png")} style={styles.icon} />
-                        <Text style={{ fontSize: scaleFont(12), marginRight: 5 }}>30/90 |</Text>
-                        <Image source={require("../../img/mypage/studyroom.png")} style={styles.icon} />
-                        <Text style={{ fontSize: scaleFont(12), marginRight: 5 }}>01/05 |</Text>
-                        <Image source={require("../../img/mypage/locker.png")} style={styles.icon} />
-                        <Text style={{ fontSize: scaleFont(12) }}>10/45</Text>
+                        <Image source={require("../../img/mypage/seat.png")} style={[layout.icon14]} />
+                        <Text style={{ fontSize: scaleFont(12), marginRight: 5 }}>{item.seats} |</Text>
+                        <Image source={require("../../img/mypage/studyroom.png")} style={[layout.icon14]} />
+                        <Text style={{ fontSize: scaleFont(12), marginRight: 5 }}>{item.studyRooms} |</Text>
+                        <Image source={require("../../img/mypage/locker.png")} style={[layout.icon14]} />
+                        <Text style={{ fontSize: scaleFont(12) }}>{item.lockers}</Text>
                     </View>
                     {/* 이벤트문구 */}
                     <View style={{
                         flexDirection: 'row',
-                        backgroundColor: '#F6F6F6',
+                        backgroundColor: color.lightGray,
                         width: scaleWidth(330),
                         paddingHorizontal: scaleWidth(8),
                         paddingVertical: scaleHeight(6),
@@ -111,9 +118,9 @@ export default function StoreDetail({ navigation }) {
                         marginTop: scaleHeight(20)
 
                     }}>
-                        <Image source={require("../../img/mypage/discount.png")} style={styles.icon} />
+                        <Image source={require("../../img/mypage/discount.png")} style={[layout.icon14]} />
                         <Text style={{ fontSize: scaleFont(12), color: color.black, marginRight: 5 }}>
-                            캐시정기권 이용시 좌석당 최대 20% 할인
+                            {item.eventDescription}
                         </Text>
                     </View>
                     {/* 시간, 문의 */}
@@ -128,7 +135,7 @@ export default function StoreDetail({ navigation }) {
                                 }}
                                 resizeMode="contain"
                             />
-                            <Text>00:00~24:00</Text>
+                            <Text>{item.businessHours}</Text>
                         </View>
                         <View style={{ flexDirection: 'row' }}>
                             {/* 카카오 */}
@@ -175,7 +182,7 @@ export default function StoreDetail({ navigation }) {
                                         paddingHorizontal: scaleWidth(12),
                                         borderRadius: 4,
                                         borderWidth: 1,
-                                        borderColor: '#dbdcdd',
+                                        borderColor: color.gray200,
                                         flexDirection: 'row',
                                         alignItems: 'center',
                                         justifyContent: 'space-between',
@@ -220,7 +227,7 @@ export default function StoreDetail({ navigation }) {
                                         paddingHorizontal: scaleWidth(12),
                                         borderRadius: 4,
                                         borderWidth: 1,
-                                        borderColor: '#dbdcdd',
+                                        borderColor: color.gray200,
                                         flexDirection: 'row',
                                         alignItems: 'center',
                                         justifyContent: 'space-between',
@@ -238,12 +245,12 @@ export default function StoreDetail({ navigation }) {
                                     />
                                     <Text>1일권 사용</Text>
                                 </TouchableOpacity>
-                                <TouchableOpacity onPress={temp}
+                                <TouchableOpacity onPress={pass}
                                     style={{
                                         paddingHorizontal: scaleWidth(12),
                                         borderRadius: 4,
                                         borderWidth: 1,
-                                        borderColor: '#dbdcdd',
+                                        borderColor: color.gray200,
                                         flexDirection: 'row',
                                         alignItems: 'center',
                                         justifyContent: 'space-between',
@@ -268,7 +275,7 @@ export default function StoreDetail({ navigation }) {
                                         paddingHorizontal: scaleWidth(12),
                                         borderRadius: 4,
                                         borderWidth: 1,
-                                        borderColor: '#dbdcdd',
+                                        borderColor: color.gray200,
                                         alignItems: 'center',
                                         justifyContent: 'center',
                                         width: scaleWidth(104),
@@ -300,17 +307,18 @@ export default function StoreDetail({ navigation }) {
 
 
                         <View style={{ flexDirection: 'row' }}>
-                            <TouchableOpacity style={{
-                                paddingHorizontal: scaleWidth(12),
-                                paddingVertical: scaleHeight(9),
-                                borderRadius: 4,
-                                borderWidth: 1,
-                                borderColor: '#dbdcdd',
-                                alignItems: 'center',
-                                justifyContent: 'space-between',
-                                width: scaleWidth(104),
-                                marginRight: scaleWidth(9)
-                            }}>
+                            <TouchableOpacity onPress={studyRoom}
+                                style={{
+                                    paddingHorizontal: scaleWidth(12),
+                                    paddingVertical: scaleHeight(9),
+                                    borderRadius: 4,
+                                    borderWidth: 1,
+                                    borderColor: color.gray200,
+                                    alignItems: 'center',
+                                    justifyContent: 'space-between',
+                                    width: scaleWidth(104),
+                                    marginRight: scaleWidth(9)
+                                }}>
                                 <Image
                                     source={require('../../img/home/studyroom.png')}
                                     style={{
@@ -326,14 +334,14 @@ export default function StoreDetail({ navigation }) {
                                 paddingVertical: scaleHeight(9),
                                 borderRadius: 4,
                                 borderWidth: 1,
-                                borderColor: '#dbdcdd',
+                                borderColor: color.gray200,
                                 alignItems: 'center',
                                 justifyContent: 'space-between',
                                 width: scaleWidth(104),
                                 marginRight: scaleWidth(9)
                             }}>
                                 <Image
-                                    source={require('../../img/home/locker2.png')}
+                                    source={require('../../img/home/locker1.png')}
                                     style={{
                                         width: scaleWidth(49),
                                         height: scaleHeight(40),
@@ -347,7 +355,7 @@ export default function StoreDetail({ navigation }) {
                                 paddingVertical: scaleHeight(9),
                                 borderRadius: 4,
                                 borderWidth: 1,
-                                borderColor: '#dbdcdd',
+                                borderColor: color.gray200,
                                 alignItems: 'center',
                                 justifyContent: 'space-between',
                                 width: scaleWidth(104),
@@ -390,7 +398,7 @@ export default function StoreDetail({ navigation }) {
                         <View style={{
                             justifyContent: 'space-between', flexDirection: 'row',
                         }}>
-                            <TouchableOpacity>
+                            <TouchableOpacity onPress={update}>
                                 <Image
                                     source={require("../../img/home/g-payment.png")}
                                     style={{ width: scaleWidth(50), height: scaleHeight(50), }}
@@ -398,7 +406,7 @@ export default function StoreDetail({ navigation }) {
                                 />
                                 <Text style={{ fontSize: scaleFont(12), lineHeight: scaleFont(13), textAlign: 'center' }}>임시</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity>
+                            <TouchableOpacity onPress={update}>
                                 <Image
                                     source={require("../../img/home/g-studytime.png")}
                                     style={{ width: scaleWidth(50), height: scaleHeight(50), }}
@@ -406,7 +414,7 @@ export default function StoreDetail({ navigation }) {
                                 />
                                 <Text style={{ fontSize: scaleFont(12), lineHeight: scaleFont(13), textAlign: 'center' }}>임시</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity>
+                            <TouchableOpacity onPress={update}>
                                 <Image
                                     source={require("../../img/home/g-coupon.png")}
                                     style={{ width: scaleWidth(50), height: scaleHeight(50), }}
@@ -414,7 +422,7 @@ export default function StoreDetail({ navigation }) {
                                 />
                                 <Text style={{ fontSize: scaleFont(12), lineHeight: scaleFont(13), textAlign: 'center' }}>임시</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity>
+                            <TouchableOpacity onPress={update}>
                                 <Image
                                     source={require("../../img/home/g-point.png")}
                                     style={{ width: scaleWidth(50), height: scaleHeight(50), }}
@@ -422,7 +430,7 @@ export default function StoreDetail({ navigation }) {
                                 />
                                 <Text style={{ fontSize: scaleFont(12), lineHeight: scaleFont(13), textAlign: 'center' }}>임시</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity>
+                            <TouchableOpacity onPress={update}>
                                 <Image
                                     source={require("../../img/home/g-notice.png")}
                                     style={{ width: scaleWidth(50), height: scaleHeight(50), }}
@@ -455,18 +463,21 @@ export default function StoreDetail({ navigation }) {
                             <Text>
                                 시작 스터디카페는 개읜의 학습 취향과 컨디션, 학습패턴에 따라 선택 가능한 다양한 유형의 프리미엄 공간을 제공합니다.{"\n"}
                                 시작 스터디카페 인천 송도점에서 최적의 학습 효과를 경험하세요.
+                                {item.guide}
                             </Text>
 
                         </View>
                     </View>
                     {/* 지도 */}
                     <View style={{ flex: 1, paddingTop: scaleHeight(20), height: scaleHeight(270) }}>
-                        <GoogleMapScreen
-                            onRegionChange={(region) => {
-                                console.log('지도 영역 변경됨:', region);
-                            }}
-                            style={{ flex: 1, borderWidth: 1 }}
+                        <Map
+                            width={scaleWidth(360)}
+                            height={scaleHeight(500)}
+                            centerPoint={{ lat: 37.5665, lng: 126.9780 }}
                         />
+
+
+
                     </View>
                 </View>
             </ScrollView>
@@ -475,11 +486,6 @@ export default function StoreDetail({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-    icon: {
-        width: 14,
-        height: 14,
-        marginRight: 3,
-    },
     bannerWrapper: {
         width: '100%',
         position: 'relative',
