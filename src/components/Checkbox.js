@@ -1,5 +1,6 @@
 import React from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import color from '../res/color';
 import { scaleHeight, scaleWidth } from '../res/layout';
 
 export default function Checkbox({ checked, label, onPress, style, labelStyle }) {
@@ -31,6 +32,6 @@ const styles = StyleSheet.create({
     },
     label: {
         fontSize: 14,
-        color: '#000',
+        color: color.black,
     },
 });

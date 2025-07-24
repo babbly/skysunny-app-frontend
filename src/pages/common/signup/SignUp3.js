@@ -15,14 +15,11 @@ export default function SignUp3({ navigation }) {
         navigation.navigate('PageStack', { screen: 'SignUp4' });
     };
 
-
-
     const [id, setId] = useState('');
 
-
     const FloatingInput = ({ label, value, onChangeText, secureTextEntry, editable = true, placeholder, rightButton, placeholderTextColor }) => (
-        <View style={styles.inputContainer}>
-            <Text style={styles.inputLabel}>{label}</Text>
+        <View style={[layout.inputContainer]}>
+            <Text style={[layout.inputLabel]}>{label}</Text>
             <TextInput
                 value={value}
                 onChangeText={onChangeText}
@@ -30,16 +27,15 @@ export default function SignUp3({ navigation }) {
                 editable={editable}
                 placeholder={placeholder}
                 placeholderTextColor={placeholderTextColor}
-                style={[styles.input]}
+                style={[layout.input]}
             />
             {rightButton && (
-                <TouchableOpacity style={styles.button} onPress={rightButton.onPress}>
-                    <Text style={styles.buttonText}>{rightButton.label}</Text>
+                <TouchableOpacity style={styles.inputInnerButton} onPress={rightButton.onPress}>
+                    <Text style={styles.inputInnerButtonTxt}>{rightButton.label}</Text>
                 </TouchableOpacity>
             )}
         </View>
     );
-
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: color.white }}>
@@ -49,17 +45,17 @@ export default function SignUp3({ navigation }) {
             >
 
                 {/* 상단 바 */}
-                <View style={layout.topBar}>
+                <View style={[layout.topBar]}>
                     <View style={{ flexDirection: 'row' }}>
-                        <TouchableOpacity style={layout.backBox} onPress={() => navigation.goBack()}>
+                        <TouchableOpacity style={[layout.backBox]} onPress={() => navigation.goBack()}>
                             <Image
                                 source={require('../../../img/common/backarrow.png')}
-                                style={{ width: scaleWidth(24), height: scaleHeight(24) }}
+                                style={[layout.icon24]}
                                 resizeMode="contain"
                             />
                         </TouchableOpacity>
                         <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                            <Text style={layout.topText}>회원가입 (3/5)</Text>
+                            <Text style={[layout.topTxt]}>회원가입 (3/5)</Text>
                         </View>
                     </View>
                 </View>
@@ -67,7 +63,7 @@ export default function SignUp3({ navigation }) {
                 <View style={[layout.container, { backgroundColor: color.white }]}>
 
                     <View style={{ width: scaleWidth(320), paddingTop: scaleHeight(30), }}>
-                        <Text>
+                        <Text style={[layout.guideTxt]}>
                             - 아이디를 입력하세요.
                         </Text>
                     </View>
@@ -84,11 +80,30 @@ export default function SignUp3({ navigation }) {
                             resizeMode="contain"
                         />
                         <Text style={{
+                            color: color.gray900,
+                            fontFamily: 'Noto Sans KR',
+                            fontSize: scaleFont(12),
+                            fontWeight: '400',
+                            lineHeight: scaleFont(16),
                             textAlign: 'center',
-                            color: color.black,
                         }}>
                             사용 가능한 아이디입니다.
                         </Text>
+                        {/* <Image
+                            source={require('../../../img/common/error.png')}
+                            style={{ width: scaleWidth(16), height: scaleHeight(16), marginRight: 4 }}
+                            resizeMode="contain"
+                        />
+                        <Text style={{
+                            color: 'red',
+                            fontFamily: 'Noto Sans KR',
+                            fontSize: scaleFont(12),
+                            fontWeight: '400',
+                            lineHeight: scaleFont(16),
+                            textAlign: 'center',
+                        }}>
+                            이미 사용중인 아이디입니다.
+                        </Text> */}
                     </View>
                 </View>
 
@@ -96,12 +111,12 @@ export default function SignUp3({ navigation }) {
                 <View style={styles.bottomWrapper}>
                     <View style={styles.bottomButtonWrapper2}>
                         <TouchableOpacity onPress={() => navigation.goBack()}>
-                            <Text style={styles.bottomButtonText}>이전</Text>
+                            <Text style={[layout.bottomButtonTxt]}>이전</Text>
                         </TouchableOpacity>
                     </View>
                     <View style={styles.bottomButtonWrapper}>
                         <TouchableOpacity onPress={agree}>
-                            <Text style={styles.bottomButtonText}>다음</Text>
+                            <Text style={[layout.bottomButtonTxt]}>다음</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -111,38 +126,7 @@ export default function SignUp3({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-    inputContainer: {
-        position: 'relative',
-        width: scaleWidth(320),
-        marginBottom: scaleHeight(10),
-    },
-    inputLabel: {
-        position: 'absolute',
-        top: scaleHeight(10),
-        left: scaleWidth(14),
-        fontSize: scaleFont(12),
-        lineHeight: scaleFont(16),
-        color: color.lightDarkGray,
-        zIndex: 1,
-        backgroundColor: color.white,
-        paddingHorizontal: 4,
-    },
-    input: {
-        borderWidth: 1,
-        borderColor: '#e0e0e0',
-        borderRadius: 4,
-        fontSize: scaleFont(14),
-        lineHeight: scaleFont(24),
-        // paddingTop 대신 paddingVertical 사용
-        paddingTop: Platform.OS === 'ios' ? scaleHeight(10) : scaleHeight(30),
-        paddingHorizontal: scaleWidth(18),
-        color: color.blackGray,
-        backgroundColor: color.white,
-        minHeight: scaleHeight(64),
-        textAlignVertical: 'center',
-    },
-
-    button: {
+    inputInnerButton: {
         position: 'absolute',
         right: scaleWidth(14),
         top: scaleHeight(19),
@@ -151,19 +135,14 @@ const styles = StyleSheet.create({
         paddingVertical: scaleHeight(5),
         borderRadius: 4,
     },
-    buttonText: {
+    inputInnerButtonTxt: {
         fontSize: scaleFont(12),
         lineHeight: scaleFont(16),
         color: color.white,
     },
     bottomWrapper: {
-        position: 'absolute',
-        bottom: 0,
         flexDirection: 'row',
-        width: '100%',
-        alignItems: 'center',
     },
-
     bottomButtonWrapper: {
         width: scaleWidth(240),
         height: scaleHeight(52),
@@ -171,18 +150,11 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
-
     bottomButtonWrapper2: {
         width: scaleWidth(120),
         height: scaleHeight(52),
-        backgroundColor: color.buttonGray,
+        backgroundColor: color.gray100,
         justifyContent: 'center',
         alignItems: 'center',
     },
-
-    bottomButtonText: {
-        fontSize: scaleFont(16),
-        lineHeight: scaleFont(26),
-        color: color.blackGray
-    }
 });

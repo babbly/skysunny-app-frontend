@@ -11,7 +11,7 @@ const SearchBox = () => {
                 placeholder="매장명을 입력하세요."
                 placeholderTextColor="#c4c4c4"
                 style={styles.input}
-                editable={false} // 입력 비활성화
+                editable={false}
             // value={searchTxt}
             // onChangeText={text => {
             //     searchList(text.trim());
@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderRadius: 4,
         backgroundColor: color.lightGray,
-        width: scaleWidth(330),
+        width: scaleWidth(320),
         height: scaleHeight(40),
         paddingHorizontal: scaleWidth(10),
     },

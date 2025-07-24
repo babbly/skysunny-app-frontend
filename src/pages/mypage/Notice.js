@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FlatList, Image, SafeAreaView, Text, TouchableOpacity, View } from 'react-native';
+import { FlatList, Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import color from '../../res/color';
 import layout, { scaleFont, scaleHeight, scaleWidth } from '../../res/layout';
 
@@ -22,6 +22,7 @@ const noticeList = [
         date: '2022-01-07',
         content: '1월 공지사항 내용입니다.',
     },
+
 ];
 
 export default function Notice({ navigation }) {
@@ -38,7 +39,7 @@ export default function Notice({ navigation }) {
         const isOpen = openNotices.includes(item.id);
 
         return (
-            <View style={{ marginBottom: scaleHeight(20) }}>
+            <View style={{ marginBottom: scaleHeight(30) }}>
                 <TouchableOpacity onPress={() => toggleNotice(item.id)}>
                     <View
                         style={{
@@ -49,25 +50,21 @@ export default function Notice({ navigation }) {
                         }}
                     >
                         <View>
-                            <Text style={{
-                                fontWeight: '500',
-                                fontSize: scaleFont(15),
-                                lineHeight: scaleFont(24),
-                                marginBottom: 5,
-                            }}>
+                            <Text style={styles.boldTxt}>
                                 {item.title}
                             </Text>
                             <Text style={{
-                                fontWeight: '350',
+                                color: color.fontGray,
+                                fontFamily: 'Noto Sans KR',
                                 fontSize: scaleFont(12),
+                                fontWeight: '300',
                                 lineHeight: scaleFont(18),
-                                color: '#777',
                             }}>
                                 {item.date}
                             </Text>
                         </View>
                         <Image
-                            source={require('../../img/common/underarrow.png')}
+                            source={require('../../img/common/downarrow.png')}
                             style={{
                                 width: scaleWidth(24),
                                 height: scaleHeight(24),
@@ -83,10 +80,11 @@ export default function Notice({ navigation }) {
                     <View
                         style={{
                             width: scaleWidth(310),
+                            paddingVertical: scaleHeight(25),
+                            paddingHorizontal: scaleWidth(25),
+                            marginTop: scaleHeight(25),
                             backgroundColor: color.lightGray,
                             borderRadius: 6,
-                            padding: 20,
-                            marginTop: 10,
                         }}
                     >
                         <Text style={{ fontSize: scaleFont(13), lineHeight: scaleFont(20) }}>{item.content}</Text>
@@ -100,28 +98,39 @@ export default function Notice({ navigation }) {
         <SafeAreaView style={{ flex: 1, alignItems: 'center', backgroundColor: color.white }}>
 
             {/* 상단 바 */}
-            <View style={layout.topBar}>
+            <View style={[layout.topBar]}>
                 <View style={{ flexDirection: 'row' }}>
-                    <TouchableOpacity style={layout.backBox} onPress={() => navigation.goBack()}>
+                    <TouchableOpacity style={[layout.backBox]} onPress={() => navigation.goBack()}>
                         <Image
                             source={require('../../img/common/backarrow.png')}
-                            style={{ width: scaleWidth(24), height: scaleHeight(24) }}
+                            style={[layout.icon24]}
                             resizeMode="contain"
                         />
                     </TouchableOpacity>
                     <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                        <Text style={layout.topText}>공지사항</Text>
+                        <Text style={[layout.topTxt]}>공지사항</Text>
                     </View>
                 </View>
             </View>
 
             {/* 리스트 */}
-            <FlatList
-                contentContainerStyle={{ paddingVertical: scaleHeight(20) }}
-                data={noticeList}
-                keyExtractor={(item) => item.id.toString()}
-                renderItem={renderItem}
-            />
+            <View style={[layout.container, { backgroundColor: color.white }]}>
+                <FlatList
+                    contentContainerStyle={{ paddingVertical: scaleHeight(20) }}
+                    data={noticeList}
+                    keyExtractor={(item) => item.id.toString()}
+                    renderItem={renderItem}
+                />
+            </View>
         </SafeAreaView>
     );
 }
+const styles = StyleSheet.create({
+    boldTxt: {
+        color: color.black,
+        fontFamily: 'Noto Sans KR',
+        fontSize: scaleFont(15),
+        fontWeight: '500',
+        lineHeight: scaleFont(24)
+    },
+});

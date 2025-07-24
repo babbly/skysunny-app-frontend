@@ -17,6 +17,8 @@ import SignUp4 from './signup/SignUp4';
 import SignUp5 from './signup/SignUp5';
 import SignUp6 from './signup/SignUp6';
 
+import HistoryDetail from '../history/HistoryDetail';
+
 import Settings from '../mypage/Settings';
 
 import Coupon from '../mypage/Coupon';
@@ -24,7 +26,8 @@ import FavoriteStore from '../mypage/FavoriteStore';
 import Inquiry from '../mypage/Inquiry';
 import MyInfo from '../mypage/MyInfo';
 import Notice from '../mypage/Notice';
-import Payment from '../mypage/Payment';
+import PaymentHistory from '../mypage/PaymentHistory';
+import PointHistory from '../mypage/PointHistory';
 import StudyTime from '../mypage/StudyTime';
 
 import AppInquiry from '../mypage/inquiry/AppInquiry';
@@ -34,11 +37,22 @@ import MyInquiryDetail from '../mypage/inquiry/MyInquiryDetail';
 import StoreInquiry from '../mypage/inquiry/StoreInquiry';
 import StoreInquiryDetail from '../mypage/inquiry/StoreInquiryDetail';
 
+import CheckCoupon from '../store/CheckCoupon';
+import CheckPayment from '../store/CheckPayment';
+import Payment from '../store/CompletePayment';
 import OneDayPass from '../store/OneDayPass';
 import Out from '../store/Out';
+import Pass from '../store/Pass';
+import PassTicket from '../store/PassTicket';
+import PaymentMethod from '../store/PaymentMethod';
+import QrCode from '../store/QrCode';
+import SelectSeat from '../store/SelectSeat';
 import StoreDetail from '../store/StoreDetail';
-import TempPass from '../store/TempPass';
+import StudyRoomPass from '../store/StudyRoomPass';
+import StudyRoomTicket from '../store/StudyRoomTicket';
 
+
+import Update from './../../components/Update';
 
 
 
@@ -62,18 +76,19 @@ export default function PageStack() {
             <Stack.Screen name="SignUp6" component={SignUp6} />
             <Stack.Screen name="Verify" component={Verify} />
 
-
+            {/* history stack */}
+            <Stack.Screen name="HistoryDetail" component={HistoryDetail} />
 
 
             {/* mypage stack */}
             <Stack.Screen name="Settings" component={Settings} />
 
             <Stack.Screen name="MyInfo" component={MyInfo} />
-            <Stack.Screen name="Payment" component={Payment} />
+            <Stack.Screen name="PaymentHistory" component={PaymentHistory} />
             <Stack.Screen name="StudyTime" component={StudyTime} />
             <Stack.Screen name="FavoriteStore" component={FavoriteStore} />
             <Stack.Screen name="Coupon" component={Coupon} />
-            {/* <Stack.Screen name="Point" component={Point} /> */}
+            <Stack.Screen name="PointHistory" component={PointHistory} />
             <Stack.Screen name="Notice" component={Notice} />
             <Stack.Screen name="Inquiry" component={Inquiry} />
 
@@ -89,9 +104,20 @@ export default function PageStack() {
             <Stack.Screen name="StoreDetail" component={StoreDetail} />
             <Stack.Screen name="Out" component={Out} />
             <Stack.Screen name="OneDayPass" component={OneDayPass} />
-            <Stack.Screen name="TempPass" component={TempPass} />
+            <Stack.Screen name="Pass" component={Pass} />
+            <Stack.Screen name="PassTicket" component={PassTicket} />
+            <Stack.Screen name="CheckPayment" component={CheckPayment} />
+            <Stack.Screen name="CheckCoupon" component={CheckCoupon} />
+            <Stack.Screen name="Payment" component={Payment} />
+            <Stack.Screen name="PaymentMethod" component={PaymentMethod} />
+            <Stack.Screen name="StudyRoomTicket" component={StudyRoomTicket} />
+            <Stack.Screen name="StudyRoomPass" component={StudyRoomPass} />
+            <Stack.Screen name="QrCode" component={QrCode} />
 
 
+
+            <Stack.Screen name="Update" component={Update} />
+            <Stack.Screen name="SelectSeat" component={SelectSeat} />
 
 
         </Stack.Navigator>

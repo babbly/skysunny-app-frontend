@@ -3,6 +3,7 @@ import {
     Image,
     SafeAreaView,
     ScrollView,
+    StyleSheet,
     Text,
     TouchableOpacity,
     View
@@ -88,41 +89,36 @@ export default function StoreInquiry({ navigation }) {
         <SafeAreaView style={{ flex: 1, backgroundColor: color.white }}>
 
             {/* 상단 바 */}
-            <View style={layout.topBar}>
+            <View style={[layout.topBar]}>
                 <View style={{ flexDirection: 'row' }}>
-                    <TouchableOpacity style={layout.backBox} onPress={() => navigation.goBack()}>
+                    <TouchableOpacity style={[layout.backBox]} onPress={() => navigation.goBack()}>
                         <Image
                             source={require("../../../img/common/backarrow.png")}
-                            style={{ width: scaleWidth(24), height: scaleHeight(24) }}
+                            style={[layout.icon24]}
                             resizeMode="contain"
                         />
                     </TouchableOpacity>
                     <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                        <Text style={layout.topText}>지점 이용문의</Text>
+                        <Text style={[layout.topTxt]}>지점 이용문의</Text>
                     </View>
                 </View>
             </View>
 
             <ScrollView
                 contentContainerStyle={{
-                    paddingHorizontal: scaleWidth(15),
+                    paddingHorizontal: scaleWidth(20),
                     paddingBottom: scaleHeight(50),
                 }}
                 keyboardShouldPersistTaps="handled"
             >
-                <View style={{ marginTop: 20 }}>
-                    <Text style={{
-                        marginBottom: 20,
-                        fontWeight: '500',
-                        fontSize: scaleFont(15),
-                        lineHeight: scaleFont(24)
-                    }}>
+                <View style={{ marginTop: scaleHeight(20) }}>
+                    <Text style={styles.boldTxt}>
                         문의하실 지점을 선택해주세요.
                     </Text>
                 </View>
 
 
-                <View style={{ marginBottom: 20 }}>
+                <View style={{ marginVertical: scaleHeight(20) }}>
                     <SearchBox />
                 </View>
 
@@ -133,29 +129,34 @@ export default function StoreInquiry({ navigation }) {
                         onPress={() => navigation.navigate('StoreInquiryDetail', { store })}
                         style={{
                             flexDirection: 'row',
-                            paddingVertical: 10,
-                            paddingHorizontal: 10,
+                            paddingVertical: scaleHeight(10),
+                            paddingHorizontal: scaleWidth(10),
+                            borderRadius: 6,
                             borderWidth: 1,
-                            borderColor: '#e5e5e5',
-                            height: 70,
-                            marginBottom: 10,
+                            borderColor: color.mediumGray,
+                            marginBottom: scaleHeight(10),
                         }}
                     >
                         <Image
                             source={store.image}
-                            style={{ width: 50, height: 50, borderRadius: 8 }}
+                            style={{ width: scaleWidth(50), height: scaleHeight(50), borderRadius: 8 }}
                             resizeMode="contain"
                         />
                         <View style={{ paddingLeft: 10, paddingVertical: 5 }}>
                             <Text style={{
-                                fontWeight: '500',
+                                color: color.black,
+                                fontFamily: 'Noto Sans KR',
                                 fontSize: scaleFont(13),
+                                fontWeight: '500',
                                 lineHeight: scaleFont(20),
                             }}>
                                 {store.name}
                             </Text>
                             <Text style={{
+                                color: color.fontGray,
+                                fontFamily: 'Noto Sans KR',
                                 fontSize: scaleFont(12),
+                                fontWeight: '300',
                                 lineHeight: scaleFont(20),
                             }}>
                                 {store.address}
@@ -168,3 +169,12 @@ export default function StoreInquiry({ navigation }) {
         </SafeAreaView>
     );
 }
+const styles = StyleSheet.create({
+    boldTxt: {
+        color: color.black,
+        fontFamily: 'Noto Sans KR',
+        fontSize: scaleFont(15),
+        fontWeight: '500',
+        lineHeight: scaleFont(24)
+    }
+});

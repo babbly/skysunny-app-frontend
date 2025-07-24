@@ -43,7 +43,7 @@ export default function TabNavigator() {
                         />
                     );
                 },
-                tabBarActiveTintcolor: '#000',
+                tabBarActiveTintColor: '#000',
                 tabBarInactiveTintColor: 'gray',
                 headerShown: false,
             })}

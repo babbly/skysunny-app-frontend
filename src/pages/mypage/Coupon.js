@@ -16,8 +16,8 @@ export default function Coupon({ navigation }) {
             store: '시작 스터디카페 인천 송도점',
             validDays: 10,
             amount: '5,000원',
-            minUse: '10,000원 이상 사용가능',
-            type: '사용가능',
+            minUse: '10,000원 이상 이용가능',
+            type: '이용가능',
         },
         {
             id: '2',
@@ -26,7 +26,7 @@ export default function Coupon({ navigation }) {
             store: '시작 스터디카페 인천 송도점',
             validDays: -1,
             amount: '3,000원',
-            minUse: '5,000원 이상 사용가능',
+            minUse: '5,000원 이상 이용가능',
             type: '만료',
         },
         {
@@ -36,8 +36,8 @@ export default function Coupon({ navigation }) {
             store: '시작 스터디카페 인천 송도점',
             validDays: 10,
             amount: '5,000원',
-            minUse: '10,000원 이상 사용가능',
-            type: '사용가능',
+            minUse: '10,000원 이상 이용가능',
+            type: '이용가능',
         },
         {
             id: '4',
@@ -46,8 +46,8 @@ export default function Coupon({ navigation }) {
             store: '시작 스터디카페 인천 송도점',
             validDays: 10,
             amount: '5,000원',
-            minUse: '10,000원 이상 사용가능',
-            type: '사용가능',
+            minUse: '10,000원 이상 이용가능',
+            type: '이용가능',
         },
         {
             id: '5',
@@ -56,8 +56,8 @@ export default function Coupon({ navigation }) {
             store: '시작 스터디카페 인천 송도점',
             validDays: 10,
             amount: '5,000원',
-            minUse: '10,000원 이상 사용가능',
-            type: '사용가능',
+            minUse: '10,000원 이상 이용가능',
+            type: '이용가능',
         },
         {
             id: '6',
@@ -66,8 +66,8 @@ export default function Coupon({ navigation }) {
             store: '시작 스터디카페 인천 송도점',
             validDays: 10,
             amount: '5,000원',
-            minUse: '10,000원 이상 사용가능',
-            type: '사용가능',
+            minUse: '10,000원 이상 이용가능',
+            type: '이용가능',
         },
     ];
 
@@ -90,62 +90,67 @@ export default function Coupon({ navigation }) {
             <View style={{
                 flexDirection: 'row',
                 justifyContent: 'space-between',
-                borderBottomWidth: 1,
-                paddingBottom: scaleHeight(10),
-                marginBottom: scaleHeight(10),
-                borderColor: '#e5e5e5'
             }}>
                 <Text style={{
-                    fontWeight: '400',
-                    fontSize: scaleFont(13),
-                    lineHeight: scaleFont(16),
                     color: color.fontGray,
+                    fontFamily: 'Noto Sans KR',
+                    fontSize: scaleFont(11),
+                    fontWeight: '300',
+                    lineHeight: scaleFont(18),
+                    alignSelf: 'center',
                 }}>{item.code}</Text>
 
                 <View style={{
-                    backgroundColor: color.lightGray,
+                    backgroundColor: item.type === '이용가능' ? color.lightGray : color.gray200,
                     borderRadius: 4,
                     width: scaleWidth(60),
-                    height: scaleHeight(20),
-                    justifyContent: 'center',
+                    paddingHorizontal: scaleWidth(2),
                 }}>
                     <Text style={{
+                        color: item.type === '이용가능' ? color.gray900 : color.gray500,
+                        fontFamily: 'Noto Sans KR',
                         fontSize: scaleFont(12),
+                        fontWeight: '300',
+                        lineHeight: scaleFont(16),
                         textAlign: 'center',
-                        color: color.blackGray
                     }}>{item.type}</Text>
                 </View>
             </View>
+            <View style={[layout.line, { marginVertical: scaleHeight(10) }]} />
 
-            <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: scaleHeight(5) }}>
+            <View style={{ flexDirection: 'row', alignItems: 'center', }}>
                 <View style={{
                     backgroundColor: color.lightGray,
                     borderRadius: 4,
                     width: scaleWidth(60),
-                    height: scaleHeight(20),
-                    justifyContent: 'center',
+                    paddingHorizontal: scaleWidth(2),
                     marginRight: scaleWidth(5)
                 }}>
                     <Text style={{
+                        color: color.gray900,
+                        fontFamily: 'Noto Sans KR',
                         fontSize: scaleFont(12),
+                        fontWeight: '300',
+                        lineHeight: scaleFont(16),
                         textAlign: 'center',
-                        color: color.blackGray
                     }}>매장전용</Text>
                 </View>
                 <Text style={{
-                    fontWeight: '500',
-                    fontSize: scaleFont(13),
-                    lineHeight: scaleFont(20),
                     color: color.black,
+                    fontFamily: 'Noto Sans KR',
+                    fontSize: scaleFont(13),
+                    fontWeight: '500',
+                    lineHeight: scaleFont(20),
                 }}>{item.title}</Text>
             </View>
 
             <Text style={{
-                fontWeight: '350',
-                fontSize: scaleFont(12),
-                lineHeight: scaleFont(20),
                 color: color.fontGray,
-                marginBottom: scaleHeight(5)
+                fontFamily: 'Noto Sans KR',
+                fontSize: scaleFont(12),
+                fontWeight: '300',
+                lineHeight: scaleFont(20),
+                marginVertical: scaleHeight(5)
             }}>{item.store}</Text>
 
             <View style={{
@@ -154,14 +159,15 @@ export default function Coupon({ navigation }) {
             }}>
                 <Image
                     source={require("../../img/mypage/redclock.png")}
-                    style={{ width: 14, height: 14, marginRight: 3 }}
+                    style={[layout.icon14]}
                     resizeMode="contain"
                 />
                 <Text style={{
-                    fontWeight: '700',
+                    color: color.red,
+                    fontFamily: 'Noto Sans KR',
                     fontSize: scaleFont(12),
+                    fontWeight: '700',
                     lineHeight: scaleFont(16),
-                    color: 'red'
                 }}>
                     {item.validDays > 0 ? `유효기간 ${item.validDays}일` : '만료됨'}
                 </Text>
@@ -174,15 +180,19 @@ export default function Coupon({ navigation }) {
                 marginTop: scaleHeight(10),
             }}>
                 <Text style={{
-                    fontWeight: '400',
-                    fontSize: scaleFont(18),
-                    lineHeight: scaleFont(24),
                     color: color.black,
+                    fontFamily: 'BM DoHyeon',
+                    fontSize: scaleFont(18),
+                    fontWeight: '400',
+                    lineHeight: scaleFont(24),
                 }}>{item.amount}</Text>
 
                 <Text style={{
-                    fontSize: scaleFont(12),
                     color: color.fontGray,
+                    fontFamily: 'Noto Sans KR',
+                    fontSize: scaleFont(12),
+                    fontWeight: '300',
+                    lineHeight: scaleFont(20),
                 }}>{item.minUse}</Text>
             </View>
         </View>
@@ -192,17 +202,17 @@ export default function Coupon({ navigation }) {
         <SafeAreaView style={{ flex: 1, backgroundColor: color.white }}>
 
             {/* 상단 바 */}
-            <View style={layout.topBar}>
+            <View style={[layout.topBar]}>
                 <View style={{ flexDirection: 'row' }}>
-                    <TouchableOpacity style={layout.backBox} onPress={() => navigation.goBack()}>
+                    <TouchableOpacity style={[layout.backBox]} onPress={() => navigation.goBack()}>
                         <Image
                             source={require("../../img/common/backarrow.png")}
-                            style={{ width: scaleWidth(24), height: scaleHeight(24) }}
+                            style={[layout.icon24]}
                             resizeMode="contain"
                         />
                     </TouchableOpacity>
                     <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                        <Text style={layout.topText}>쿠폰함</Text>
+                        <Text style={[layout.topTxt]}>쿠폰함</Text>
                     </View>
                 </View>
             </View>
@@ -219,7 +229,7 @@ export default function Coupon({ navigation }) {
                         key={tab}
                         onPress={() => setSelectedTab(tab)}
                         style={[layout.toggleButton, {
-                            backgroundColor: selectedTab === tab ? color.mainColor : color.buttonGray,
+                            backgroundColor: selectedTab === tab ? color.mainColor : color.gray100,
                             borderWidth: selectedTab === tab ? 1 : 0,
                             marginBottom: scaleHeight(5),
                         }]}>
@@ -229,9 +239,7 @@ export default function Coupon({ navigation }) {
             </View>
 
             {/* 쿠폰 리스트 */}
-            <View style={{
-                flex: 1, backgroundColor: color.lightGray
-            }}>
+            <View style={[layout.container]}>
                 <FlatList
                     data={filteredCoupons}
                     renderItem={renderCouponItem}

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Image, SafeAreaView, Text, TouchableOpacity, View } from 'react-native';
-import GoogleMapScreen from '../../components/GoogleMap';
 import SearchBox from '../../components/SearchBox';
 import color from '../../res/color';
 import layout, { scaleFont, scaleHeight, scaleWidth } from '../../res/layout';
@@ -9,30 +8,36 @@ export default function SearchTab({ navigation }) {
     const [searchMode, setSearchMode] = useState('map');
     const [hasResults, setHasResults] = useState(false);
 
+    const home = () => {
+        navigation.navigate('PageStack', {
+            screen: 'HomeTab'
+        });
+    };
+
     return (
         <SafeAreaView style={{ flex: 1, alignItems: 'center', backgroundColor: color.white }}>
 
 
             {/* 상단 바 */}
-            <View style={layout.topBar}>
+            <View style={[layout.topBar]}>
                 <View style={{ flexDirection: 'row' }}>
-                    <TouchableOpacity style={layout.backBox} onPress={() => navigation.goBack()}>
+                    <TouchableOpacity style={[layout.backBox]} onPress={home}>
                         <Image
                             source={require("../../img/common/backarrow.png")}
-                            style={{ width: scaleWidth(24), height: scaleHeight(24) }}
+                            style={[layout.icon24]}
                             resizeMode="contain"
                         />
                     </TouchableOpacity>
                     <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                        <Text style={layout.topText}>매장검색</Text>
+                        <Text style={[layout.topTxt]}>매장검색</Text>
                     </View>
                 </View>
             </View>
 
             <View style={[layout.container, { backgroundColor: color.white }]}>
                 {/* 상단부분 */}
-                <View style={{ paddingVertical: scaleHeight(20), }}>
-                    <View style={{ flexDirection: 'row', marginBottom: scaleHeight(20) }}>
+                <View style={{ paddingVertical: scaleHeight(20) }}>
+                    <View style={{ flexDirection: 'row', marginBottom: scaleHeight(20), }}>
                         <TouchableOpacity
                             style={{
                                 borderRadius: 4,
@@ -74,20 +79,19 @@ export default function SearchTab({ navigation }) {
                     />
                 </View>
 
-                {searchMode === 'map' ?
-                    <View>
-                        <GoogleMapScreen
-                            onRegionChange={(region) => {
-                                console.log('지도 영역 변경됨:', region);
-                            }}
-                            style={{ flex: 1 }}
-                        />
-                    </View>
-                    :
+                {/* {searchMode === 'map' ? */}
+                <View style={{ flex: 1, width: scaleWidth(360) }}>
+                    <Map
+                        width={scaleWidth(360)}
+                        height={scaleHeight(500)}
+                        centerPoint={{ lat: 37.5665, lng: 126.9780 }}
+                    />
+                </View>
+                {/*     :
                     <View>
 
-                    </View>
-                }
+                     </View>
+                // } */}
                 {/* 결과없을때 */}
                 {searchMode === 'name' && !hasResults && (
                     <View style={[layout.container, { justifyContent: 'center', flex: 1 }]}>

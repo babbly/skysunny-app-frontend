@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FlatList, Image, SafeAreaView, Text, TouchableOpacity, View } from 'react-native';
+import { FlatList, Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import color from '../../../res/color';
 import layout, { scaleFont, scaleHeight, scaleWidth } from '../../../res/layout';
 
@@ -59,34 +59,27 @@ export default function MyInquiry({ navigation }) {
                             <View style={{ flexDirection: 'row' }}>
                                 <View style={{
                                     borderRadius: 4,
-                                    paddingHorizontal: 10,
+                                    paddingHorizontal: scaleWidth(10),
                                     paddingVertical: Platform.OS === 'ios' ? scaleHeight(8) : scaleHeight(5),
-                                    backgroundColor: item.answer ? '#e5e5e5' : '#f6f6f6',
-                                    color: item.answer ? '#6e6e6e' : color.black,
+                                    backgroundColor: item.answer ? color.mediumGray : color.lightGray,
+                                    color: item.answer ? color.fontGray : color.black,
                                     marginRight: 10
                                 }}>
                                     <Text style={{
+                                        color: color.black,
+                                        fontFamily: 'Noto Sans KR',
+                                        fontSize: scaleFont(12),
+                                        fontWeight: '300',
+                                        lineHeight: scaleFont(16),
                                         textAlign: 'center',
-                                        alignItems: 'center'
                                     }}>{item.answer ? '답변완료' : '답변대기'}</Text>
                                 </View>
-                                <Text style={{
-                                    fontWeight: '500',
-                                    fontSize: scaleFont(15),
-                                    lineHeight: scaleFont(24),
-                                    marginBottom: 5,
-                                }}>
+                                <Text style={styles.boldTxt}>
                                     {item.title}
                                 </Text>
-
                             </View>
 
-                            <Text style={{
-                                fontWeight: '350',
-                                fontSize: scaleFont(12),
-                                lineHeight: scaleFont(18),
-                                color: '#777',
-                            }}>
+                            <Text style={[layout.dateTxt]}>
                                 {item.date}
                             </Text>
                         </View>
@@ -97,32 +90,42 @@ export default function MyInquiry({ navigation }) {
     };
 
     return (
-        <SafeAreaView style={{ flex: 1, alignItems: 'center', backgroundColor: color.white }}>
-
+        <SafeAreaView style={{ flex: 1, alignItems: 'center' }}>
 
             {/* 상단 바 */}
-            <View style={layout.topBar}>
+            <View style={[layout.topBar]}>
                 <View style={{ flexDirection: 'row' }}>
-                    <TouchableOpacity style={layout.backBox} onPress={() => navigation.goBack()}>
+                    <TouchableOpacity style={[layout.backBox]} onPress={() => navigation.goBack()}>
                         <Image
                             source={require('../../../img/common/backarrow.png')}
-                            style={{ width: scaleWidth(24), height: scaleHeight(24) }}
+                            style={[layout.icon24]}
                             resizeMode="contain"
                         />
                     </TouchableOpacity>
                     <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                        <Text style={layout.topText}>나의 문의내역</Text>
+                        <Text style={[layout.topTxt]}>나의 문의내역</Text>
                     </View>
                 </View>
             </View>
 
             {/* 리스트 */}
-            <FlatList
-                contentContainerStyle={{ paddingVertical: scaleHeight(20) }}
-                data={myInquiryList}
-                keyExtractor={(item) => item.id.toString()}
-                renderItem={renderItem}
-            />
+            <View style={[layout.container, { backgroundColor: color.white }]}>
+                <FlatList
+                    contentContainerStyle={{ paddingVertical: scaleHeight(20) }}
+                    data={myInquiryList}
+                    keyExtractor={(item) => item.id.toString()}
+                    renderItem={renderItem}
+                />
+            </View>
         </SafeAreaView>
     );
 }
+const styles = StyleSheet.create({
+    boldTxt: {
+        color: color.black,
+        fontFamily: 'Noto Sans KR',
+        fontSize: scaleFont(15),
+        fontWeight: '500',
+        lineHeight: scaleFont(24)
+    },
+});

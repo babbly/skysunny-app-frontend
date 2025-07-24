@@ -6,7 +6,11 @@ import layout, { scaleFont, scaleHeight, scaleWidth } from '../../res/layout';
 
 export default function Settings({ navigation }) {
 
-
+    const logout = () => {
+        navigation.navigate('PageStack', {
+            // screen: 'LogOut'
+        });
+    };
 
     const [toggleStates, setToggleStates] = useState([false, false, false, false, false]);
 
@@ -29,22 +33,23 @@ export default function Settings({ navigation }) {
         <SafeAreaView style={{ flex: 1, alignItems: 'center', backgroundColor: color.white }}>
 
             {/* 상단 바 */}
-            <View style={layout.topBar}>
+            <View style={[layout.topBar]}>
                 <View style={{ flexDirection: 'row' }}>
-                    <TouchableOpacity style={layout.backBox} onPress={() => navigation.goBack()}>
+                    <TouchableOpacity style={[layout.backBox]} onPress={() => navigation.goBack()}>
                         <Image
                             source={require('../../img/common/backarrow.png')}
-                            style={{ width: scaleWidth(24), height: scaleHeight(24) }}
+                            style={[layout.icon24]}
                             resizeMode="contain"
                         />
                     </TouchableOpacity>
                     <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                        <Text style={layout.topText}>설정</Text>
+                        <Text style={[layout.topTxt]}>설정</Text>
                     </View>
                 </View>
             </View>
 
             <View style={[layout.container, { backgroundColor: color.white }]}>
+
                 {menus.map((menuText, idx) => (
                     <TouchableOpacity
                         key={idx}
@@ -56,8 +61,8 @@ export default function Settings({ navigation }) {
                             <Image
                                 source={
                                     toggleStates[idx]
-                                        ? require('../../img/mypage/settingUnBtn.png') // 눌린 상태 이미지
-                                        : require('../../img/mypage/settingBtn.png')   // 기본 이미지
+                                        ? require('../../img/mypage/settingUnBtn.png')
+                                        : require('../../img/mypage/settingBtn.png')
                                 }
                                 style={{
                                     width: scaleWidth(24),
@@ -151,9 +156,35 @@ export default function Settings({ navigation }) {
                     </View>
                 </View>
 
-
-
-
+            </View>
+            <View style={{ marginBottom: scaleHeight(20) }}>
+                <Text style={{
+                    color: color.fontGray,
+                    textAlign: 'center',
+                    fontFamily: 'Noto Sans KR',
+                    fontSize: scaleFont(14),
+                    fontWeight: '300',
+                    lineHeight: scaleFont(20),
+                }}>회원탈퇴를 원하시는 분은
+                    <Text
+                        // onPress={{}}
+                        style={{
+                            color: color.black,
+                            fontFamily: 'Noto Sans KR',
+                            fontSize: scaleFont(14),
+                            fontWeight: '700',
+                            lineHeight: scaleFont(20)
+                        }}> 여기</Text>
+                    를 눌러주세요.
+                </Text>
+            </View>
+            {/* 하단 버튼 */}
+            <View style={[layout.bottomButtonGray]}>
+                <TouchableOpacity
+                    onPress={logout}
+                >
+                    <Text style={[layout.bottomButtonTxt]}>로그아웃</Text>
+                </TouchableOpacity>
             </View>
         </SafeAreaView >
     );
@@ -162,12 +193,16 @@ const styles = StyleSheet.create({
     menuTab: {
         flexDirection: 'row',
         justifyContent: 'space-between',
+        alignItems: 'center',
+        // alignSelf: 'stretch',
         width: scaleWidth(330),
-        marginTop: 20
+        marginTop: scaleHeight(25)
     },
     menuText: {
-        fontWeight: '500',
+        color: color.black,
+        fontFamily: 'Noto Sans KR',
         fontSize: scaleFont(15),
+        fontWeight: '500',
         lineHeight: scaleFont(24),
     },
 });

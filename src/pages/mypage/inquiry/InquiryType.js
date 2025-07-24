@@ -6,6 +6,7 @@ import {
     Platform,
     SafeAreaView,
     ScrollView,
+    StyleSheet,
     Text,
     TextInput,
     TouchableOpacity,
@@ -18,7 +19,7 @@ export default function InquiryType({ navigation }) {
     const [inquiryMode, setInquiryMode] = useState('join');
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
-
+    const [inputHeight, setInputHeight] = useState(scaleHeight(180));
 
     const handleSubmit = () => {
         if (!title.trim() || !content.trim()) {
@@ -29,6 +30,7 @@ export default function InquiryType({ navigation }) {
         Alert.alert('문의 제출 완료', '성공적으로 제출되었습니다.');
         setTitle('');
         setContent('');
+        setInputHeight(scaleHeight(180));
     };
 
     return (
@@ -39,24 +41,24 @@ export default function InquiryType({ navigation }) {
             >
 
                 {/* 상단 바 */}
-                <View style={layout.topBar}>
+                <View style={[layout.topBar]}>
                     <View style={{ flexDirection: 'row' }}>
-                        <TouchableOpacity style={layout.backBox} onPress={() => navigation.goBack()}>
+                        <TouchableOpacity style={[layout.backBox]} onPress={() => navigation.goBack()}>
                             <Image
                                 source={require("../../../img/common/backarrow.png")}
-                                style={{ width: scaleWidth(24), height: scaleHeight(24) }}
+                                style={[layout.icon24]}
                                 resizeMode="contain"
                             />
                         </TouchableOpacity>
                         <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                            <Text style={layout.topText}>입점/제휴문의</Text>
+                            <Text style={[layout.topTxt]}>입점/제휴문의</Text>
                         </View>
                     </View>
                 </View>
 
                 <ScrollView
                     contentContainerStyle={{
-                        paddingHorizontal: scaleWidth(15),
+                        paddingHorizontal: scaleWidth(20),
                         paddingBottom: scaleHeight(50)
                     }}
                     keyboardShouldPersistTaps="handled"
@@ -64,14 +66,16 @@ export default function InquiryType({ navigation }) {
                     {/* 안내 문구 */}
                     <View style={{ marginTop: 20 }}>
                         <Text style={{
-                            marginBottom: 10,
-                            fontWeight: '500',
+                            color: color.black,
+                            fontFamily: 'Noto Sans KR',
                             fontSize: scaleFont(15),
-                            lineHeight: scaleFont(24)
+                            fontWeight: '500',
+                            lineHeight: scaleFont(24),
+                            marginBottom: scaleHeight(10)
                         }}>
                             스카스카에게 문의를 남겨주세요.
                         </Text>
-                        <Text>
+                        <Text style={[layout.guideTxt]}>
                             - 원하시는 문의 유형을 선택하신 후 작성해주세요.{"\n"}
                             운영자 검토 후 최대한 신속하게 답변해드릴게요.
                         </Text>
@@ -81,40 +85,30 @@ export default function InquiryType({ navigation }) {
                     <View style={{ paddingVertical: scaleHeight(20) }}>
                         <View style={{ flexDirection: 'row' }}>
                             <TouchableOpacity
-                                style={{
-                                    borderRadius: 4,
-                                    borderWidth: 1,
-                                    borderColor: inquiryMode === 'join' ? color.black : "#F6F6F6",
+                                style={[layout.toggleButton, {
                                     backgroundColor: inquiryMode === 'join' ? color.mainColor : "#F6F6F6",
-                                    paddingVertical: scaleHeight(8),
-                                    paddingHorizontal: scaleWidth(12),
+                                    borderWidth: inquiryMode === 'join' ? 1 : 0,
                                     marginRight: scaleWidth(5),
-                                }}
+                                }]}
                                 onPress={() => setInquiryMode('join')}
                             >
-                                <Text style={{
-                                    textAlign: 'center',
+                                <Text style={[layout.btnTxt, {
                                     color: inquiryMode === 'join' ? color.black : color.fontGray
-                                }}>
+                                }]}>
                                     입점
                                 </Text>
                             </TouchableOpacity>
 
                             <TouchableOpacity
-                                style={{
-                                    borderRadius: 4,
-                                    borderWidth: 1,
-                                    borderColor: inquiryMode === 'cooperate' ? color.black : "#F6F6F6",
+                                style={[layout.toggleButton, {
                                     backgroundColor: inquiryMode === 'cooperate' ? color.mainColor : "#F6F6F6",
-                                    paddingVertical: scaleHeight(8),
-                                    paddingHorizontal: scaleWidth(12),
-                                }}
+                                    borderWidth: inquiryMode === 'cooperate' ? 1 : 0,
+                                }]}
                                 onPress={() => setInquiryMode('cooperate')}
                             >
-                                <Text style={{
-                                    textAlign: 'center',
+                                <Text style={[layout.btnTxt, {
                                     color: inquiryMode === 'cooperate' ? color.black : color.fontGray
-                                }}>
+                                }]}>
                                     제휴
                                 </Text>
                             </TouchableOpacity>
@@ -123,33 +117,14 @@ export default function InquiryType({ navigation }) {
 
                     {/* 제목 입력 */}
                     <View style={{ position: 'relative', marginBottom: 10 }}>
-                        <Text style={{
-                            position: 'absolute',
-                            top: 6,
-                            left: 10,
-                            fontSize: scaleFont(12),
-                            lineHeight: scaleFont(16),
-                            color: color.lightDarkGray,
-                            paddingHorizontal: 4,
-                            zIndex: 10,
-                        }}>
+                        <Text style={[layout.inputLabel]}>
                             제목
                         </Text>
                         <TextInput
                             value={title}
                             onChangeText={setTitle}
                             placeholder="제목을 입력해주세요"
-                            style={{
-                                borderWidth: 1,
-                                borderColor: '#e0e0e0',
-                                paddingHorizontal: 14,
-                                borderRadius: 4,
-                                fontSize: scaleFont(14),
-                                lineHeight: scaleFont(24),
-                                height: scaleHeight(64),
-                                paddingTop: scaleHeight(18),
-                                color: color.blackGray
-                            }}
+                            style={[layout.input]}
                         />
                     </View>
 
@@ -160,39 +135,21 @@ export default function InquiryType({ navigation }) {
                             value={content}
                             onChangeText={setContent}
                             placeholder="문의하실 내용을 입력해주세요"
+                            onContentSizeChange={(e) =>
+                                setInputHeight(e.nativeEvent.contentSize.height)
+                            }
                             multiline
                             numberOfLines={10}
                             textAlignVertical="top"
-                            style={{
-                                borderWidth: 1,
-                                borderColor: '#e0e0e0',
-                                padding: 10,
-                                borderRadius: 4,
-                                fontSize: scaleFont(14),
-                                lineHeight: scaleFont(24),
-                                height: scaleHeight(180),
-                                color: '#c4c4c4'
-                            }}
+                            style={styles.contentInput}
                         />
                     </View>
                 </ScrollView>
 
                 {/* 하단 버튼 */}
-                <View style={{
-                    position: 'absolute',
-                    bottom: 0,
-                    width: '100%',
-                    height: scaleHeight(52),
-                    backgroundColor: color.mainColor,
-                    justifyContent: 'center',
-                    alignItems: 'center'
-                }}>
+                <View style={[layout.bottomButtonMain]}>
                     <TouchableOpacity onPress={handleSubmit}>
-                        <Text style={{
-                            fontSize: scaleFont(16),
-                            lineHeight: scaleFont(26),
-                            color: color.blackGray
-                        }}>
+                        <Text style={[layout.bottomButtonTxt]}>
                             제출하기
                         </Text>
                     </TouchableOpacity>
@@ -201,3 +158,17 @@ export default function InquiryType({ navigation }) {
         </SafeAreaView>
     );
 }
+const styles = StyleSheet.create({
+    contentInput: {
+        borderWidth: 1,
+        borderColor: color.grey80,
+        padding: 10,
+        borderRadius: 4,
+        fontSize: scaleFont(14),
+        lineHeight: scaleFont(24),
+        height: scaleHeight(180),
+        paddingVertical: scaleHeight(10),
+        paddingHorizontal: scaleWidth(14),
+        color: color.grey70
+    }
+});

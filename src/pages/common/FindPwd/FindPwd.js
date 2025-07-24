@@ -3,16 +3,18 @@ import {
     Image,
     KeyboardAvoidingView,
     SafeAreaView,
-    StyleSheet, Text,
+    Text,
     TextInput, TouchableOpacity, View
 } from 'react-native';
 import color from '../../../res/color';
 import layout, { scaleFont, scaleHeight, scaleWidth } from '../../../res/layout';
 
 export default function FindPwd({ navigation }) {
+
     const verify = () => {
         navigation.navigate('PageStack', { screen: 'Verify' });
     };
+
     const resetPwd = () => {
         navigation.navigate('PageStack', { screen: 'FindPwd2' });
     };
@@ -21,10 +23,9 @@ export default function FindPwd({ navigation }) {
     const [phone, setPhone] = useState('');
     const [id, setId] = useState('');
 
-
     const FloatingInput = ({ label, value, onChangeText, secureTextEntry, editable = true, placeholder, rightButton, placeholderTextColor }) => (
-        <View style={styles.inputContainer}>
-            <Text style={styles.inputLabel}>{label}</Text>
+        <View style={[layout.inputContainer]}>
+            <Text style={[layout.inputLabel]}>{label}</Text>
             <TextInput
                 value={value}
                 onChangeText={onChangeText}
@@ -32,13 +33,8 @@ export default function FindPwd({ navigation }) {
                 editable={editable}
                 placeholder={placeholder}
                 placeholderTextColor={placeholderTextColor}
-                style={[styles.input]}
+                style={[layout.input]}
             />
-            {rightButton && (
-                <TouchableOpacity style={styles.button} onPress={rightButton.onPress}>
-                    <Text style={styles.buttonText}>{rightButton.label}</Text>
-                </TouchableOpacity>
-            )}
         </View>
     );
 
@@ -51,17 +47,17 @@ export default function FindPwd({ navigation }) {
             >
 
                 {/* 상단 바 */}
-                <View style={layout.topBar}>
+                <View style={[layout.topBar]}>
                     <View style={{ flexDirection: 'row' }}>
-                        <TouchableOpacity style={layout.backBox} onPress={() => navigation.goBack()}>
+                        <TouchableOpacity style={[layout.backBox]} onPress={() => navigation.goBack()}>
                             <Image
                                 source={require('../../../img/common/backarrow.png')}
-                                style={{ width: scaleWidth(24), height: scaleHeight(24) }}
+                                style={[layout.icon24]}
                                 resizeMode="contain"
                             />
                         </TouchableOpacity>
                         <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                            <Text style={layout.topText}>비밀번호 찾기</Text>
+                            <Text style={[layout.topTxt]}>비밀번호 찾기</Text>
                         </View>
                     </View>
                 </View>
@@ -69,42 +65,35 @@ export default function FindPwd({ navigation }) {
                 <View style={[layout.container, { backgroundColor: color.white }]}>
 
                     <View style={{ width: scaleWidth(320), paddingTop: scaleHeight(30), }}>
-                        <Text>
+                        <Text style={[layout.guideTxt]}>
                             - 본인인증 버튼을 누르고 회원가입 시 등록한 휴대전화번호로 인증을 완료하세요. 성명과 휴대전화번호를 표시합니다.{"\n"}
                             - 가입하신 아이디를 기입하고 '비밀번호 재설정'을 누르세요.
                         </Text>
                     </View>
+
                     {/* 본인인증 버튼 */}
-                    <View style={{
-                        width: scaleWidth(320),
-                        paddingVertical: scaleHeight(15),
-                        borderRadius: 4,
-                        borderWidth: 1,
-                        borderColor: color.black,
-                        backgroundColor: color.mainColor,
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        marginTop: scaleHeight(30),
-                    }}>
+                    <View style={[layout.verifyBtn]}>
                         <TouchableOpacity onPress={verify}>
-                            <Text style={styles.bottomButtonText}>본인 인증</Text>
+                            <Text style={[layout.bottomButtonTxt]}>본인 인증</Text>
                         </TouchableOpacity>
                     </View>
+
                     <View style={{ marginTop: scaleHeight(30) }}>
                         <FloatingInput
                             label="성명"
                             placeholder="본인인증 완료시 정보 표시"
-                            placeholderTextColor={color.whiteGray}
+                            placeholderTextColor={color.gray300}
                             value={name}
                             onChangeText={setName}
                             editable={false} />
                         <FloatingInput
                             label="휴대전화번호"
                             placeholder="본인인증 완료시 정보 표시"
-                            placeholderTextColor={color.whiteGray}
+                            placeholderTextColor={color.gray300}
                             value={phone}
                             onChangeText={setPhone}
                             editable={false} />
+
                         <View style={{
                             width: scaleWidth(320),
                             flexDirection: 'row',
@@ -117,8 +106,12 @@ export default function FindPwd({ navigation }) {
                                 resizeMode="contain"
                             />
                             <Text style={{
+                                color: color.gray900,
+                                fontFamily: 'Noto Sans KR',
+                                fontSize: scaleFont(12),
+                                fontWeight: '400',
+                                lineHeight: scaleFont(16),
                                 textAlign: 'center',
-                                color: color.black,
                             }}>
                                 정상 인증되었어요.
                             </Text>
@@ -126,87 +119,22 @@ export default function FindPwd({ navigation }) {
                         <FloatingInput
                             label="아이디(E-mail)"
                             placeholder="가입하신 아이디를 입력하세요"
-                            placeholderTextColor={color.whiteGray}
+                            placeholderTextColor={color.gray300}
                             value={id}
                             onChangeText={setId}
                             editable={false} />
-
                     </View>
-
                 </View>
 
                 {/* 하단 버튼 */}
-                <View style={styles.bottomButtonWrapper}>
+                <View style={[layout.bottomButtonMain]}>
                     <TouchableOpacity
                         onPress={resetPwd}
                     >
-                        <Text style={styles.bottomButtonText}>비밀번호 재설정</Text>
+                        <Text style={[layout.bottomButtonTxt]}>비밀번호 재설정</Text>
                     </TouchableOpacity>
                 </View>
             </KeyboardAvoidingView>
         </SafeAreaView >
     );
 }
-
-const styles = StyleSheet.create({
-    inputContainer: {
-        position: 'relative',
-        width: scaleWidth(320),
-        marginBottom: scaleHeight(10),
-    },
-    inputLabel: {
-        position: 'absolute',
-        top: scaleHeight(10),
-        left: scaleWidth(14),
-        fontSize: scaleFont(12),
-        lineHeight: scaleFont(16),
-        color: color.lightDarkGray,
-        zIndex: 1,
-        backgroundColor: color.white,
-        paddingHorizontal: 4,
-    },
-    input: {
-        borderWidth: 1,
-        borderColor: '#e0e0e0',
-        borderRadius: 4,
-        fontSize: scaleFont(14),
-        lineHeight: scaleFont(24),
-        // paddingTop 대신 paddingVertical 사용
-        paddingTop: Platform.OS === 'ios' ? scaleHeight(10) : scaleHeight(30),
-        paddingHorizontal: scaleWidth(18),
-        color: color.blackGray,
-        backgroundColor: color.white,
-        minHeight: scaleHeight(64),
-        textAlignVertical: 'center',
-    },
-
-    button: {
-        position: 'absolute',
-        right: scaleWidth(14),
-        top: scaleHeight(19),
-        backgroundColor: color.lightGray,
-        paddingHorizontal: scaleWidth(10),
-        paddingVertical: scaleHeight(5),
-        borderRadius: 4,
-    },
-    buttonText: {
-        fontSize: scaleFont(12),
-        lineHeight: scaleFont(16),
-        color: color.black,
-    },
-
-    bottomButtonWrapper: {
-        width: scaleWidth(360),
-        height: scaleHeight(52),
-        backgroundColor: color.mainColor,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-
-
-    bottomButtonText: {
-        fontSize: scaleFont(16),
-        lineHeight: scaleFont(26),
-        color: color.blackGray
-    }
-});

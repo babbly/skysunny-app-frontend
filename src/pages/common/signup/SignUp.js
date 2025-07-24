@@ -29,7 +29,6 @@ export default function SignUp({ navigation }) {
         marketing: false,
     });
 
-
     const toggleAgreeAll = () => {
         const newValue = !agreeAll;
         setAgreeAll(newValue);
@@ -42,7 +41,6 @@ export default function SignUp({ navigation }) {
         });
     };
 
-
     const toggleItem = (key) => {
         const newAgreeItems = {
             ...agreeItems,
@@ -50,7 +48,6 @@ export default function SignUp({ navigation }) {
         };
         setAgreeItems(newAgreeItems);
     };
-
 
     useEffect(() => {
         const allChecked = Object.values(agreeItems).every(Boolean);
@@ -64,7 +61,7 @@ export default function SignUp({ navigation }) {
                 label={`${isRequired ? '(필수)' : '(선택)'} ${label}`}
                 onPress={() => toggleItem(key)}
                 style={{ flex: 1 }}
-                labelStyle={{ color: agreeItems[key] ? color.black : color.mediumGray }}
+                labelStyle={{ color: agreeItems[key] ? color.black : color.grey30 }}
             />
             {showButton && (
                 <TouchableOpacity style={styles.viewButton}>
@@ -74,8 +71,6 @@ export default function SignUp({ navigation }) {
         </View>
     );
 
-
-
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: color.white }}>
             <KeyboardAvoidingView
@@ -84,24 +79,24 @@ export default function SignUp({ navigation }) {
             >
 
                 {/* 상단 바 */}
-                <View style={layout.topBar}>
+                <View style={[layout.topBar]}>
                     <View style={{ flexDirection: 'row' }}>
-                        <TouchableOpacity style={layout.backBox} onPress={home}>
+                        <TouchableOpacity style={[layout.backBox]} onPress={home}>
                             <Image
                                 source={require('../../../img/common/backarrow.png')}
-                                style={{ width: scaleWidth(24), height: scaleHeight(24) }}
+                                style={[layout.icon24]}
                                 resizeMode="contain"
                             />
                         </TouchableOpacity>
                         <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                            <Text style={layout.topText}>서비스 약관동의(1/5)</Text>
+                            <Text style={[layout.topTxt]}>서비스 약관동의(1/5)</Text>
                         </View>
                     </View>
                 </View>
 
                 <View style={[layout.container, { backgroundColor: color.white }]}>
                     <View style={{ paddingVertical: scaleHeight(30) }}>
-                        <Text style={{ color: color.mediumGray }}>
+                        <Text style={[layout.guideTxt]}>
                             - 필수 항목에 동의하셔야 서비스를 이용하실 수 있습니다. {"\n"}
                             - 전체 동의에는 선택항목에 대한 동의도 포함되어 있습니다.
                         </Text>
@@ -120,7 +115,7 @@ export default function SignUp({ navigation }) {
                     </TouchableOpacity>
 
                     {/* 개별 동의 항목 */}
-                    <View style={{ width: scaleWidth(320), paddingHorizontal: scaleWidth(14), }}>
+                    <View style={{ width: scaleWidth(320), paddingHorizontal: scaleWidth(14) }}>
                         {renderCheckbox('이용약관', 'terms')}
                         {renderCheckbox('개인정보 처리방침', 'privacy')}
                         {renderCheckbox('이용상태 PUSH 알림 수신', 'push', true, false)}
@@ -130,11 +125,11 @@ export default function SignUp({ navigation }) {
                 </View>
 
                 {/* 하단 버튼 */}
-                <View style={styles.bottomButtonWrapper}>
+                <View style={[layout.bottomButtonMain]}>
                     <TouchableOpacity
                         onPress={agree}
                     >
-                        <Text style={styles.bottomButtonText}>동의합니다</Text>
+                        <Text style={[layout.bottomButtonTxt]}>동의합니다</Text>
                     </TouchableOpacity>
                 </View>
             </KeyboardAvoidingView>
@@ -147,11 +142,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         paddingHorizontal: scaleWidth(15),
+        paddingVertical: scaleHeight(15),
         width: scaleWidth(320)
-    },
-    checkboxLabel: {
-        fontSize: scaleFont(14),
-        color: color.black,
     },
     viewButton: {
         width: scaleWidth(60),
@@ -167,20 +159,6 @@ const styles = StyleSheet.create({
         lineHeight: scaleFont(16),
         color: color.black
     },
-    bottomButtonWrapper: {
-        position: 'absolute',
-        bottom: 0,
-        width: '100%',
-        height: scaleHeight(52),
-        backgroundColor: color.mainColor,
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    bottomButtonText: {
-        fontSize: scaleFont(16),
-        lineHeight: scaleFont(26),
-        color: color.blackGray
-    }
 });
 
 

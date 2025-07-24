@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, Platform, SafeAreaView, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import color from '../../res/color';
 import layout, { scaleFont, scaleHeight, scaleWidth } from '../../res/layout';
@@ -18,9 +18,9 @@ export default function MyPageTab({ navigation }) {
             screen: 'MyInfo'
         });
     };
-    const payment = () => {
+    const paymentHistory = () => {
         navigation.navigate('PageStack', {
-            screen: 'Payment'
+            screen: 'PaymentHistory'
         });
     };
     const studyTime = () => {
@@ -41,11 +41,11 @@ export default function MyPageTab({ navigation }) {
         });
     };
 
-    //     const point = () => {
-    //     navigation.navigate('PageStack', {
-    //         screen: 'Point'
-    //     });
-    // };
+    const pointHistory = () => {
+        navigation.navigate('PageStack', {
+            screen: 'PointHistory'
+        });
+    };
 
     const notice = () => {
         navigation.navigate('PageStack', {
@@ -62,8 +62,6 @@ export default function MyPageTab({ navigation }) {
 
     return (
         <SafeAreaProvider>
-            {Platform.OS === 'ios' && <StatusBar barStyle="light-content" />}
-            <View style={{ paddingTop: scaleHeight(40) }} />
             <SafeAreaView style={{ flex: 1, }}>
                 <View style={{
                     height: scaleHeight(290),
@@ -79,22 +77,17 @@ export default function MyPageTab({ navigation }) {
                     }}>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between', }}>
                             <View style={{ flexDirection: 'row', }}>
-                                <TouchableOpacity style={layout.backBox}
+                                <TouchableOpacity style={[layout.backBox]}
                                     onPress={() => navigation.goBack()}>
                                     <Image
                                         source={require("../../img/common/backarrow.png")}
-                                        style={{ width: scaleWidth(24), height: scaleHeight(24) }}
+                                        style={[layout.icon24]}
                                         resizeMode="contain"
                                     />
                                 </TouchableOpacity>
-                                <View style={{
-                                    justifyContent: 'center',
-                                }}>
-                                    <Text style={layout.topText}>마이페이지</Text>
-                                </View>
                             </View>
                             <View>
-                                <TouchableOpacity style={layout.backBox}
+                                <TouchableOpacity style={[layout.backBox]}
                                     onPress={settings}>
                                     <Image
                                         source={require("../../img/common/setting.png")}
@@ -107,14 +100,18 @@ export default function MyPageTab({ navigation }) {
 
                         <View style={{ marginTop: scaleHeight(35), marginHorizontal: scaleWidth(25) }}>
                             <Text style={{
+                                color: color.black,
+                                fontFamily: 'BM DoHyeon',
+                                fontSize: scaleFont(18),
                                 fontWeight: '400',
-                                fontSize: 18,
                                 lineHeight: scaleFont(26),
                                 marginBottom: scaleHeight(8)
                             }}>홍길동 회원님, 반가워요!</Text>
                             <Text style={{
-                                fontWeight: '400',
+                                color: color.black,
+                                fontFamily: 'Noto Sans KR',
                                 fontSize: scaleFont(14),
+                                fontWeight: '300',
                                 lineHeight: scaleFont(26),
                             }}>오늘도 스카스카와 함께 열공해볼까요?</Text>
                         </View>
@@ -126,80 +123,75 @@ export default function MyPageTab({ navigation }) {
                             onPress={myinfo}>
                             <Image
                                 source={require("../../img/mypage/myinfo.png")}
-                                style={{ width: 24, height: 20, marginRight: 10 }}
+                                style={styles.menuIcon}
                                 resizeMode="contain"
                             />
-                            <Text style={{ fontSize: scaleFont(13), fontWeight: '500', lineHeight: scaleFont(20) }}>내 정보관리</Text>
+                            <Text style={styles.menuTxt}>내 정보관리</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.myMenu}
-                            onPress={payment}>
+                            onPress={paymentHistory}>
                             <Image
                                 source={require("../../img/mypage/payment.png")}
-                                style={{ width: 24, height: 20, marginRight: 10 }}
+                                style={styles.menuIcon}
                                 resizeMode="contain"
                             />
-                            <Text style={{ fontSize: scaleFont(13), fontWeight: '500', lineHeight: scaleFont(20) }}>결제내역</Text>
+                            <Text style={styles.menuTxt}>결제내역</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.myMenu}
                             onPress={studyTime}>
                             <Image
                                 source={require("../../img/mypage/studyTime.png")}
-                                style={{ width: 24, height: 20, marginRight: 10 }}
+                                style={styles.menuIcon}
                                 resizeMode="contain"
                             />
-                            <Text style={{ fontSize: scaleFont(13), fontWeight: '500', lineHeight: scaleFont(20) }}>내 공부시간</Text>
+                            <Text style={styles.menuTxt}>내 공부시간</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.myMenu}
                             onPress={favoriteStore}>
                             <Image
                                 source={require("../../img/mypage/store.png")}
-                                style={{ width: 24, height: 20, marginRight: 10 }}
+                                style={styles.menuIcon}
                                 resizeMode="contain"
                             />
-                            <Text style={{ fontSize: scaleFont(13), fontWeight: '500', lineHeight: scaleFont(20) }}>찜한 매장</Text>
+                            <Text style={styles.menuTxt}>찜한 매장</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.myMenu}
                             onPress={coupon}>
                             <Image
                                 source={require("../../img/mypage/coupon.png")}
-                                style={{ width: 24, height: 20, marginRight: 10 }}
+                                style={styles.menuIcon}
                                 resizeMode="contain"
                             />
-                            <Text style={{ fontSize: scaleFont(13), fontWeight: '500', lineHeight: scaleFont(20) }}>쿠폰함</Text>
+                            <Text style={styles.menuTxt}>쿠폰함</Text>
                         </TouchableOpacity>
-                        {/* <TouchableOpacity style={styles.myMenu}
-                    onPress={point}>
-                    <Image
-                        source={require("../../img/mypage/point.png")}
-                        style={{ width: 24, height: 20, marginRight: 10 }}
-                        resizeMode="contain"
-                    />
-                    <Text style={{ fontSize: scaleFont(13), fontWeight: '500', lineHeight: scaleFont(20) }}>포인트내역</Text>
-                </TouchableOpacity> */}
+                        <TouchableOpacity style={styles.myMenu}
+                            onPress={pointHistory}>
+                            <Image
+                                source={require("../../img/mypage/point.png")}
+                                style={styles.menuIcon}
+                                resizeMode="contain"
+                            />
+                            <Text style={styles.menuTxt}>포인트내역</Text>
+                        </TouchableOpacity>
                         <TouchableOpacity style={styles.myMenu}
                             onPress={notice}>
                             <Image
                                 source={require("../../img/mypage/notice.png")}
-                                style={{ width: 24, height: 20, marginRight: 10 }}
+                                style={styles.menuIcon}
                                 resizeMode="contain"
                             />
-                            <Text style={{ fontSize: scaleFont(13), fontWeight: '500', lineHeight: scaleFont(20) }}>공지사항</Text>
+                            <Text style={styles.menuTxt}>공지사항</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.myMenu}
                             onPress={inquiry}>
                             <Image
                                 source={require("../../img/mypage/inquiry.png")}
-                                style={{ width: scaleWidth(24), height: scaleHeight(20), marginRight: 10 }}
+                                style={styles.menuIcon}
                                 resizeMode="contain"
                             />
-                            <Text style={{ fontSize: scaleFont(13), fontWeight: '500', lineHeight: scaleFont(20) }}>이용문의</Text>
+                            <Text style={styles.menuTxt}>이용문의</Text>
                         </TouchableOpacity>
                     </View>
-
-
-                    <View style={layout.container}></View>
-
-
                 </View>
             </SafeAreaView>
         </SafeAreaProvider>
@@ -209,18 +201,34 @@ export default function MyPageTab({ navigation }) {
 
 const styles = StyleSheet.create({
     menuBox: {
-        position: 'absolute',
-        top: scaleHeight(200),
-        marginHorizontal: scaleWidth(20),
         width: scaleWidth(310),
-        backgroundColor: color.white,
-        borderRadius: 12,
         paddingHorizontal: scaleWidth(25),
         paddingTop: scaleHeight(25),
-        zIndex: 10,
+
+        position: 'absolute',
+        top: scaleHeight(200),
+        marginHorizontal: scaleWidth(25),
+
+        borderRadius: 6,
+        borderColor: color.mediumGray,
+        borderWidth: 1,
+        backgroundColor: color.white,
+        // zIndex: 10,
     },
     myMenu: {
         flexDirection: 'row',
         marginBottom: scaleHeight(25),
+    },
+    menuIcon: {
+        width: scaleWidth(24),
+        height: scaleHeight(20),
+        marginRight: 10
+    },
+    menuTxt: {
+        color: color.black,
+        fontFamily: 'Noto Sans KR',
+        fontSize: scaleFont(13),
+        fontWeight: '500',
+        lineHeight: scaleFont(20)
     }
 });

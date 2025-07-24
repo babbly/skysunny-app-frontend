@@ -1,9 +1,9 @@
 import React from 'react';
 import { Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import color from '../../res/color';
-import layout, { scaleFont, scaleHeight, scaleWidth } from '../../res/layout';
+import color from '../res/color';
+import layout, { scaleFont, scaleHeight, scaleWidth } from '../res/layout';
 
-export default function CommunityTab({ navigation }) {
+export default function Update({ navigation }) {
 
     return (
         <SafeAreaView style={{ flex: 1, alignItems: 'center', backgroundColor: color.white }}>
@@ -13,13 +13,13 @@ export default function CommunityTab({ navigation }) {
                 <View style={{ flexDirection: 'row' }}>
                     <TouchableOpacity style={[layout.backBox]} onPress={() => navigation.goBack()}>
                         <Image
-                            source={require('../../img/common/backarrow.png')}
+                            source={require('../img/common/backarrow.png')}
                             style={[layout.icon24]}
                             resizeMode="contain"
                         />
                     </TouchableOpacity>
                     <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                        <Text style={[layout.topTxt]}>커뮤니티</Text>
+                        <Text style={[layout.topTxt]}>업데이트</Text>
                     </View>
                 </View>
             </View>
@@ -27,7 +27,7 @@ export default function CommunityTab({ navigation }) {
             <View style={[layout.container, { justifyContent: 'center', }]}>
 
                 <Image
-                    source={require("../../img/common/update.png")}
+                    source={require("../img/common/update.png")}
                     style={{ width: scaleWidth(150), height: scaleHeight(150), }}
                     resizeMode="contain"
                 />

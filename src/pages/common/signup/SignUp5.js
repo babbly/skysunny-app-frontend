@@ -19,10 +19,9 @@ export default function SignUp5({ navigation }) {
     const [study, setStudy] = useState('');
     const [parentPhone, setParentPhone] = useState('');
 
-
     const FloatingInput = ({ label, value, onChangeText, secureTextEntry, editable = true, placeholder, rightButton, placeholderTextColor }) => (
-        <View style={styles.inputContainer}>
-            <Text style={styles.inputLabel}>{label}</Text>
+        <View style={[layout.inputContainer]}>
+            <Text style={[layout.inputLabel]}>{label}</Text>
             <TextInput
                 value={value}
                 onChangeText={onChangeText}
@@ -30,11 +29,11 @@ export default function SignUp5({ navigation }) {
                 editable={editable}
                 placeholder={placeholder}
                 placeholderTextColor={placeholderTextColor}
-                style={[styles.input]}
+                style={[layout.input]}
             />
             {rightButton && (
-                <TouchableOpacity style={styles.button} onPress={rightButton.onPress}>
-                    <Text style={styles.buttonText}>{rightButton.label}</Text>
+                <TouchableOpacity style={styles.inputInnerButton} onPress={rightButton.onPress}>
+                    <Text style={styles.inputInnerButtonTxt}>{rightButton.label}</Text>
                 </TouchableOpacity>
             )}
         </View>
@@ -49,17 +48,17 @@ export default function SignUp5({ navigation }) {
             >
 
                 {/* 상단 바 */}
-                <View style={layout.topBar}>
+                <View style={[layout.topBar]}>
                     <View style={{ flexDirection: 'row' }}>
-                        <TouchableOpacity style={layout.backBox} onPress={() => navigation.goBack()}>
+                        <TouchableOpacity style={[layout.backBox]} onPress={() => navigation.goBack()}>
                             <Image
                                 source={require('../../../img/common/backarrow.png')}
-                                style={{ width: scaleWidth(24), height: scaleHeight(24) }}
+                                style={[layout.icon24]}
                                 resizeMode="contain"
                             />
                         </TouchableOpacity>
                         <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                            <Text style={layout.topText}>회원가입 (4/5)</Text>
+                            <Text style={[layout.topTxt]}>회원가입 (4/5)</Text>
                         </View>
                     </View>
                 </View>
@@ -77,7 +76,7 @@ export default function SignUp5({ navigation }) {
                         <FloatingInput
                             label="주소"
                             placeholder="기본주소"
-                            placeholderTextColor={color.whiteGray}
+                            placeholderTextColor={color.gray300}
                             value={address}
                             onChangeText={setAddress}
                             rightButton={{ label: '주소검색', onPress: () => alert('주소 검색') }}
@@ -85,14 +84,14 @@ export default function SignUp5({ navigation }) {
                         <FloatingInput
                             label="하고있는 공부 (선택)"
                             placeholder="정보를 입력하세요"
-                            placeholderTextColor={color.whiteGray}
+                            placeholderTextColor={color.gray300}
                             value={study}
                             onChangeText={setStudy} />
 
                         <FloatingInput
                             label="보호자 연락처 (선택)"
                             placeholder="휴대전화번호 숫자만 입력하세요"
-                            placeholderTextColor={color.whiteGray}
+                            placeholderTextColor={color.gray300}
                             value={parentPhone}
                             onChangeText={setParentPhone} />
                     </View>
@@ -103,12 +102,12 @@ export default function SignUp5({ navigation }) {
                 <View style={styles.bottomWrapper}>
                     <View style={styles.bottomButtonWrapper2}>
                         <TouchableOpacity onPress={() => navigation.goBack()}>
-                            <Text style={styles.bottomButtonText}>이전</Text>
+                            <Text style={[layout.bottomButtonTxt]}>이전</Text>
                         </TouchableOpacity>
                     </View>
                     <View style={styles.bottomButtonWrapper}>
                         <TouchableOpacity onPress={agree}>
-                            <Text style={styles.bottomButtonText}>다음</Text>
+                            <Text style={[layout.bottomButtonTxt]}>다음</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -118,38 +117,7 @@ export default function SignUp5({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-    inputContainer: {
-        position: 'relative',
-        width: scaleWidth(320),
-        marginBottom: scaleHeight(10),
-    },
-    inputLabel: {
-        position: 'absolute',
-        top: scaleHeight(10),
-        left: scaleWidth(14),
-        fontSize: scaleFont(12),
-        lineHeight: scaleFont(16),
-        color: color.lightDarkGray,
-        zIndex: 1,
-        backgroundColor: color.white,
-        paddingHorizontal: 4,
-    },
-    input: {
-        borderWidth: 1,
-        borderColor: '#e0e0e0',
-        borderRadius: 4,
-        fontSize: scaleFont(14),
-        lineHeight: scaleFont(24),
-        // paddingTop 대신 paddingVertical 사용
-        paddingTop: Platform.OS === 'ios' ? scaleHeight(10) : scaleHeight(30),
-        paddingHorizontal: scaleWidth(18),
-        color: color.blackGray,
-        backgroundColor: color.white,
-        minHeight: scaleHeight(64),
-        textAlignVertical: 'center',
-    },
-
-    button: {
+    inputInnerButton: {
         position: 'absolute',
         right: scaleWidth(14),
         top: scaleHeight(19),
@@ -158,19 +126,14 @@ const styles = StyleSheet.create({
         paddingVertical: scaleHeight(5),
         borderRadius: 4,
     },
-    buttonText: {
+    inputInnerButtonTxt: {
         fontSize: scaleFont(12),
         lineHeight: scaleFont(16),
         color: color.white,
     },
     bottomWrapper: {
-        position: 'absolute',
-        bottom: 0,
         flexDirection: 'row',
-        width: '100%',
-        alignItems: 'center',
     },
-
     bottomButtonWrapper: {
         width: scaleWidth(240),
         height: scaleHeight(52),
@@ -178,18 +141,11 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
-
     bottomButtonWrapper2: {
         width: scaleWidth(120),
         height: scaleHeight(52),
-        backgroundColor: color.buttonGray,
+        backgroundColor: color.gray100,
         justifyContent: 'center',
         alignItems: 'center',
     },
-
-    bottomButtonText: {
-        fontSize: scaleFont(16),
-        lineHeight: scaleFont(26),
-        color: color.blackGray
-    }
 });

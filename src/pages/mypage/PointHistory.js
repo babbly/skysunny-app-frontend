@@ -3,7 +3,7 @@ import { Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'r
 import color from '../../res/color';
 import layout, { scaleFont, scaleHeight, scaleWidth } from '../../res/layout';
 
-export default function CommunityTab({ navigation }) {
+export default function PointHistory({ navigation }) {
 
     return (
         <SafeAreaView style={{ flex: 1, alignItems: 'center', backgroundColor: color.white }}>
@@ -19,7 +19,7 @@ export default function CommunityTab({ navigation }) {
                         />
                     </TouchableOpacity>
                     <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                        <Text style={[layout.topTxt]}>커뮤니티</Text>
+                        <Text style={[layout.topTxt]}>포인트 내역</Text>
                     </View>
                 </View>
             </View>

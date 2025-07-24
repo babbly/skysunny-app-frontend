@@ -22,8 +22,8 @@ export default function MyInfo({ navigation }) {
     const [parentId, setParentId] = useState('test@test.com');
 
     const FloatingInput = ({ label, value, onChangeText, secureTextEntry, editable = true, placeholder, rightButton, placeholderTextColor }) => (
-        <View style={styles.inputContainer}>
-            <Text style={styles.inputLabel}>{label}</Text>
+        <View style={[layout.inputContainer]}>
+            <Text style={[layout.inputLabel]}>{label}</Text>
             <TextInput
                 value={value}
                 onChangeText={onChangeText}
@@ -31,11 +31,11 @@ export default function MyInfo({ navigation }) {
                 editable={editable}
                 placeholder={placeholder}
                 placeholderTextColor={placeholderTextColor}
-                style={[styles.input]}
+                style={[layout.input]}
             />
             {rightButton && (
-                <TouchableOpacity style={styles.button} onPress={rightButton.onPress}>
-                    <Text style={styles.buttonText}>{rightButton.label}</Text>
+                <TouchableOpacity style={styles.inputInnerButton} onPress={rightButton.onPress}>
+                    <Text style={styles.inputInnerButtonTxt}>{rightButton.label}</Text>
                 </TouchableOpacity>
             )}
         </View>
@@ -46,17 +46,17 @@ export default function MyInfo({ navigation }) {
         <SafeAreaView style={{ flex: 1, backgroundColor: color.white }}>
 
             {/* 상단 바 */}
-            <View style={layout.topBar}>
+            <View style={[layout.topBar]}>
                 <View style={{ flexDirection: 'row' }}>
-                    <TouchableOpacity style={layout.backBox} onPress={() => navigation.goBack()}>
+                    <TouchableOpacity style={[layout.backBox]} onPress={() => navigation.goBack()}>
                         <Image
                             source={require('../../img/common/backarrow.png')}
-                            style={{ width: scaleWidth(24), height: scaleHeight(24) }}
+                            style={[layout.icon24]}
                             resizeMode="contain"
                         />
                     </TouchableOpacity>
                     <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                        <Text style={layout.topText}>내 정보관리</Text>
+                        <Text style={[layout.topTxt]}>내 정보관리</Text>
                     </View>
                 </View>
             </View>
@@ -93,10 +93,11 @@ export default function MyInfo({ navigation }) {
                         rightButton={{ label: '본인인증', onPress: () => alert('인증') }}
                     />
                     <Text style={{
+                        color: color.grey30,
+                        fontFamily: 'Noto Sans KR',
                         fontSize: scaleFont(12),
                         lineHeight: scaleFont(17),
                         marginBottom: scaleHeight(10),
-                        color: color.mediumGray
                     }}>- 휴대전화번호를 변경하시려면 본인인증을 완료하고 저장하세요.</Text>
                     <FloatingInput
                         label="주소"
@@ -110,43 +111,20 @@ export default function MyInfo({ navigation }) {
 
                 </View>
             </ScrollView>
+            {/* 하단 버튼 */}
+            <View style={[layout.bottomButtonMain]}>
+                <TouchableOpacity
+                // onPress={save}
+                >
+                    <Text style={[layout.bottomButtonTxt]}>저장</Text>
+                </TouchableOpacity>
+            </View>
         </SafeAreaView>
     );
 }
 
 const styles = StyleSheet.create({
-    inputContainer: {
-        position: 'relative',
-        width: scaleWidth(320),
-        marginBottom: scaleHeight(10),
-    },
-    inputLabel: {
-        position: 'absolute',
-        top: scaleHeight(10),
-        left: scaleWidth(14),
-        fontSize: scaleFont(12),
-        lineHeight: scaleFont(16),
-        color: color.lightDarkGray,
-        zIndex: 1,
-        backgroundColor: color.white,
-        paddingHorizontal: 4,
-    },
-    input: {
-        borderWidth: 1,
-        borderColor: '#e0e0e0',
-        borderRadius: 4,
-        fontSize: scaleFont(14),
-        lineHeight: scaleFont(24),
-        // paddingTop 대신 paddingVertical 사용
-        paddingTop: Platform.OS === 'ios' ? scaleHeight(10) : scaleHeight(30),
-        paddingHorizontal: scaleWidth(18),
-        color: color.blackGray,
-        backgroundColor: color.white,
-        minHeight: scaleHeight(64),
-        textAlignVertical: 'center',
-    },
-
-    button: {
+    inputInnerButton: {
         position: 'absolute',
         right: scaleWidth(14),
         top: scaleHeight(19),
@@ -155,7 +133,7 @@ const styles = StyleSheet.create({
         paddingVertical: scaleHeight(5),
         borderRadius: 4,
     },
-    buttonText: {
+    inputInnerButtonTxt: {
         fontSize: scaleFont(12),
         lineHeight: scaleFont(16),
         color: color.black,

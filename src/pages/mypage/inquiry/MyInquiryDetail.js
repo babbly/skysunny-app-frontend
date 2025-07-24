@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, SafeAreaView, Text, TouchableOpacity, View } from 'react-native';
+import { Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import color from '../../../res/color';
 import layout, { scaleFont, scaleHeight, scaleWidth } from '../../../res/layout';
 
@@ -8,44 +8,56 @@ export default function MyInquiryDetail({ route, navigation }) {
     const { inquiry } = route.params;
 
     return (
-        <SafeAreaView style={{ flex: 1, backgroundColor: color.white }}>
-            <View style={{ flex: 1, paddingTop: scaleHeight(40) }}>
+        <SafeAreaView style={{ flex: 1 }}>
+            <View style={[layout.container, { backgroundColor: color.white }]}>
                 {/* 상단 바 */}
                 <View style={[layout.topBar]}>
                     <View style={{ flexDirection: 'row', justifyContent: 'flex-end', }}>
-                        <TouchableOpacity style={layout.backBox} onPress={() => navigation.goBack()}>
+                        <TouchableOpacity style={[layout.backBox]} onPress={() => navigation.goBack()}>
                             <Image
                                 source={require('../../../img/common/close.png')}
-                                style={{ width: scaleWidth(24), height: scaleHeight(24) }}
+                                style={[layout.icon24]}
                                 resizeMode="contain"
                             />
                         </TouchableOpacity>
                     </View>
                 </View>
+
                 {/* 문의 */}
                 <View style={{
                     width: scaleWidth(360),
-                    paddingHorizontal: 20,
-                    paddingVertical: 30,
+                    paddingHorizontal: scaleWidth(20),
+                    paddingVertical: scaleHeight(30),
                     alignSelf: 'center',
                 }}>
                     <View style={{ flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center' }}>
                         <View style={{
                             borderRadius: 4,
-                            paddingHorizontal: 10,
-                            paddingVertical: 5,
-                            backgroundColor: inquiry.answer ? '#e5e5e5' : '#f6f6f6',
+                            paddingVertical: scaleHeight(5),
+                            paddingHorizontal: scaleWidth(10),
+                            backgroundColor: inquiry.answer ? color.mediumGray : color.lightGray,
+                            marginBottom: scaleHeight(8),
                             marginRight: 10,
-                            marginBottom: 8
                         }}>
-                            <Text>{inquiry.answer ? '답변완료' : '답변대기'}</Text>
+                            <Text style={{
+                                color: color.black,
+                                fontFamily: 'Noto Sans KR',
+                                fontSize: scaleFont(12),
+                                fontWeight: '300',
+                                lineHeight: scaleFont(16),
+                                textAlign: 'center',
+                            }}>{inquiry.answer ? '답변완료' : '답변대기'}</Text>
                         </View>
-                        <Text style={{ fontSize: scaleFont(16), fontWeight: 'bold' }}>
+                        <Text style={styles.boldTxt}>
                             {inquiry.title}
                         </Text>
                     </View>
-                    <Text style={{ color: '#888', marginBottom: 20 }}>{inquiry.date}</Text>
-                    <Text style={{ fontSize: scaleFont(14), marginBottom: 30 }}>{inquiry.content}</Text>
+                    <Text style={[layout.dateTxt, {
+                        marginBottom: scaleHeight(20)
+                    }]}>{inquiry.date}</Text>
+                    <Text style={[layout.dateTxt, {
+                        color: color.grey10,
+                    }]}>{inquiry.content}</Text>
                 </View>
 
                 {/* 답변 */}
@@ -54,29 +66,23 @@ export default function MyInquiryDetail({ route, navigation }) {
                         style={{
                             flex: 1,
                             backgroundColor: color.lightGray,
-                            paddingHorizontal: 20,
-                            paddingTop: 30,
+                            paddingHorizontal: scaleWidth(20),
+                            paddingVertical: scaleHeight(30),
                         }}>
                         <Text style={{
-                            fontWeight: '700',
+                            color: color.grey10,
+                            fontFamily: 'Noto Sans KR',
                             fontSize: scaleFont(18),
+                            fontWeight: '700',
                             lineHeight: (26),
-                            marginBottom: 10,
-                            color: '#2d2d2d'
                         }}>A.</Text>
-                        <Text style={{
-                            fontSize: scaleFont(12),
-                            lineHeight: scaleFont(18),
-                            color: '#2d2d2d',
-                            marginBottom: 10
-                        }}>
+                        <Text style={[styles.txt, {
+                            color: color.grey10,
+                            marginVertical: scaleHeight(10)
+                        }]}>
                             {inquiry.answer}
                         </Text>
-                        <Text style={{
-                            fontSize: scaleFont(12),
-                            lineHeight: scaleFont(16),
-                            color: color.fontGray
-                        }}>
+                        <Text style={[layout.dateTxt]}>
                             {inquiry.answerDate}
                         </Text>
                     </View>
@@ -86,3 +92,13 @@ export default function MyInquiryDetail({ route, navigation }) {
         </SafeAreaView >
     );
 }
+
+const styles = StyleSheet.create({
+    boldTxt: {
+        color: color.black,
+        fontFamily: 'Noto Sans KR',
+        fontSize: scaleFont(15),
+        fontWeight: '500',
+        lineHeight: scaleFont(24)
+    },
+});

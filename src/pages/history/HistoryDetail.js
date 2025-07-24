@@ -11,17 +11,17 @@ export default function HistoryDetail({ navigation }) {
         <SafeAreaView style={{ flex: 1, alignItems: 'center', backgroundColor: color.white }}>
 
             {/* 상단 바 */}
-            <View style={layout.topBar}>
+            <View style={[layout.topBar]}>
                 <View style={{ flexDirection: 'row' }}>
-                    <TouchableOpacity style={layout.backBox} onPress={() => navigation.goBack()}>
+                    <TouchableOpacity style={[layout.backBox]} onPress={() => navigation.goBack()}>
                         <Image
                             source={require('../../img/common/backarrow.png')}
-                            style={{ width: scaleWidth(24), height: scaleHeight(24) }}
+                            style={[layout.icon24]}
                             resizeMode="contain"
                         />
                     </TouchableOpacity>
                     <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                        <Text style={layout.topText}>이용내역 상세보기</Text>
+                        <Text style={[layout.topTxt]}>이용내역 상세보기</Text>
                     </View>
                 </View>
             </View>
@@ -94,7 +94,7 @@ export default function HistoryDetail({ navigation }) {
                     <View style={{
                         paddingTop: scaleHeight(10),
                         borderTopWidth: 1,
-                        borderColor: '#e5e5e5',
+                        borderColor: color.mediumGray,
                     }}>
                         <View style={{ flexDirection: 'row', }}>
                             <Text style={{
@@ -118,22 +118,6 @@ export default function HistoryDetail({ navigation }) {
 
                         </View>
                     </View>
-                    {/* <TouchableOpacity style={{
-                        backgroundColor: color.buttonGray,
-                        height: 36,
-                        borderRadius: 6,
-                        paddingVertical: 8,
-                        paddingHorizontal: 16
-
-                    }}
-                        onPress={() => detail(item)}>
-                      
-                    <Text style={{
-
-                        textAlign: 'center',
-                    }}>이용내역 상세보기</Text>
-                   
-                </TouchableOpacity> */}
                 </View>
             </View>
         </SafeAreaView >

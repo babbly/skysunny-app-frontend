@@ -6,6 +6,7 @@ import {
     Platform,
     SafeAreaView,
     ScrollView,
+    StyleSheet,
     Text,
     TextInput,
     TouchableOpacity,
@@ -40,83 +41,52 @@ export default function StoreInquiryDetail({ navigation, route }) {
             >
 
                 {/* 상단 바 */}
-                <View style={layout.topBar}>
+                <View style={[layout.topBar]}>
                     <View style={{ flexDirection: 'row' }}>
-                        <TouchableOpacity style={layout.backBox} onPress={() => navigation.goBack()}>
+                        <TouchableOpacity style={[layout.backBox]} onPress={() => navigation.goBack()}>
                             <Image
                                 source={require("../../../img/common/backarrow.png")}
-                                style={{ width: scaleWidth(24), height: scaleHeight(24) }}
+                                style={[layout.icon24]}
                                 resizeMode="contain"
                             />
                         </TouchableOpacity>
                         <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                            <Text style={layout.topText}>지점 이용문의</Text>
+                            <Text style={[layout.topTxt]}>지점 이용문의</Text>
                         </View>
                     </View>
                 </View>
 
                 <ScrollView
                     contentContainerStyle={{
-                        paddingHorizontal: scaleWidth(15),
+                        paddingHorizontal: scaleWidth(20),
                         paddingBottom: scaleHeight(50)
                     }}
                     keyboardShouldPersistTaps="handled"
                 >
                     {/* 안내 문구 */}
                     <View style={{ marginTop: 20, }}>
-                        <Text style={{
-                            marginBottom: 10,
-                            fontWeight: '500',
-                            fontSize: scaleFont(15),
-                            lineHeight: scaleFont(24)
-                        }}>
+                        <Text style={styles.boldTxt}>
                             지점 문의 내용을 남겨주세요.
                         </Text>
-                        <View style={{ flexDirection: 'row', marginBottom: 20 }}>
-                            <Text style={{
-                                fontSize: scaleFont(12),
-                                lineHeight: scaleFont(17),
-                                color: color.mediumGray
-                            }}>
-                                - 매장명 |
+                        <View style={{ flexDirection: 'row', marginTop: scaleHeight(11), marginBottom: scaleHeight(20) }}>
+                            <Text style={[layout.guideTxt]}>
+                                - 매장명
                             </Text>
-                            <Text style={{
-                                fontSize: scaleFont(12),
-                                lineHeight: scaleFont(17),
-                                color: color.mediumGray
-                            }}>{store.name}</Text>
+                            <View style={[layout.rightLine, { marginHorizontal: 5, alignSelf: 'center' }]} />
+                            <Text style={[layout.guideTxt]}>{store.name}</Text>
                         </View>
                     </View>
 
                     {/* 제목 */}
                     <View style={{ position: 'relative', marginBottom: 10 }}>
-                        <Text style={{
-                            position: 'absolute',
-                            top: 6,
-                            left: 10,
-                            fontSize: scaleFont(12),
-                            lineHeight: scaleFont(16),
-                            color: color.lightDarkGray,
-                            paddingHorizontal: 4,
-                            zIndex: 10,
-                        }}>
+                        <Text style={[layout.inputLabel]}>
                             제목
                         </Text>
                         <TextInput
                             value={title}
                             onChangeText={setTitle}
                             placeholder="제목을 입력해주세요"
-                            style={{
-                                borderWidth: 1,
-                                borderColor: '#e0e0e0',
-                                paddingHorizontal: 14,
-                                borderRadius: 4,
-                                fontSize: scaleFont(14),
-                                lineHeight: scaleFont(24),
-                                height: scaleHeight(64),
-                                paddingTop: scaleHeight(18),
-                                color: color.blackGray
-                            }}
+                            style={[layout.input]}
                         />
                     </View>
 
@@ -130,36 +100,15 @@ export default function StoreInquiryDetail({ navigation, route }) {
                             multiline
                             numberOfLines={10}
                             textAlignVertical="top"
-                            style={{
-                                borderWidth: 1,
-                                borderColor: '#e0e0e0',
-                                padding: 10,
-                                borderRadius: 4,
-                                fontSize: scaleFont(14),
-                                lineHeight: scaleFont(24),
-                                height: scaleHeight(180),
-                                color: '#c4c4c4'
-                            }}
+                            style={styles.contentInput}
                         />
                     </View>
                 </ScrollView>
 
                 {/* 하단 버튼 */}
-                <View style={{
-                    position: 'absolute',
-                    bottom: 0,
-                    width: '100%',
-                    height: scaleHeight(52),
-                    backgroundColor: color.mainColor,
-                    justifyContent: 'center',
-                    alignItems: 'center'
-                }}>
+                <View style={[layout.bottomButtonMain]}>
                     <TouchableOpacity onPress={handleSubmit}>
-                        <Text style={{
-                            fontSize: scaleFont(16),
-                            lineHeight: scaleFont(26),
-                            color: color.blackGray
-                        }}>
+                        <Text style={[layout.bottomButtonTxt]}>
                             제출하기
                         </Text>
                     </TouchableOpacity>
@@ -168,3 +117,24 @@ export default function StoreInquiryDetail({ navigation, route }) {
         </SafeAreaView>
     );
 }
+const styles = StyleSheet.create({
+    boldTxt: {
+        color: color.black,
+        fontFamily: 'Noto Sans KR',
+        fontSize: scaleFont(15),
+        fontWeight: '500',
+        lineHeight: scaleFont(24)
+    },
+    contentInput: {
+        borderWidth: 1,
+        borderColor: color.grey80,
+        padding: 10,
+        borderRadius: 4,
+        fontSize: scaleFont(14),
+        lineHeight: scaleFont(24),
+        height: scaleHeight(180),
+        paddingVertical: scaleHeight(10),
+        paddingHorizontal: scaleWidth(14),
+        color: color.grey70
+    }
+});
