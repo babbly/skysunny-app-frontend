@@ -73,7 +73,7 @@ export default function AppInquiry({ navigation }) {
                         <View>
                             <Text style={{
                                 color: color.black,
-                                fontFamily: 'Noto Sans KR',
+                                fontFamily: 'NotoSans KR',
                                 fontSize: scaleFont(15),
                                 fontWeight: '500',
                                 lineHeight: scaleFont(24),
@@ -83,11 +83,7 @@ export default function AppInquiry({ navigation }) {
                         </View>
                         <Image
                             source={require('../../../img/common/downarrow.png')}
-                            style={{
-                                width: scaleWidth(24),
-                                height: scaleHeight(20),
-                                transform: [{ scaleY: isOpen ? -1 : 1 }],
-                            }}
+                            style={[layout.icon2420]}
                             resizeMode="contain"
                         />
                     </View>
@@ -152,7 +148,7 @@ export default function AppInquiry({ navigation }) {
 const styles = StyleSheet.create({
     contentTxt: {
         color: color.gray900,
-        fontFamily: 'Noto Sans KR',
+        fontFamily: 'NotoSans KR',
         fontSize: scaleFont(12),
         lineHeight: scaleFont(18)
     },

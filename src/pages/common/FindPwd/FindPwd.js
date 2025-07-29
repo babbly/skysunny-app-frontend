@@ -11,12 +11,11 @@ import layout, { scaleFont, scaleHeight, scaleWidth } from '../../../res/layout'
 
 export default function FindPwd({ navigation }) {
 
-    const verify = () => {
-        navigation.navigate('PageStack', { screen: 'Verify' });
-    };
-
-    const resetPwd = () => {
-        navigation.navigate('PageStack', { screen: 'FindPwd2' });
+    const movePage = (screen) => {
+        navigation.navigate('PageStack', {
+            screen: screen,
+            params: { from: 'FindPwd' },
+        });
     };
 
     const [name, setName] = useState('');
@@ -64,8 +63,8 @@ export default function FindPwd({ navigation }) {
 
                 <View style={[layout.container, { backgroundColor: color.white }]}>
 
-                    <View style={{ width: scaleWidth(320), paddingTop: scaleHeight(30), }}>
-                        <Text style={[layout.guideTxt]}>
+                    <View style={[layout.guideView]}>
+                        <Text style={[layout.f12w300]}>
                             - 본인인증 버튼을 누르고 회원가입 시 등록한 휴대전화번호로 인증을 완료하세요. 성명과 휴대전화번호를 표시합니다.{"\n"}
                             - 가입하신 아이디를 기입하고 '비밀번호 재설정'을 누르세요.
                         </Text>
@@ -73,7 +72,7 @@ export default function FindPwd({ navigation }) {
 
                     {/* 본인인증 버튼 */}
                     <View style={[layout.verifyBtn]}>
-                        <TouchableOpacity onPress={verify}>
+                        <TouchableOpacity onPress={() => movePage('Verify')} >
                             <Text style={[layout.bottomButtonTxt]}>본인 인증</Text>
                         </TouchableOpacity>
                     </View>
@@ -102,12 +101,12 @@ export default function FindPwd({ navigation }) {
                         }}>
                             <Image
                                 source={require('../../../img/common/circleCheck.png')}
-                                style={{ width: scaleWidth(16), height: scaleHeight(16), marginRight: 4 }}
+                                style={[layout.icon16, { marginRight: 4 }]}
                                 resizeMode="contain"
                             />
                             <Text style={{
                                 color: color.gray900,
-                                fontFamily: 'Noto Sans KR',
+                                fontFamily: 'NotoSans KR',
                                 fontSize: scaleFont(12),
                                 fontWeight: '400',
                                 lineHeight: scaleFont(16),
@@ -128,9 +127,7 @@ export default function FindPwd({ navigation }) {
 
                 {/* 하단 버튼 */}
                 <View style={[layout.bottomButtonMain]}>
-                    <TouchableOpacity
-                        onPress={resetPwd}
-                    >
+                    <TouchableOpacity onPress={() => movePage('FindPwd2')} >
                         <Text style={[layout.bottomButtonTxt]}>비밀번호 재설정</Text>
                     </TouchableOpacity>
                 </View>

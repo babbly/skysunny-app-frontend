@@ -11,7 +11,7 @@ const BannerSlider = ({ banners, type = 'sub1', bannerHeight, borderRadius }) =>
 
     const IS_MAIN2 = type === 'main2';
 
-    const ITEM_WIDTH = IS_MAIN2 ? 360 : SCREEN_WIDTH; // 고정
+    const ITEM_WIDTH = IS_MAIN2 ? 360 : SCREEN_WIDTH;
 
     const totalItemWidth = ITEM_WIDTH + 2 * 2;
 

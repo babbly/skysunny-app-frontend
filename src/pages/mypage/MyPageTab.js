@@ -7,58 +7,9 @@ import layout, { scaleFont, scaleHeight, scaleWidth } from '../../res/layout';
 
 export default function MyPageTab({ navigation }) {
 
-    const settings = () => {
-        navigation.navigate('PageStack', {
-            screen: 'Settings'
-        });
+    const movePage = (screen) => {
+        navigation.navigate('PageStack', { screen });
     };
-
-    const myinfo = () => {
-        navigation.navigate('PageStack', {
-            screen: 'MyInfo'
-        });
-    };
-    const paymentHistory = () => {
-        navigation.navigate('PageStack', {
-            screen: 'PaymentHistory'
-        });
-    };
-    const studyTime = () => {
-        navigation.navigate('PageStack', {
-            screen: 'StudyTime'
-        });
-    };
-
-    const favoriteStore = () => {
-        navigation.navigate('PageStack', {
-            screen: 'FavoriteStore'
-        });
-    };
-
-    const coupon = () => {
-        navigation.navigate('PageStack', {
-            screen: 'Coupon'
-        });
-    };
-
-    const pointHistory = () => {
-        navigation.navigate('PageStack', {
-            screen: 'PointHistory'
-        });
-    };
-
-    const notice = () => {
-        navigation.navigate('PageStack', {
-            screen: 'Notice'
-        });
-    };
-
-    const inquiry = () => {
-        navigation.navigate('PageStack', {
-            screen: 'Inquiry'
-        });
-    };
-
 
     return (
         <SafeAreaProvider>
@@ -88,7 +39,7 @@ export default function MyPageTab({ navigation }) {
                             </View>
                             <View>
                                 <TouchableOpacity style={[layout.backBox]}
-                                    onPress={settings}>
+                                    onPress={() => movePage('Settings')} >
                                     <Image
                                         source={require("../../img/common/setting.png")}
                                         style={{ width: 21.36, height: 22.26, }}
@@ -101,7 +52,7 @@ export default function MyPageTab({ navigation }) {
                         <View style={{ marginTop: scaleHeight(35), marginHorizontal: scaleWidth(25) }}>
                             <Text style={{
                                 color: color.black,
-                                fontFamily: 'BM DoHyeon',
+                                fontFamily: 'BMDoHyeon',
                                 fontSize: scaleFont(18),
                                 fontWeight: '400',
                                 lineHeight: scaleFont(26),
@@ -109,7 +60,7 @@ export default function MyPageTab({ navigation }) {
                             }}>홍길동 회원님, 반가워요!</Text>
                             <Text style={{
                                 color: color.black,
-                                fontFamily: 'Noto Sans KR',
+                                fontFamily: 'NotoSans KR',
                                 fontSize: scaleFont(14),
                                 fontWeight: '300',
                                 lineHeight: scaleFont(26),
@@ -120,7 +71,7 @@ export default function MyPageTab({ navigation }) {
                     {/* 메뉴박스 */}
                     <View style={styles.menuBox}>
                         <TouchableOpacity style={styles.myMenu}
-                            onPress={myinfo}>
+                            onPress={() => movePage('MyInfo')} >
                             <Image
                                 source={require("../../img/mypage/myinfo.png")}
                                 style={styles.menuIcon}
@@ -129,7 +80,7 @@ export default function MyPageTab({ navigation }) {
                             <Text style={styles.menuTxt}>내 정보관리</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.myMenu}
-                            onPress={paymentHistory}>
+                            onPress={() => movePage('PaymentHistory')} >
                             <Image
                                 source={require("../../img/mypage/payment.png")}
                                 style={styles.menuIcon}
@@ -138,7 +89,7 @@ export default function MyPageTab({ navigation }) {
                             <Text style={styles.menuTxt}>결제내역</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.myMenu}
-                            onPress={studyTime}>
+                            onPress={() => movePage('StudyTime')} >
                             <Image
                                 source={require("../../img/mypage/studyTime.png")}
                                 style={styles.menuIcon}
@@ -147,7 +98,7 @@ export default function MyPageTab({ navigation }) {
                             <Text style={styles.menuTxt}>내 공부시간</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.myMenu}
-                            onPress={favoriteStore}>
+                            onPress={() => movePage('FavoriteStore')} >
                             <Image
                                 source={require("../../img/mypage/store.png")}
                                 style={styles.menuIcon}
@@ -156,7 +107,7 @@ export default function MyPageTab({ navigation }) {
                             <Text style={styles.menuTxt}>찜한 매장</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.myMenu}
-                            onPress={coupon}>
+                            onPress={() => movePage('Coupon')} >
                             <Image
                                 source={require("../../img/mypage/coupon.png")}
                                 style={styles.menuIcon}
@@ -165,7 +116,7 @@ export default function MyPageTab({ navigation }) {
                             <Text style={styles.menuTxt}>쿠폰함</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.myMenu}
-                            onPress={pointHistory}>
+                            onPress={() => movePage('PointHistory')} >
                             <Image
                                 source={require("../../img/mypage/point.png")}
                                 style={styles.menuIcon}
@@ -174,7 +125,7 @@ export default function MyPageTab({ navigation }) {
                             <Text style={styles.menuTxt}>포인트내역</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.myMenu}
-                            onPress={notice}>
+                            onPress={() => movePage('Notice')} >
                             <Image
                                 source={require("../../img/mypage/notice.png")}
                                 style={styles.menuIcon}
@@ -183,7 +134,7 @@ export default function MyPageTab({ navigation }) {
                             <Text style={styles.menuTxt}>공지사항</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.myMenu}
-                            onPress={inquiry}>
+                            onPress={() => movePage('Inquiry')} >
                             <Image
                                 source={require("../../img/mypage/inquiry.png")}
                                 style={styles.menuIcon}
@@ -226,7 +177,7 @@ const styles = StyleSheet.create({
     },
     menuTxt: {
         color: color.black,
-        fontFamily: 'Noto Sans KR',
+        fontFamily: 'NotoSans KR',
         fontSize: scaleFont(13),
         fontWeight: '500',
         lineHeight: scaleFont(20)

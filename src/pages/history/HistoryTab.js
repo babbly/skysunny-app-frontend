@@ -100,7 +100,7 @@ export default function HistoryTab({ navigation }) {
                         style={[styles.statusBtn, statusTab === st && styles.statusBtnActive]}
                         onPress={() => setStatusTab(st)}
                     >
-                        <Text style={statusTab === st ? styles.tabTextActive : styles.tabText}>{st}</Text>
+                        <Text style={statusTab === st ? [styles.tabTextActive, { fontFamily: 'NotoSans KR' }] : [styles.tabText, { fontFamily: 'NotoSans KR' }]}>{st}</Text>
                     </TouchableOpacity>
                 ))}
             </View>
@@ -123,19 +123,27 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
     },
     tabBtn: {
+        justifyContent: 'center',
+        alignItems: 'center',
         paddingVertical: scaleHeight(7),
-        paddingHorizontal: scaleWidth(11),
+        paddingHorizontal: scaleWidth(10),
         borderBottomWidth: 1,
         borderColor: color.gray200,
     },
     tabBtnActive: {
         borderColor: color.black,
+        justifyContent: 'center',
+        alignItems: 'center',
+        paddingVertical: scaleHeight(7),
+        paddingHorizontal: scaleWidth(10),
     },
     tabText: {
         color: color.gray300,
+        fontFamily: 'BMDoHyeon',
     },
     tabTextActive: {
         color: color.black,
+        fontFamily: 'BMDoHyeon',
     },
     statusBtn: {
         backgroundColor: color.gray100,
@@ -167,7 +175,7 @@ const styles = StyleSheet.create({
     },
     cardCategory: {
         color: color.black,
-        fontFamily: Platform.OS === 'ios' ? 'BM DoHyeon' : '배달의민족 도현',
+        fontFamily: 'BMDoHyeon',
         fontSize: scaleFont(13),
         // fontWeight: '400',
         lineHeight: scaleFont(16)

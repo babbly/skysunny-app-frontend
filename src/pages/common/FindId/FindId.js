@@ -7,16 +7,15 @@ import {
     TextInput, TouchableOpacity, View
 } from 'react-native';
 import color from '../../../res/color';
-import layout, { scaleHeight, scaleWidth } from '../../../res/layout';
+import layout, { scaleHeight } from '../../../res/layout';
 
 export default function FindId({ navigation }) {
 
-    const verify = () => {
-        navigation.navigate('PageStack', { screen: 'Verify' });
-    };
-
-    const findId = () => {
-        navigation.navigate('PageStack', { screen: 'FindId2' });
+    const movePage = (screen) => {
+        navigation.navigate('PageStack', {
+            screen: screen,
+            params: { from: 'FindId' },
+        });
     };
 
     const [name, setName] = useState('');
@@ -62,7 +61,7 @@ export default function FindId({ navigation }) {
 
                 <View style={[layout.container, { backgroundColor: color.white }]}>
 
-                    <View style={{ width: scaleWidth(320), paddingTop: scaleHeight(30), }}>
+                    <View style={[layout.guideView]}>
                         <Text style={[layout.guideTxt]}>
                             - 본인인증 버튼을 누르고 인증을 완료하면 성명과 휴대전화 번호를 표시합니다.{"\n"}
                             - 아이디 찾기 버튼을 누르세요. 아이디를 화면에 표시합니다.
@@ -71,7 +70,7 @@ export default function FindId({ navigation }) {
 
                     {/* 본인인증 버튼 */}
                     <View style={[layout.verifyBtn]}>
-                        <TouchableOpacity onPress={verify}>
+                        <TouchableOpacity onPress={() => movePage('Verify')} >
                             <Text style={[layout.bottomButtonTxt]}>본인 인증</Text>
                         </TouchableOpacity>
                     </View>
@@ -97,9 +96,7 @@ export default function FindId({ navigation }) {
 
                 {/* 하단 버튼 */}
                 <View style={[layout.bottomButtonGray]}>
-                    <TouchableOpacity
-                        onPress={findId}
-                    >
+                    <TouchableOpacity onPress={() => movePage('FindId2')} >
                         <Text style={[layout.bottomButtonTxt]}>아이디 찾기</Text>
                     </TouchableOpacity>
                 </View>

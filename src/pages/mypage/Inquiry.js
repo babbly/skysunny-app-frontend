@@ -1,7 +1,7 @@
 import React from 'react';
 import { Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import color from '../../res/color';
-import layout, { scaleFont, scaleHeight, scaleWidth } from '../../res/layout';
+import layout, { scaleFont, scaleWidth } from '../../res/layout';
 
 
 export default function Inquiry({ navigation }) {
@@ -32,10 +32,7 @@ export default function Inquiry({ navigation }) {
                         <Text style={styles.menuText}> 앱 이용문의</Text>
                         <Image
                             source={require('../../img/common/backarrow2.png')}
-                            style={{
-                                width: scaleWidth(24),
-                                height: scaleHeight(20),
-                            }}
+                            style={[layout.icon2420]}
                             resizeMode="contain"
                         />
                     </View>
@@ -45,10 +42,7 @@ export default function Inquiry({ navigation }) {
                         <Text style={styles.menuText}> 입점/제휴문의</Text>
                         <Image
                             source={require('../../img/common/backarrow2.png')}
-                            style={{
-                                width: scaleWidth(24),
-                                height: scaleHeight(20),
-                            }}
+                            style={[layout.icon2420]}
                             resizeMode="contain"
                         />
                     </View>
@@ -58,10 +52,7 @@ export default function Inquiry({ navigation }) {
                         <Text style={styles.menuText}> 지점 이용문의</Text>
                         <Image
                             source={require('../../img/common/backarrow2.png')}
-                            style={{
-                                width: scaleWidth(24),
-                                height: scaleHeight(20),
-                            }}
+                            style={[layout.icon2420]}
                             resizeMode="contain"
                         />
                     </View>
@@ -71,10 +62,7 @@ export default function Inquiry({ navigation }) {
                         <Text style={styles.menuText}> 나의 문의내역</Text>
                         <Image
                             source={require('../../img/common/backarrow2.png')}
-                            style={{
-                                width: scaleWidth(24),
-                                height: scaleHeight(20),
-                            }}
+                            style={[layout.icon2420]}
                             resizeMode="contain"
                         />
                     </View>
@@ -93,6 +81,8 @@ const styles = StyleSheet.create({
         marginTop: 20
     },
     menuText: {
+        color: color.black,
+        fontFamily: 'NotoSans KR',
         fontWeight: '500',
         fontSize: scaleFont(15),
         lineHeight: scaleFont(24),

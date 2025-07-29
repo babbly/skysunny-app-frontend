@@ -1,7 +1,7 @@
 import React from 'react';
 import { Image, StyleSheet, TextInput, View } from 'react-native';
 import color from '../res/color';
-import { scaleFont, scaleHeight, scaleWidth } from '../res/layout';
+import layout, { scaleFont, scaleHeight, scaleWidth } from '../res/layout';
 
 const SearchBox = () => {
     return (
@@ -19,7 +19,7 @@ const SearchBox = () => {
             />
             <Image
                 source={require('../img/common/search2.png')}
-                style={styles.icon}
+                style={[layout.icon24, { marginRight: scaleWidth(8) }]}
                 resizeMode="contain"
             />
         </View>
@@ -35,11 +35,6 @@ const styles = StyleSheet.create({
         width: scaleWidth(320),
         height: scaleHeight(40),
         paddingHorizontal: scaleWidth(10),
-    },
-    icon: {
-        width: scaleWidth(24),
-        height: scaleHeight(24),
-        marginRight: scaleWidth(8),
     },
     input: {
         flex: 1,

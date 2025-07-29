@@ -52,6 +52,7 @@ import StudyRoomPass from '../store/StudyRoomPass';
 import StudyRoomTicket from '../store/StudyRoomTicket';
 
 
+import Alarm from '../home/Alarm';
 import Update from './../../components/Update';
 
 
@@ -114,6 +115,7 @@ export default function PageStack() {
             <Stack.Screen name="StudyRoomPass" component={StudyRoomPass} />
             <Stack.Screen name="QrCode" component={QrCode} />
 
+            <Stack.Screen name="Alarm" component={Alarm} />
 
 
             <Stack.Screen name="Update" component={Update} />

@@ -7,15 +7,14 @@ import {
     TextInput, TouchableOpacity, View
 } from 'react-native';
 import color from '../../../res/color';
-import layout, { scaleFont, scaleHeight, scaleWidth } from '../../../res/layout';
+import layout, { scaleHeight } from '../../../res/layout';
 
 export default function FindPwd2({ navigation }) {
 
-    const login = () => {
-        navigation.navigate('PageStack', {
-            screen: 'Login'
-        });
+    const movePage = (screen) => {
+        navigation.navigate('PageStack', { screen });
     };
+
 
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
@@ -54,14 +53,13 @@ export default function FindPwd2({ navigation }) {
                             />
                         </TouchableOpacity>
                         <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                            <Text style={[layout.topTxt]}>비밀번호 재설정</Text>
+                            <Text style={[layout.topTxt]}>비밀번호 찾기</Text>
                         </View>
                     </View>
                 </View>
 
                 <View style={[layout.container, { backgroundColor: color.white }]}>
-
-                    <View style={{ width: scaleWidth(320), paddingTop: scaleHeight(30), }}>
+                    <View style={[layout.guideView]}>
                         <Text style={[layout.guideTxt]}>
                             - 새로운 비밀번호를 입력해주세요. {"\n"} (최서 8자리 이상, 영문/숫자/특수문자 혼용)
                         </Text>
@@ -86,23 +84,13 @@ export default function FindPwd2({ navigation }) {
                         />
                     </View>
 
-                    <View style={{
-                        width: scaleWidth(320), flexDirection: 'row',
-                        alignItems: 'center'
-                    }}>
+                    <View style={[layout.errorView]}>
                         <Image
                             source={require('../../../img/common/error.png')}
-                            style={{ width: scaleWidth(16), height: scaleHeight(16), marginRight: 4 }}
+                            style={[layout.icon16, { marginRight: 4 }]}
                             resizeMode="contain"
                         />
-                        <Text style={{
-                            color: 'red',
-                            fontFamily: 'Noto Sans KR',
-                            fontSize: scaleFont(12),
-                            fontWeight: '400',
-                            lineHeight: scaleFont(16),
-                            textAlign: 'center',
-                        }}>
+                        <Text style={[layout.errorTxt]}>
                             비밀번호가 다릅니다. 다시 확인해주세요.
                         </Text>
                     </View>
@@ -110,9 +98,7 @@ export default function FindPwd2({ navigation }) {
 
                 {/* 하단 버튼 */}
                 <View style={[layout.bottomButtonMain]}>
-                    <TouchableOpacity
-                        onPress={login}
-                    >
+                    <TouchableOpacity onPress={() => movePage('Login')} >
                         <Text style={[layout.bottomButtonTxt]}>완료</Text>
                     </TouchableOpacity>
                 </View>

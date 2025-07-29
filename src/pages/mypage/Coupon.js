@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FlatList, Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { FlatList, Image, SafeAreaView, Text, TouchableOpacity, View } from 'react-native';
 import color from '../../res/color';
 import layout, { scaleFont, scaleHeight, scaleWidth } from '../../res/layout';
 
@@ -93,7 +93,7 @@ export default function Coupon({ navigation }) {
             }}>
                 <Text style={{
                     color: color.fontGray,
-                    fontFamily: 'Noto Sans KR',
+                    fontFamily: 'NotoSans KR',
                     fontSize: scaleFont(11),
                     fontWeight: '300',
                     lineHeight: scaleFont(18),
@@ -106,14 +106,9 @@ export default function Coupon({ navigation }) {
                     width: scaleWidth(60),
                     paddingHorizontal: scaleWidth(2),
                 }}>
-                    <Text style={{
+                    <Text style={[layout.f12w300, {
                         color: item.type === '이용가능' ? color.gray900 : color.gray500,
-                        fontFamily: 'Noto Sans KR',
-                        fontSize: scaleFont(12),
-                        fontWeight: '300',
-                        lineHeight: scaleFont(16),
-                        textAlign: 'center',
-                    }}>{item.type}</Text>
+                    }]}>{item.type}</Text>
                 </View>
             </View>
             <View style={[layout.line, { marginVertical: scaleHeight(10) }]} />
@@ -126,18 +121,13 @@ export default function Coupon({ navigation }) {
                     paddingHorizontal: scaleWidth(2),
                     marginRight: scaleWidth(5)
                 }}>
-                    <Text style={{
+                    <Text style={[layout.f12w300, {
                         color: color.gray900,
-                        fontFamily: 'Noto Sans KR',
-                        fontSize: scaleFont(12),
-                        fontWeight: '300',
-                        lineHeight: scaleFont(16),
-                        textAlign: 'center',
-                    }}>매장전용</Text>
+                    }]}>매장전용</Text>
                 </View>
                 <Text style={{
                     color: color.black,
-                    fontFamily: 'Noto Sans KR',
+                    fontFamily: 'NotoSans KR',
                     fontSize: scaleFont(13),
                     fontWeight: '500',
                     lineHeight: scaleFont(20),
@@ -146,7 +136,7 @@ export default function Coupon({ navigation }) {
 
             <Text style={{
                 color: color.fontGray,
-                fontFamily: 'Noto Sans KR',
+                fontFamily: 'NotoSans KR',
                 fontSize: scaleFont(12),
                 fontWeight: '300',
                 lineHeight: scaleFont(20),
@@ -162,13 +152,9 @@ export default function Coupon({ navigation }) {
                     style={[layout.icon14]}
                     resizeMode="contain"
                 />
-                <Text style={{
-                    color: color.red,
-                    fontFamily: 'Noto Sans KR',
-                    fontSize: scaleFont(12),
+                <Text style={[layout.errorTxt, {
                     fontWeight: '700',
-                    lineHeight: scaleFont(16),
-                }}>
+                }]}>
                     {item.validDays > 0 ? `유효기간 ${item.validDays}일` : '만료됨'}
                 </Text>
             </View>
@@ -181,7 +167,7 @@ export default function Coupon({ navigation }) {
             }}>
                 <Text style={{
                     color: color.black,
-                    fontFamily: 'BM DoHyeon',
+                    fontFamily: 'BMDoHyeon',
                     fontSize: scaleFont(18),
                     fontWeight: '400',
                     lineHeight: scaleFont(24),
@@ -189,7 +175,7 @@ export default function Coupon({ navigation }) {
 
                 <Text style={{
                     color: color.fontGray,
-                    fontFamily: 'Noto Sans KR',
+                    fontFamily: 'NotoSans KR',
                     fontSize: scaleFont(12),
                     fontWeight: '300',
                     lineHeight: scaleFont(20),
@@ -232,8 +218,15 @@ export default function Coupon({ navigation }) {
                             backgroundColor: selectedTab === tab ? color.mainColor : color.gray100,
                             borderWidth: selectedTab === tab ? 1 : 0,
                             marginBottom: scaleHeight(5),
+                            width: scaleWidth(78.75)
                         }]}>
-                        <Text>{tab}</Text>
+                        <Text style={{
+                            color: selectedTab === tab ? color.gray900 : color.gray700,
+                            fontFamily: 'NotoSans KR',
+                            fontWeight: '300',
+                            fontSize: scaleFont(13),
+                            lineHeight: scaleHeight(20)
+                        }}>{tab}</Text>
                     </TouchableOpacity>
                 ))}
             </View>
@@ -256,6 +249,3 @@ export default function Coupon({ navigation }) {
 }
 
 
-const styles = StyleSheet.create({
-    container: { flex: 1, justifyContent: 'center', alignItems: 'center' },
-});

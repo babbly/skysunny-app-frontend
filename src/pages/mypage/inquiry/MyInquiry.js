@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FlatList, Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { FlatList, Image, SafeAreaView, Text, TouchableOpacity, View } from 'react-native';
 import color from '../../../res/color';
 import layout, { scaleFont, scaleHeight, scaleWidth } from '../../../res/layout';
 
@@ -67,14 +67,14 @@ export default function MyInquiry({ navigation }) {
                                 }}>
                                     <Text style={{
                                         color: color.black,
-                                        fontFamily: 'Noto Sans KR',
+                                        fontFamily: 'NotoSans KR',
                                         fontSize: scaleFont(12),
                                         fontWeight: '300',
                                         lineHeight: scaleFont(16),
                                         textAlign: 'center',
                                     }}>{item.answer ? '답변완료' : '답변대기'}</Text>
                                 </View>
-                                <Text style={styles.boldTxt}>
+                                <Text style={[layout.titleTxt]}>
                                     {item.title}
                                 </Text>
                             </View>
@@ -120,12 +120,3 @@ export default function MyInquiry({ navigation }) {
         </SafeAreaView>
     );
 }
-const styles = StyleSheet.create({
-    boldTxt: {
-        color: color.black,
-        fontFamily: 'Noto Sans KR',
-        fontSize: scaleFont(15),
-        fontWeight: '500',
-        lineHeight: scaleFont(24)
-    },
-});

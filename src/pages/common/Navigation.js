@@ -43,6 +43,10 @@ export default function TabNavigator() {
                         />
                     );
                 },
+                tabBarLabelStyle: {
+                    fontFamily: 'BMDoHyeon',
+                    fontSize: 10,
+                },
                 tabBarActiveTintColor: '#000',
                 tabBarInactiveTintColor: 'gray',
                 headerShown: false,

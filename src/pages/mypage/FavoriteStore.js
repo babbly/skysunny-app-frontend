@@ -11,10 +11,8 @@ export default function FavoriteStore({ navigation }) {
         favoriteStores();
     }, [selectedTab]);
 
-    const storeDetail = () => {
-        navigation.navigate('PageStack', {
-            screen: 'StoreDetail'
-        });
+    const movePage = (screen) => {
+        navigation.navigate('PageStack', { screen });
     };
     const [selectedTab, setSelectedTab] = useState('nearest');
     const [storeData, setStoreData] = useState([]);
@@ -41,7 +39,7 @@ export default function FavoriteStore({ navigation }) {
                 borderRadius: 6,
                 flexDirection: 'row'
             }}
-                onPress={storeDetail}>
+                onPress={() => movePage('StoreDetail')} >
                 <View style={{ position: 'relative' }}>
                     <Image
                         source={require("../../img/mypage/example.png")}
@@ -97,7 +95,7 @@ export default function FavoriteStore({ navigation }) {
                             />
                             <Text style={{
                                 color: color.black,
-                                fontFamily: 'Noto Sans KR',
+                                fontFamily: 'NotoSans KR',
                                 fontSize: scaleFont(14),
                                 fontWeight: '700',
                                 lineHeight: scaleFont(16)
@@ -105,7 +103,7 @@ export default function FavoriteStore({ navigation }) {
                         </View>
                         {/* <Text style={{
                             color: color.black,
-                            fontFamily: 'Noto Sans KR',
+                            fontFamily: 'NotoSans KR',
                             fontSize: scaleFont(12),
                             fontWeight: '700',
                             lineHeight: scaleFont(16)
@@ -114,14 +112,14 @@ export default function FavoriteStore({ navigation }) {
                     <View style={[layout.line, { paddingBottom: scaleHeight(4) }]} />
                     {/* 매장 정보 */}
                     <View style={{ marginVertical: scaleHeight(14), }}>
-                        <Text style={[styles.favInfoTxt, { fontFamily: 'BM DoHyeon', }]}>{item.name}</Text>
+                        <Text style={[styles.favInfoTxt, { fontFamily: 'BMDoHyeon', }]}>{item.name}</Text>
                         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                             <Image source={require("../../img/mypage/time.png")} style={[layout.icon14]} />
-                            <Text style={[styles.favInfoTxt, { fontFamily: 'Noto Sans KR', marginVertical: scaleHeight(4) }]}>{item.businessHours}</Text>
+                            <Text style={[styles.favInfoTxt, { fontFamily: 'NotoSans KR', marginVertical: scaleHeight(4) }]}>{item.businessHours}</Text>
                         </View>
                         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                             <Image source={require("../../img/mypage/discount.png")} style={[layout.icon14]} />
-                            <Text style={[styles.favInfoTxt, { fontFamily: 'Noto Sans KR', }]}>{item.eventDescription}</Text>
+                            <Text style={[styles.favInfoTxt, { fontFamily: 'NotoSans KR', }]}>{item.eventDescription}</Text>
                         </View>
                     </View>
 
@@ -212,7 +210,7 @@ const styles = StyleSheet.create({
     },
     favInfoTxt2: {
         color: color.gray900,
-        fontFamily: 'Noto Sans KR',
+        fontFamily: 'NotoSans KR',
         fontSize: scaleFont(12),
         fontWeight: '400',
         lineHeight: scaleFont(16)

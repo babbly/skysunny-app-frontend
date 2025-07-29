@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { FlatList, Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { FlatList, Image, SafeAreaView, Text, TouchableOpacity, View } from 'react-native';
 import color from '../../res/color';
-import layout, { scaleFont, scaleHeight, scaleWidth } from '../../res/layout';
+import layout, { scaleHeight, scaleWidth } from '../../res/layout';
 
 const noticeList = [
     {
@@ -28,7 +28,6 @@ const noticeList = [
 export default function Notice({ navigation }) {
     const [openNotices, setOpenNotices] = useState([]);
 
-
     const toggleNotice = (id) => {
         setOpenNotices((prev) =>
             prev.includes(id) ? prev.filter((n) => n !== id) : [...prev, id]
@@ -50,26 +49,18 @@ export default function Notice({ navigation }) {
                         }}
                     >
                         <View>
-                            <Text style={styles.boldTxt}>
+                            <Text style={[layout.titleTxt]}>
                                 {item.title}
                             </Text>
-                            <Text style={{
-                                color: color.fontGray,
-                                fontFamily: 'Noto Sans KR',
-                                fontSize: scaleFont(12),
-                                fontWeight: '300',
-                                lineHeight: scaleFont(18),
-                            }}>
+                            <Text style={[layout.dateTxt]}>
                                 {item.date}
                             </Text>
                         </View>
                         <Image
                             source={require('../../img/common/downarrow.png')}
-                            style={{
-                                width: scaleWidth(24),
-                                height: scaleHeight(24),
+                            style={[layout.icon24, {
                                 transform: [{ scaleY: isOpen ? -1 : 1 }],
-                            }}
+                            }]}
                             resizeMode="contain"
                         />
                     </View>
@@ -87,7 +78,9 @@ export default function Notice({ navigation }) {
                             borderRadius: 6,
                         }}
                     >
-                        <Text style={{ fontSize: scaleFont(13), lineHeight: scaleFont(20) }}>{item.content}</Text>
+                        <Text style={[layout.dateTxt, {
+                            color: color.grey10
+                        }]}>{item.content}</Text>
                     </View>
                 )}
             </View>
@@ -125,12 +118,3 @@ export default function Notice({ navigation }) {
         </SafeAreaView>
     );
 }
-const styles = StyleSheet.create({
-    boldTxt: {
-        color: color.black,
-        fontFamily: 'Noto Sans KR',
-        fontSize: scaleFont(15),
-        fontWeight: '500',
-        lineHeight: scaleFont(24)
-    },
-});

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Image, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Graph from '../../components/Graph';
 import color from '../../res/color';
@@ -6,7 +6,9 @@ import layout, { scaleFont, scaleHeight, scaleWidth } from '../../res/layout';
 
 
 export default function StudyTime({ navigation }) {
-
+    useEffect(() => {
+        console.log('📊 Graph 컴포넌트가 렌더링됨');
+    }, []);
     const [activeTab, setActiveTab] = useState('study');
 
 
@@ -65,33 +67,33 @@ export default function StudyTime({ navigation }) {
                 contentContainerStyle={{ backgroundColor: color.white, paddingBottom: scaleHeight(50), alignItems: 'center' }}
                 showsVerticalScrollIndicator={false}
             >
-                {activeTab === 'study' && (
-                    <>
-                        <View style={styles.timeBox}>
-                            <View style={styles.timeBox2}>
-                                <Text style={styles.mainTxt}>총 공부시간</Text>
-                                <Text style={styles.timeTxt}>21:30</Text>
-                            </View>
-                            <View style={styles.timeBox2}>
-                                <Text style={styles.mainTxt}>평균 공부시간</Text>
-                                <Text style={styles.timeTxt}>04:00</Text>
-                            </View>
+                {/* {activeTab === 'study' && ( */}
+                <>
+                    <View style={styles.timeBox}>
+                        <View style={styles.timeBox2}>
+                            <Text style={styles.mainTxt}>총 공부시간</Text>
+                            <Text style={styles.timeTxt}>21:30</Text>
                         </View>
+                        <View style={styles.timeBox2}>
+                            <Text style={styles.mainTxt}>평균 공부시간</Text>
+                            <Text style={styles.timeTxt}>04:00</Text>
+                        </View>
+                    </View>
 
-                        <View style={styles.graphBox}>
-                            <Graph />
+                    <View style={styles.graphBox}>
+                        <Graph />
+                    </View>
+                    <View style={styles.timeBox}>
+                        <View style={{ width: scaleWidth(160), alignItems: 'center' }}>
+                            <Text style={styles.mainTxt}>월 평균 공부시간</Text>
+                            <Text style={styles.timeTxt}>21:30</Text>
                         </View>
-                        <View style={styles.timeBox}>
-                            <View style={{ width: scaleWidth(160), alignItems: 'center' }}>
-                                <Text style={styles.mainTxt}>월 평균 공부시간</Text>
-                                <Text style={styles.timeTxt}>21:30</Text>
-                            </View>
-                        </View>
-                        <View style={styles.graphBox}>
-                            <Text>그래프 공간</Text>
-                        </View>
-                    </>
-                )}
+                    </View>
+                    <View style={styles.graphBox}>
+                        <Text>그래프 공간</Text>
+                    </View>
+                </>
+                {/* // )} */}
 
                 {activeTab === 'attendance' && (
                     <>
@@ -108,7 +110,9 @@ export default function StudyTime({ navigation }) {
                             justifyContent: 'center',
                             alignItems: 'center',
                         }}>
-                            <Text>그래프 공간</Text>
+                            <View style={styles.graphBox}>
+                                <Graph />
+                            </View>
                         </View>
                     </>
                 )}

@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import {
     Image, SafeAreaView,
     ScrollView,
-    StyleSheet, Text,
+    Text,
     TextInput, TouchableOpacity, View
 } from 'react-native';
 import color from '../../res/color';
-import layout, { scaleFont, scaleHeight, scaleWidth } from '../../res/layout';
+import layout, { scaleFont, scaleHeight } from '../../res/layout';
 
 export default function MyInfo({ navigation }) {
     const [id, setId] = useState('test@test.com');
@@ -34,8 +34,8 @@ export default function MyInfo({ navigation }) {
                 style={[layout.input]}
             />
             {rightButton && (
-                <TouchableOpacity style={styles.inputInnerButton} onPress={rightButton.onPress}>
-                    <Text style={styles.inputInnerButtonTxt}>{rightButton.label}</Text>
+                <TouchableOpacity style={[layout.inputInnerButton]} onPress={rightButton.onPress}>
+                    <Text style={[layout.inputInnerButtonTxt]}>{rightButton.label}</Text>
                 </TouchableOpacity>
             )}
         </View>
@@ -94,7 +94,7 @@ export default function MyInfo({ navigation }) {
                     />
                     <Text style={{
                         color: color.grey30,
-                        fontFamily: 'Noto Sans KR',
+                        fontFamily: 'NotoSans KR',
                         fontSize: scaleFont(12),
                         lineHeight: scaleFont(17),
                         marginBottom: scaleHeight(10),
@@ -123,19 +123,3 @@ export default function MyInfo({ navigation }) {
     );
 }
 
-const styles = StyleSheet.create({
-    inputInnerButton: {
-        position: 'absolute',
-        right: scaleWidth(14),
-        top: scaleHeight(19),
-        backgroundColor: color.lightGray,
-        paddingHorizontal: scaleWidth(10),
-        paddingVertical: scaleHeight(5),
-        borderRadius: 4,
-    },
-    inputInnerButtonTxt: {
-        fontSize: scaleFont(12),
-        lineHeight: scaleFont(16),
-        color: color.black,
-    },
-});

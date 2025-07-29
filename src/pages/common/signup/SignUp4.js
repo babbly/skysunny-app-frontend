@@ -7,12 +7,12 @@ import {
     TextInput, TouchableOpacity, View
 } from 'react-native';
 import color from '../../../res/color';
-import layout, { scaleFont, scaleHeight, scaleWidth } from '../../../res/layout';
+import layout, { scaleHeight } from '../../../res/layout';
 
 export default function SignUp4({ navigation }) {
 
-    const agree = () => {
-        navigation.navigate('PageStack', { screen: 'SignUp5' });
+    const movePage = (screen) => {
+        navigation.navigate('PageStack', { screen });
     };
 
     const [password, setPassword] = useState('');
@@ -31,8 +31,8 @@ export default function SignUp4({ navigation }) {
                 style={[layout.input]}
             />
             {rightButton && (
-                <TouchableOpacity style={styles.inputInnerButton} onPress={rightButton.onPress}>
-                    <Text style={styles.inputInnerButtonTxt}>{rightButton.label}</Text>
+                <TouchableOpacity style={layout.inputInnerButton} onPress={rightButton.onPress}>
+                    <Text style={layout.inputInnerButtonTxt}>{rightButton.label}</Text>
                 </TouchableOpacity>
             )}
         </View>
@@ -64,7 +64,7 @@ export default function SignUp4({ navigation }) {
 
                 <View style={[layout.container, { backgroundColor: color.white }]}>
 
-                    <View style={{ width: scaleWidth(320), paddingTop: scaleHeight(30), }}>
+                    <View style={[layout.guideView]}>
                         <Text style={[layout.guideTxt]}>
                             -  비밀번호를 입력하세요. {"\n"}
                             (최소 8자리 이상, 영문/숫자/특수문자 혼용)
@@ -91,37 +91,27 @@ export default function SignUp4({ navigation }) {
                         />
                     </View>
 
-                    <View style={{
-                        width: scaleWidth(320), flexDirection: 'row',
-                        alignItems: 'center'
-                    }}>
+                    <View style={[layout.errorView]}>
                         <Image
                             source={require('../../../img/common/error.png')}
-                            style={{ width: scaleWidth(16), height: scaleHeight(16), marginRight: 4 }}
+                            style={[layout.icon16, { marginRight: 4 }]}
                             resizeMode="contain"
                         />
-                        <Text style={{
-                            color: 'red',
-                            fontFamily: 'Noto Sans KR',
-                            fontSize: scaleFont(12),
-                            fontWeight: '400',
-                            lineHeight: scaleFont(16),
-                            textAlign: 'center',
-                        }}>
-                            비밀번호가 다릅니다 다시 확인해주세요.
+                        <Text style={[layout.errorTxt]}>
+                            비밀번호가 다릅니다. 다시 확인해주세요.
                         </Text>
                     </View>
                 </View>
 
                 {/* 하단 버튼 */}
                 <View style={styles.bottomWrapper}>
-                    <View style={styles.bottomButtonWrapper2}>
+                    <View style={[layout.bottomButtonGray2]}>
                         <TouchableOpacity onPress={() => navigation.goBack()}>
                             <Text style={[layout.bottomButtonTxt]}>이전</Text>
                         </TouchableOpacity>
                     </View>
-                    <View style={styles.bottomButtonWrapper}>
-                        <TouchableOpacity onPress={agree}>
+                    <View style={[layout.bottomButtonMain2]}>
+                        <TouchableOpacity onPress={() => movePage('SignUp5')} >
                             <Text style={[layout.bottomButtonTxt]}>다음</Text>
                         </TouchableOpacity>
                     </View>
@@ -132,35 +122,7 @@ export default function SignUp4({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-    inputInnerButton: {
-        position: 'absolute',
-        right: scaleWidth(14),
-        top: scaleHeight(19),
-        backgroundColor: color.black,
-        paddingHorizontal: scaleWidth(10),
-        paddingVertical: scaleHeight(5),
-        borderRadius: 4,
-    },
-    inputInnerButtonTxt: {
-        fontSize: scaleFont(12),
-        lineHeight: scaleFont(16),
-        color: color.white,
-    },
     bottomWrapper: {
         flexDirection: 'row',
-    },
-    bottomButtonWrapper: {
-        width: scaleWidth(240),
-        height: scaleHeight(52),
-        backgroundColor: color.mainColor,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    bottomButtonWrapper2: {
-        width: scaleWidth(120),
-        height: scaleHeight(52),
-        backgroundColor: color.gray100,
-        justifyContent: 'center',
-        alignItems: 'center',
     },
 });

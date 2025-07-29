@@ -7,16 +7,12 @@ import {
     TextInput, TouchableOpacity, View
 } from 'react-native';
 import color from '../../../res/color';
-import layout, { scaleFont, scaleHeight, scaleWidth } from '../../../res/layout';
+import layout, { scaleHeight, scaleWidth } from '../../../res/layout';
 
 export default function SignUp2({ navigation }) {
 
-    const verify = () => {
-        navigation.navigate('PageStack', { screen: 'Verify' });
-    };
-
-    const agree = () => {
-        navigation.navigate('PageStack', { screen: 'SignUp3' });
+    const movePage = (screen) => {
+        navigation.navigate('PageStack', { screen });
     };
 
     const [name, setName] = useState('홍길동');
@@ -64,7 +60,7 @@ export default function SignUp2({ navigation }) {
 
                 <View style={[layout.container, { backgroundColor: color.white }]}>
 
-                    <View style={{ width: scaleWidth(320), paddingTop: scaleHeight(30), }}>
+                    <View style={[layout.guideView]}>
                         <Text style={[layout.guideTxt]}>
                             - 본인인증을 누르고 진행하세요.
                         </Text>
@@ -72,7 +68,7 @@ export default function SignUp2({ navigation }) {
 
                     {/* 본인인증 버튼 */}
                     <View style={[layout.verifyBtn]}>
-                        <TouchableOpacity onPress={verify}>
+                        <TouchableOpacity onPress={() => movePage('Verify')} >
                             <Text style={styles.bottomButtonTxt}>본인 인증</Text>
                         </TouchableOpacity>
                     </View>
@@ -114,17 +110,12 @@ export default function SignUp2({ navigation }) {
                     }}>
                         <Image
                             source={require('../../../img/common/circleCheck.png')}
-                            style={{ width: scaleWidth(16), height: scaleHeight(16), marginRight: 4 }}
+                            style={[layout.icon16, { marginRight: 4 }]}
                             resizeMode="contain"
                         />
-                        <Text style={{
+                        <Text style={[layout.f12w400, {
                             color: color.gray900,
-                            fontFamily: 'Noto Sans KR',
-                            fontSize: scaleFont(12),
-                            fontWeight: '400',
-                            lineHeight: scaleFont(16),
-                            textAlign: 'center',
-                        }}>
+                        }]}>
                             정상 인증되었어요.
                         </Text>
                     </View>
@@ -132,13 +123,13 @@ export default function SignUp2({ navigation }) {
 
                 {/* 하단 버튼 */}
                 <View style={styles.bottomWrapper}>
-                    <View style={styles.bottomButtonWrapper2}>
+                    <View style={layout.bottomButtonGray2}>
                         <TouchableOpacity onPress={() => navigation.goBack()}>
                             <Text style={[layout.bottomButtonTxt]}>이전</Text>
                         </TouchableOpacity>
                     </View>
-                    <View style={styles.bottomButtonWrapper}>
-                        <TouchableOpacity onPress={agree}>
+                    <View style={layout.bottomButtonMain2}>
+                        <TouchableOpacity onPress={() => movePage('SignUp3')} >
                             <Text style={[layout.bottomButtonTxt]}>다음</Text>
                         </TouchableOpacity>
                     </View>
@@ -151,19 +142,5 @@ export default function SignUp2({ navigation }) {
 const styles = StyleSheet.create({
     bottomWrapper: {
         flexDirection: 'row',
-    },
-    bottomButtonWrapper: {
-        width: scaleWidth(240),
-        height: scaleHeight(52),
-        backgroundColor: color.mainColor,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    bottomButtonWrapper2: {
-        width: scaleWidth(120),
-        height: scaleHeight(52),
-        backgroundColor: color.gray100,
-        justifyContent: 'center',
-        alignItems: 'center',
     },
 });

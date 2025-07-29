@@ -6,6 +6,10 @@ import layout, { scaleFont, scaleHeight, scaleWidth } from '../../res/layout';
 
 export default function Settings({ navigation }) {
 
+    const movePage = (screen) => {
+        navigation.navigate('PageStack', { screen });
+    };
+
     const logout = () => {
         navigation.navigate('PageStack', {
             // screen: 'LogOut'
@@ -64,10 +68,7 @@ export default function Settings({ navigation }) {
                                         ? require('../../img/mypage/settingUnBtn.png')
                                         : require('../../img/mypage/settingBtn.png')
                                 }
-                                style={{
-                                    width: scaleWidth(24),
-                                    height: scaleHeight(20),
-                                }}
+                                style={[layout.icon2420]}
                                 resizeMode="contain"
                             />
                         </View>
@@ -80,10 +81,7 @@ export default function Settings({ navigation }) {
                         <Text style={styles.menuText}>서비스 소개</Text>
                         <Image
                             source={require('../../img/common/backarrow2.png')}
-                            style={{
-                                width: scaleWidth(24),
-                                height: scaleHeight(20),
-                            }}
+                            style={[layout.icon2420]}
                             resizeMode="contain"
                         />
                     </View>
@@ -95,10 +93,7 @@ export default function Settings({ navigation }) {
                         <Text style={styles.menuText}>이용약관</Text>
                         <Image
                             source={require('../../img/common/backarrow2.png')}
-                            style={{
-                                width: scaleWidth(24),
-                                height: scaleHeight(20),
-                            }}
+                            style={[layout.icon2420]}
                             resizeMode="contain"
                         />
                     </View>
@@ -110,10 +105,7 @@ export default function Settings({ navigation }) {
                         <Text style={styles.menuText}>개인정보처리방침</Text>
                         <Image
                             source={require('../../img/common/backarrow2.png')}
-                            style={{
-                                width: scaleWidth(24),
-                                height: scaleHeight(20),
-                            }}
+                            style={[layout.icon2420]}
                             resizeMode="contain"
                         />
                     </View>
@@ -134,10 +126,7 @@ export default function Settings({ navigation }) {
                         >
                             <Image
                                 source={require('../../img/home/call.png')}
-                                style={{
-                                    width: scaleWidth(24),
-                                    height: scaleHeight(20),
-                                }}
+                                style={[layout.icon2420]}
                                 resizeMode="contain"
                             />
                         </TouchableOpacity>
@@ -146,10 +135,7 @@ export default function Settings({ navigation }) {
                         >
                             <Image
                                 source={require('../../img/home/talk.png')}
-                                style={{
-                                    width: scaleWidth(24),
-                                    height: scaleHeight(20),
-                                }}
+                                style={[layout.icon2420]}
                                 resizeMode="contain"
                             />
                         </TouchableOpacity>
@@ -161,7 +147,7 @@ export default function Settings({ navigation }) {
                 <Text style={{
                     color: color.fontGray,
                     textAlign: 'center',
-                    fontFamily: 'Noto Sans KR',
+                    fontFamily: 'NotoSans KR',
                     fontSize: scaleFont(14),
                     fontWeight: '300',
                     lineHeight: scaleFont(20),
@@ -170,7 +156,7 @@ export default function Settings({ navigation }) {
                         // onPress={{}}
                         style={{
                             color: color.black,
-                            fontFamily: 'Noto Sans KR',
+                            fontFamily: 'NotoSans KR',
                             fontSize: scaleFont(14),
                             fontWeight: '700',
                             lineHeight: scaleFont(20)
@@ -200,7 +186,7 @@ const styles = StyleSheet.create({
     },
     menuText: {
         color: color.black,
-        fontFamily: 'Noto Sans KR',
+        fontFamily: 'NotoSans KR',
         fontSize: scaleFont(15),
         fontWeight: '500',
         lineHeight: scaleFont(24),

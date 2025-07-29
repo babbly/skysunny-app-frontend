@@ -11,10 +11,8 @@ import layout, { scaleFont, scaleHeight, scaleWidth } from '../../../res/layout'
 
 export default function SignUp6({ navigation }) {
 
-    const login = () => {
-        navigation.navigate('PageStack', {
-            screen: 'Login'
-        });
+    const movePage = (screen) => {
+        navigation.navigate('PageStack', { screen });
     };
 
 
@@ -31,14 +29,7 @@ export default function SignUp6({ navigation }) {
                         style={{ width: scaleWidth(150), height: scaleHeight(150), }}
                         resizeMode="contain"
                     />
-                    <Text style={{
-                        color: color.black,
-                        textAlign: 'center',
-                        fontFamily: 'Noto Sans KR',
-                        fontSize: scaleFont(16),
-                        fontWeight: '300',
-                        lineHeight: scaleFont(26),
-                    }}>
+                    <Text style={[layout.bottomButtonTxt, { color: color.black }]}>
                         회원가입이 완료되었습니다.
                     </Text>
 
@@ -62,9 +53,7 @@ export default function SignUp6({ navigation }) {
 
                 {/* 하단 버튼 */}
                 <View style={[layout.bottomButtonMain]}>
-                    <TouchableOpacity
-                        onPress={login}
-                    >
+                    <TouchableOpacity onPress={() => movePage('Login')} >
                         <Text style={[layout.bottomButtonTxt]}>로그인 바로가기</Text>
                     </TouchableOpacity>
                 </View>
@@ -81,26 +70,17 @@ const styles = StyleSheet.create({
     },
     mainTxt: {
         color: color.grey40,
-        fontFamily: 'Noto Sans KR',
+        fontFamily: 'NotoSans KR',
         fontSize: scaleFont(13),
         fontWeight: '300',
         lineHeight: scaleFont(20)
     },
     subTxt: {
         color: color.black,
-        fontFamily: 'Noto Sans KR',
+        fontFamily: 'NotoSans KR',
         fontSize: scaleFont(16),
         fontWeight: '300',
         lineHeight: scaleFont(24)
-    },
-    bottomButtonWrapper: {
-        position: 'absolute',
-        bottom: 0,
-        width: '100%',
-        height: scaleHeight(52),
-        backgroundColor: color.mainColor,
-        justifyContent: 'center',
-        alignItems: 'center'
     },
 });
 

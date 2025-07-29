@@ -15,9 +15,8 @@ export default function SignUp({ navigation }) {
     const home = () => {
         navigation.navigate('MainTabs', { screen: '홈' });
     };
-
-    const agree = () => {
-        navigation.navigate('PageStack', { screen: 'SignUp2' });
+    const movePage = (screen) => {
+        navigation.navigate('PageStack', { screen });
     };
 
     const [agreeAll, setAgreeAll] = useState(false);
@@ -95,7 +94,7 @@ export default function SignUp({ navigation }) {
                 </View>
 
                 <View style={[layout.container, { backgroundColor: color.white }]}>
-                    <View style={{ paddingVertical: scaleHeight(30) }}>
+                    <View style={[layout.guideView]}>
                         <Text style={[layout.guideTxt]}>
                             - 필수 항목에 동의하셔야 서비스를 이용하실 수 있습니다. {"\n"}
                             - 전체 동의에는 선택항목에 대한 동의도 포함되어 있습니다.
@@ -104,7 +103,7 @@ export default function SignUp({ navigation }) {
 
                     {/* 전체동의 */}
                     <TouchableOpacity
-                        style={[styles.checkboxRow, { marginBottom: scaleHeight(14) }]}
+                        style={[styles.checkboxRow, { marginTop: scaleHeight(30), marginBottom: scaleHeight(14) }]}
                         onPress={toggleAgreeAll}
                     >
                         <Checkbox
@@ -126,9 +125,7 @@ export default function SignUp({ navigation }) {
 
                 {/* 하단 버튼 */}
                 <View style={[layout.bottomButtonMain]}>
-                    <TouchableOpacity
-                        onPress={agree}
-                    >
+                    <TouchableOpacity onPress={() => movePage('SignUp2')} >
                         <Text style={[layout.bottomButtonTxt]}>동의합니다</Text>
                     </TouchableOpacity>
                 </View>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import color from '../../res/color';
-import layout, { scaleFont, scaleHeight, scaleWidth } from '../../res/layout';
+import layout, { scaleHeight, scaleWidth } from '../../res/layout';
 
 export default function PointHistory({ navigation }) {
 
@@ -31,14 +31,7 @@ export default function PointHistory({ navigation }) {
                     style={{ width: scaleWidth(150), height: scaleHeight(150), }}
                     resizeMode="contain"
                 />
-                <Text style={{
-                    color: color.black,
-                    textAlign: 'center',
-                    fontFamily: 'Noto Sans KR',
-                    fontSize: scaleFont(16),
-                    fontWeight: '300',
-                    lineHeight: scaleFont(26),
-                }}>
+                <Text style={[layout.bottomButtonTxt, { color: color.black }]}>
                     페이지 업데이트중이에요.{"\n"}조금만 기다려주세요!
                 </Text>
             </View>

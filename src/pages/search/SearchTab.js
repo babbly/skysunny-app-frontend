@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Image, SafeAreaView, Text, TouchableOpacity, View } from 'react-native';
+import GoogleMap from '../../components/GoogleMap';
 import SearchBox from '../../components/SearchBox';
 import color from '../../res/color';
 import layout, { scaleFont, scaleHeight, scaleWidth } from '../../res/layout';
@@ -9,9 +10,7 @@ export default function SearchTab({ navigation }) {
     const [hasResults, setHasResults] = useState(false);
 
     const home = () => {
-        navigation.navigate('PageStack', {
-            screen: 'HomeTab'
-        });
+        navigation.navigate('MainTabs', { screen: '홈' });
     };
 
     return (
@@ -21,7 +20,7 @@ export default function SearchTab({ navigation }) {
             {/* 상단 바 */}
             <View style={[layout.topBar]}>
                 <View style={{ flexDirection: 'row' }}>
-                    <TouchableOpacity style={[layout.backBox]} onPress={home}>
+                    <TouchableOpacity style={[layout.backBox]} onPress={home} >
                         <Image
                             source={require("../../img/common/backarrow.png")}
                             style={[layout.icon24]}
@@ -50,7 +49,14 @@ export default function SearchTab({ navigation }) {
                             }}
                             onPress={() => setSearchMode('map')}
                         >
-                            <Text style={{ textAlign: 'center', color: searchMode === 'map' ? color.black : color.fontGray }}>
+                            <Text style={{
+                                color: searchMode === 'map' ? color.black : color.fontGray,
+                                fontSize: scaleFont(13),
+                                lineHeight: scaleFont(26),
+                                fontFamily: 'NotoSans KR',
+                                fontWeight: '300',
+                                textAlign: 'center',
+                            }}>
                                 지도검색
                             </Text>
                         </TouchableOpacity>
@@ -69,7 +75,14 @@ export default function SearchTab({ navigation }) {
                                 setHasResults(false);
                             }}
                         >
-                            <Text style={{ textAlign: 'center', color: searchMode === 'name' ? color.black : color.fontGray }}>
+                            <Text style={{
+                                color: searchMode === 'name' ? color.black : color.fontGray,
+                                fontSize: scaleFont(13),
+                                lineHeight: scaleFont(26),
+                                fontFamily: 'NotoSans KR',
+                                fontWeight: '300',
+                                textAlign: 'center',
+                            }}>
                                 매장명 검색
                             </Text>
                         </TouchableOpacity>
@@ -81,7 +94,7 @@ export default function SearchTab({ navigation }) {
 
                 {/* {searchMode === 'map' ? */}
                 <View style={{ flex: 1, width: scaleWidth(360) }}>
-                    <Map
+                    <GoogleMap
                         width={scaleWidth(360)}
                         height={scaleHeight(500)}
                         centerPoint={{ lat: 37.5665, lng: 126.9780 }}
@@ -101,8 +114,10 @@ export default function SearchTab({ navigation }) {
                             resizeMode="contain"
                         />
                         <Text style={{
-                            fontSize: scaleFont(16),
-                            lineHeight: scaleFont(26),
+                            fontFamily: 'NotoSans KR',
+                            fontWeight: '300',
+                            fontSize: scaleFont(14),
+                            lineHeight: scaleFont(20),
                             textAlign: 'center'
                         }}>
                             검색된 매장이 없습니다.{"\n"}주소 검색은 지도 검색을 이용해주세요.
