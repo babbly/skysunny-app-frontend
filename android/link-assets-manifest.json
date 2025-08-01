@@ -1,0 +1,13 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "assets/fonts/BMDoHyeon.ttf",
+      "sha1": "0e172deca3570d1aadcc86d07bf850c44507557a"
+    },
+    {
+      "path": "assets/fonts/NotoSansKR.ttf",
+      "sha1": "46786e0e3730d530225437c3a629c9b0f3248a4f"
+    }
+  ]
+}
