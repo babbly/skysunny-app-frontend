@@ -4,8 +4,9 @@ import {
     KeyboardAvoidingView,
     SafeAreaView,
     Text,
-    TextInput, TouchableOpacity, View
+    TouchableOpacity, View
 } from 'react-native';
+import FloatingInput from '../../../components/FloatingInput';
 import color from '../../../res/color';
 import layout, { scaleHeight } from '../../../res/layout';
 
@@ -21,20 +22,6 @@ export default function FindId({ navigation }) {
     const [name, setName] = useState('');
     const [phone, setPhone] = useState('');
 
-    const FloatingInput = ({ label, value, onChangeText, secureTextEntry, editable = true, placeholder, rightButton, placeholderTextColor }) => (
-        <View style={[layout.inputContainer]}>
-            <Text style={[layout.inputLabel]}>{label}</Text>
-            <TextInput
-                value={value}
-                onChangeText={onChangeText}
-                secureTextEntry={secureTextEntry}
-                editable={editable}
-                placeholder={placeholder}
-                placeholderTextColor={placeholderTextColor}
-                style={[layout.input]}
-            />
-        </View>
-    );
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: color.white }}>
@@ -95,8 +82,11 @@ export default function FindId({ navigation }) {
                 </View>
 
                 {/* 하단 버튼 */}
-                <View style={[layout.bottomButtonGray]}>
-                    <TouchableOpacity onPress={() => movePage('FindId2')} >
+                <View style={[name && phone ? layout.bottomButtonMain : layout.bottomButtonGray]}>
+                    <TouchableOpacity
+                        onPress={() => movePage('FindId2')}
+                        disabled={!(name && phone)}
+                    >
                         <Text style={[layout.bottomButtonTxt]}>아이디 찾기</Text>
                     </TouchableOpacity>
                 </View>

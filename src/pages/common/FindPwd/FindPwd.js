@@ -4,8 +4,9 @@ import {
     KeyboardAvoidingView,
     SafeAreaView,
     Text,
-    TextInput, TouchableOpacity, View
+    TouchableOpacity, View
 } from 'react-native';
+import FloatingInput from '../../../components/FloatingInput';
 import color from '../../../res/color';
 import layout, { scaleFont, scaleHeight, scaleWidth } from '../../../res/layout';
 
@@ -21,21 +22,6 @@ export default function FindPwd({ navigation }) {
     const [name, setName] = useState('');
     const [phone, setPhone] = useState('');
     const [id, setId] = useState('');
-
-    const FloatingInput = ({ label, value, onChangeText, secureTextEntry, editable = true, placeholder, rightButton, placeholderTextColor }) => (
-        <View style={[layout.inputContainer]}>
-            <Text style={[layout.inputLabel]}>{label}</Text>
-            <TextInput
-                value={value}
-                onChangeText={onChangeText}
-                secureTextEntry={secureTextEntry}
-                editable={editable}
-                placeholder={placeholder}
-                placeholderTextColor={placeholderTextColor}
-                style={[layout.input]}
-            />
-        </View>
-    );
 
 
     return (

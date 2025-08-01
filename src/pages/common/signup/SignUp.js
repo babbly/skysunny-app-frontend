@@ -88,7 +88,7 @@ export default function SignUp({ navigation }) {
                             />
                         </TouchableOpacity>
                         <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                            <Text style={[layout.topTxt]}>서비스 약관동의(1/5)</Text>
+                            <Text style={[layout.topTxt]}>회원가입(1/5)</Text>
                         </View>
                     </View>
                 </View>

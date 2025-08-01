@@ -4,8 +4,10 @@ import {
     KeyboardAvoidingView,
     SafeAreaView,
     StyleSheet, Text,
-    TextInput, TouchableOpacity, View
+    TouchableOpacity, View
 } from 'react-native';
+import { httpPost, httpUrl } from '../../../api/httpClient';
+import FloatingInput from '../../../components/FloatingInput';
 import color from '../../../res/color';
 import layout, { scaleHeight } from '../../../res/layout';
 
@@ -16,26 +18,24 @@ export default function SignUp3({ navigation }) {
     };
 
     const [id, setId] = useState('');
+    const [checkEmail, setCheckEmail] = useState(null);
 
-    const FloatingInput = ({ label, value, onChangeText, secureTextEntry, editable = true, placeholder, rightButton, placeholderTextColor }) => (
-        <View style={[layout.inputContainer]}>
-            <Text style={[layout.inputLabel]}>{label}</Text>
-            <TextInput
-                value={value}
-                onChangeText={onChangeText}
-                secureTextEntry={secureTextEntry}
-                editable={editable}
-                placeholder={placeholder}
-                placeholderTextColor={placeholderTextColor}
-                style={[layout.input]}
-            />
-            {rightButton && (
-                <TouchableOpacity style={[layout.inputInnerButton]} onPress={rightButton.onPress}>
-                    <Text style={[layout.inputInnerButtonTxt]}>{rightButton.label}</Text>
-                </TouchableOpacity>
-            )}
-        </View>
-    );
+    const checkEmailDuplication = async () => {
+
+        if (!id.includes('@')) {
+            alert('이메일 형식으로 입력해주세요.');
+            return;
+        }
+        try {
+            const response = await httpPost(httpUrl.checkEmail, [], { email: id });
+            console.log('이메일 중복 확인 응답:', response);
+            setCheckEmail(response.code === 100); // 100이면 사용 가능
+        } catch (err) {
+            console.error(err);
+            alert('오류가 발생했습니다.');
+        }
+    };
+
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: color.white }}>
@@ -68,26 +68,38 @@ export default function SignUp3({ navigation }) {
                         </Text>
                     </View>
                     <View style={{ marginTop: scaleHeight(30) }}>
-                        <FloatingInput label="아이디(E-mail)" value={id} onChangeText={setId} rightButton={{ label: '중복확인', onPress: () => alert('인증') }} />
+                        <FloatingInput
+                            label="아이디(E-mail)"
+                            value={id} onChangeText={(text) => {
+                                setId(text);
+                                setCheckEmail(null); // 입력 변경 시 초기화
+                            }}
+                            rightButton={{ label: '중복확인', onPress: checkEmailDuplication }} />
                     </View>
-                    <View style={[layout.errorView]}>
-                        <Image
-                            source={require('../../../img/common/circleCheck.png')}
-                            style={[layout.icon16, { marginRight: 4 }]}
-                            resizeMode="contain"
-                        />
-                        <Text style={[layout.f12w400, { color: color.gray900 }]}>
-                            사용 가능한 아이디입니다.
-                        </Text>
-                        {/* <Image
-                            source={require('../../../img/common/error.png')}
-                            style={[layout.icon16, {marginRight: 4}]}
-                            resizeMode="contain"
-                        />
-                          <Text style={[layout.errorTxt]}>
-                            이미 사용중인 아이디입니다.
-                        </Text> */}
-                    </View>
+                    {checkEmail !== null && (
+                        <View style={[layout.alertView]}>
+                            <Image
+                                source={
+                                    checkEmail
+                                        ? require('../../../img/common/circleCheck.png')
+                                        : require('../../../img/common/error.png')
+                                }
+                                style={[layout.icon16, { marginRight: 4 }]}
+                                resizeMode="contain"
+                            />
+                            <Text
+                                style={[
+                                    checkEmail ? layout.f12w400 : layout.errorTxt,
+                                    { color: checkEmail ? color.gray900 : undefined },
+                                ]}
+                            >
+                                {checkEmail
+                                    ? '사용 가능한 아이디입니다.'
+                                    : '이미 사용중인 아이디입니다.'}
+                            </Text>
+                        </View>
+                    )}
+
                 </View>
 
                 {/* 하단 버튼 */}
@@ -97,8 +109,11 @@ export default function SignUp3({ navigation }) {
                             <Text style={[layout.bottomButtonTxt]}>이전</Text>
                         </TouchableOpacity>
                     </View>
-                    <View style={layout.bottomButtonMain2}>
-                        <TouchableOpacity onPress={() => movePage('SignUp4')} >
+                    <View style={checkEmail ? layout.bottomButtonMain2 : layout.bottomButtonGray1}>
+                        <TouchableOpacity
+                            onPress={() => movePage('SignUp4')}
+                            disabled={!checkEmail}
+                        >
                             <Text style={[layout.bottomButtonTxt]}>다음</Text>
                         </TouchableOpacity>
                     </View>

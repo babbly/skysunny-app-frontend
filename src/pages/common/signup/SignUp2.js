@@ -4,8 +4,9 @@ import {
     KeyboardAvoidingView,
     SafeAreaView,
     StyleSheet, Text,
-    TextInput, TouchableOpacity, View
+    TouchableOpacity, View
 } from 'react-native';
+import FloatingInput from '../../../components/FloatingInput';
 import color from '../../../res/color';
 import layout, { scaleHeight, scaleWidth } from '../../../res/layout';
 
@@ -20,20 +21,6 @@ export default function SignUp2({ navigation }) {
     const [gender, setGender] = useState('남');
     const [phone, setPhone] = useState('01012345678');
 
-    const FloatingInput = ({ label, value, onChangeText, secureTextEntry, editable = true, placeholder, rightButton, placeholderTextColor }) => (
-        <View style={[layout.inputContainer]}>
-            <Text style={[layout.inputLabel]}>{label}</Text>
-            <TextInput
-                value={value}
-                onChangeText={onChangeText}
-                secureTextEntry={secureTextEntry}
-                editable={editable}
-                placeholder={placeholder}
-                placeholderTextColor={placeholderTextColor}
-                style={[layout.input]}
-            />
-        </View>
-    );
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: color.white }}>

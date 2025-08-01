@@ -4,8 +4,9 @@ import {
     KeyboardAvoidingView,
     SafeAreaView,
     Text,
-    TextInput, TouchableOpacity, View
+    TouchableOpacity, View
 } from 'react-native';
+import FloatingInput from '../../../components/FloatingInput';
 import color from '../../../res/color';
 import layout, { scaleHeight } from '../../../res/layout';
 
@@ -18,21 +19,6 @@ export default function FindPwd2({ navigation }) {
 
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-
-    const FloatingInput = ({ label, value, onChangeText, secureTextEntry, editable = true, placeholder, rightButton, placeholderTextColor }) => (
-        <View style={[layout.inputContainer]}>
-            <Text style={[layout.inputLabel]}>{label}</Text>
-            <TextInput
-                value={value}
-                onChangeText={onChangeText}
-                secureTextEntry={secureTextEntry}
-                editable={editable}
-                placeholder={placeholder}
-                placeholderTextColor={placeholderTextColor}
-                style={[layout.input]}
-            />
-        </View>
-    );
 
 
     return (
@@ -84,7 +70,7 @@ export default function FindPwd2({ navigation }) {
                         />
                     </View>
 
-                    <View style={[layout.errorView]}>
+                    <View style={[layout.alertView]}>
                         <Image
                             source={require('../../../img/common/error.png')}
                             style={[layout.icon16, { marginRight: 4 }]}

@@ -4,8 +4,9 @@ import {
     KeyboardAvoidingView,
     SafeAreaView,
     StyleSheet, Text,
-    TextInput, TouchableOpacity, View
+    TouchableOpacity, View
 } from 'react-native';
+import FloatingInput from '../../../components/FloatingInput';
 import color from '../../../res/color';
 import layout, { scaleHeight } from '../../../res/layout';
 
@@ -18,26 +19,6 @@ export default function SignUp5({ navigation }) {
     const [address, setAddress] = useState('');
     const [study, setStudy] = useState('');
     const [parentPhone, setParentPhone] = useState('');
-
-    const FloatingInput = ({ label, value, onChangeText, secureTextEntry, editable = true, placeholder, rightButton, placeholderTextColor }) => (
-        <View style={[layout.inputContainer]}>
-            <Text style={[layout.inputLabel]}>{label}</Text>
-            <TextInput
-                value={value}
-                onChangeText={onChangeText}
-                secureTextEntry={secureTextEntry}
-                editable={editable}
-                placeholder={placeholder}
-                placeholderTextColor={placeholderTextColor}
-                style={[layout.input]}
-            />
-            {rightButton && (
-                <TouchableOpacity style={layout.inputInnerButton} onPress={rightButton.onPress}>
-                    <Text style={layout.inputInnerButtonTxt}>{rightButton.label}</Text>
-                </TouchableOpacity>
-            )}
-        </View>
-    );
 
 
     return (
