@@ -5,21 +5,36 @@ import {
     Platform,
     SafeAreaView,
     StyleSheet, Text,
-    TextInput, TouchableOpacity, View
+    TouchableOpacity, View
 } from 'react-native';
 import Checkbox from '../../components/Checkbox';
 import Dialog from '../../components/Dialog';
+import FloatingInput from '../../components/FloatingInput';
 import color from '../../res/color';
 import layout, { scaleFont, scaleHeight, scaleWidth } from '../../res/layout';
-
 
 export default function Verify({ navigation, route }) {
 
     const from = route?.params?.from ?? '';
 
-    const movePage = (screen) => {
+    const findId = (screen) => {
         navigation.navigate('PageStack', {
-            screen: screen,
+            screen: 'FindId',
+            params: {
+                name,
+                phone,
+            },
+        });
+    };
+
+    const findPwd = (screen) => {
+        navigation.navigate('PageStack', {
+            screen: 'FindPwd',
+            params: {
+                name,
+                phone,
+                id,
+            },
         });
     };
     const [agreeItems, setAgreeItems] = useState({
@@ -31,11 +46,13 @@ export default function Verify({ navigation, route }) {
     const [isOpen, setIsOpen] = useState(false);
 
     const [name, setName] = useState('');
-    const [isNative, setIsNative] = useState('내국인'); // 내국인/외국인
+    const [isNative, setIsNative] = useState('내국인');
     const [birth, setBirth] = useState('');
-    const [gender, setGender] = useState('남'); // 남/여
+    const [gender, setGender] = useState('남');
     const [phone, setPhone] = useState('');
-    const [carrier, setCarrier] = useState('SKT'); // 통신사
+    const [carrier, setCarrier] = useState('SKT');
+    const [carrierDropdownOpen, setCarrierDropdownOpen] = useState(false);
+
 
     const [veriCode, setVeriCode] = useState('');
     const [veriCodeError, setVeriCodeError] = useState(false);
@@ -47,10 +64,6 @@ export default function Verify({ navigation, route }) {
         { key: 'uniqueIdConsent', label: '고유식별정보 처리 동의' },
     ];
     const [dialogVisible, setDialogVisible] = useState(false);
-
-    const dialog = () => {
-        setDialogVisible(true);
-    };
 
     const signUp = () => {
         setDialogVisible(false);
@@ -70,46 +83,16 @@ export default function Verify({ navigation, route }) {
         setDialogVisible(false);
     };
 
-
-    const FloatingInput = ({ label, value, onChangeText, secureTextEntry, editable = true, placeholder, rightButton, twoButtons, placeholderTextColor }) => {
+    const isNextEnabled = useMemo(() => {
         return (
-            <View style={[layout.inputContainer]}>
-                <Text style={[layout.inputLabel]}>{label}</Text>
-                <TextInput
-                    value={value}
-                    onChangeText={onChangeText}
-                    secureTextEntry={secureTextEntry}
-                    editable={editable}
-                    placeholder={placeholder}
-                    placeholderTextColor={placeholderTextColor}
-                    style={[layout.input]}
-                />
-
-                {/* 오른쪽 싱글 버튼 */}
-                {rightButton && (
-                    <TouchableOpacity style={styles.rightButtonInside} onPress={rightButton.onPress}>
-                        <Text style={[layout.f12w300, { color: color.white }]}>{rightButton.label}</Text>
-                    </TouchableOpacity>
-                )}
-
-
-                {/* 두 개의 버튼이 있는 경우 */}
-                {twoButtons?.length === 2 && (
-                    <View style={styles.twoButtonWrapper}>
-                        {twoButtons.map((btn, index) => (
-                            <TouchableOpacity
-                                key={index}
-                                style={[styles.twoButtonInside, index === 0 && { marginRight: scaleWidth(8) }]}
-                                onPress={btn.onPress}
-                            >
-                                <Text style={[layout.f12w300, { color: color.white }]}>{btn.label}</Text>
-                            </TouchableOpacity>
-                        ))}
-                    </View>
-                )}
-            </View>
+            isAllAgreed &&
+            phone.length === 11 &&
+            veriCode.length === 6 &&
+            isCodeVerified
         );
-    };
+    }, [isAllAgreed, phone, veriCode, isCodeVerified]);
+
+
     const isAllAgreed = Object.values(agreeItems).every(Boolean);
 
     return (
@@ -235,11 +218,11 @@ export default function Verify({ navigation, route }) {
                             placeholderTextColor={color.gray300}
                             value={name}
                             onChangeText={setName}
-                            // rightButton={[
-                            //     { label: '내국인', onPress: () => alert('내국인') },
-                            //     { label: '외국인', onPress: () => alert('외국인') },
-                            // ]}
-                            rightButton={{ label: '인증하기', onPress: () => alert('인증') }}
+                            toggleValue={isNative}
+                            twoButtons={[
+                                { label: '내국인', onPress: () => setIsNative('내국인') },
+                                { label: '외국인', onPress: () => setIsNative('외국인') },
+                            ]}
                         />
                         <FloatingInput
                             label="생년월일"
@@ -247,14 +230,49 @@ export default function Verify({ navigation, route }) {
                             placeholderTextColor={color.gray300}
                             value={birth}
                             onChangeText={setBirth}
+                            toggleValue={gender}
+                            twoButtons={[
+                                { label: '남', onPress: () => setGender('남') },
+                                { label: '여', onPress: () => setGender('여') },
+                            ]}
                         />
                         <FloatingInput
                             label="통신사"
                             placeholder="선택하기"
                             placeholderTextColor={color.gray300}
                             value={carrier}
-                            onChangeText={setCarrier}
+                            onChangeText={() => { }}
+                            editable={false}
+                            arrowButton={true}
+                            arrowUp={carrierDropdownOpen}
+                            onArrowPress={() => setCarrierDropdownOpen(!carrierDropdownOpen)}
                         />
+                        {carrierDropdownOpen && (
+                            <View style={styles.dropdownSection}>
+                                {carriers.map((item) => (
+                                    <TouchableOpacity
+                                        key={item}
+                                        style={{
+                                            paddingVertical: scaleHeight(12),
+                                            borderBottomWidth: 1,
+                                            borderBottomColor: color.gray100,
+                                        }}
+                                        onPress={() => {
+                                            setCarrier(item);
+                                            setCarrierDropdownOpen(false);
+                                        }}
+                                    >
+                                        <Text style={{
+                                            fontSize: scaleFont(14),
+                                            color: color.black,
+                                            fontFamily: 'NotoSans KR',
+                                        }}>
+                                            {item}
+                                        </Text>
+                                    </TouchableOpacity>
+                                ))}
+                            </View>
+                        )}
                         <FloatingInput
                             label="휴대전화번호"
                             placeholder="정보를 입력하세요"
@@ -265,14 +283,24 @@ export default function Verify({ navigation, route }) {
                         />
                         <FloatingInput
                             label="인증번호"
-                            // label="인증번호를 보내드렸어요. (0분 00초)"
                             placeholder="인증번호 6자리 입력"
                             placeholderTextColor={color.gray300}
                             value={veriCode}
                             onChangeText={setVeriCode}
+                            rightText={{
+                                label: '확인',
+                                onPress: () => {
+                                    if (veriCode === '123456') {
+                                        alert('✅ 인증 성공');
+                                        setVeriCodeError(false);
+                                    } else {
+                                        setVeriCodeError(true);
+                                    }
+                                }
+                            }}
                         />
                         {veriCodeError && (
-                            <View style={[layout.errorView, { marginBottom: 12 }]}>
+                            <View style={[layout.alertView, { marginBottom: 12 }]}>
                                 <Image
                                     source={require('../../img/common/error.png')}
                                     style={[layout.icon16, { marginRight: 4 }]}
@@ -290,12 +318,14 @@ export default function Verify({ navigation, route }) {
                 </View>
 
                 {/* 하단 버튼 */}
-                <View style={[layout.bottomButtonMain]}>
-                    <TouchableOpacity onPress={() => movePage('FindId2')} >
+                <View style={[isNextEnabled ? layout.bottomButtonMain : layout.bottomButtonGray]}>
+                    <TouchableOpacity
+                        onPress={from === 'FindId' ? findId : findPwd}
+                        disabled={!isNextEnabled}
+                    >
                         <Text style={[layout.bottomButtonTxt]}>다음</Text>
                     </TouchableOpacity>
                 </View>
-                {/* dialog */}
 
                 {/* {아이디찾기에서} */}
                 {from === 'FindId' && (
@@ -328,32 +358,7 @@ export default function Verify({ navigation, route }) {
 }
 
 const styles = StyleSheet.create({
-    rightButtonInside: {
-        position: 'absolute',
-        right: scaleWidth(10),
-        top: scaleHeight(10),
-        backgroundColor: color.black,
-        paddingHorizontal: scaleWidth(10),
-        paddingVertical: scaleHeight(6),
-        borderRadius: 4,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    rightTwoButtons: {
-        position: 'absolute',
-        right: scaleWidth(10),
-        top: scaleHeight(10),
-        flexDirection: 'row',
-    },
-    twoButtonInside: {
-        backgroundColor: color.black,
-        paddingHorizontal: scaleWidth(10),
-        paddingVertical: scaleHeight(6),
-        borderRadius: 4,
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginLeft: scaleWidth(6),
-    },
+
 
     input1: {
         borderWidth: 1,
@@ -374,4 +379,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginBottom: scaleHeight(18),
     },
+
+
+
 });
