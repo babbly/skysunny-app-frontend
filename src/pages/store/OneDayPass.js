@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { Image, ImageBackground, KeyboardAvoidingView, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import Dialog from '../../components/Dialog';
 import color from '../../res/color';
 import layout, { scaleFont, scaleHeight, scaleWidth } from '../../res/layout';
 
 export default function OneDayPass({ navigation }) {
 
+    const movePage = (screen) => {
+        navigation.navigate('PageStack', { screen });
+    };
     const [passVisible, setPassVisible] = useState(false);
     const [selectedType, setSelectedType] = useState('new');
 
@@ -17,30 +19,30 @@ export default function OneDayPass({ navigation }) {
                 behavior={Platform.OS === 'ios' ? 'padding' : undefined}
             >
                 {/* 상단 바 */}
-                <View style={layout.topBar}>
+                <View style={[layout.topBar]}>
                     <View style={{ flexDirection: 'row' }}>
-                        <TouchableOpacity style={layout.backBox} onPress={() => navigation.goBack()}>
+                        <TouchableOpacity style={[layout.backBox]} onPress={() => navigation.goBack()}>
                             <Image
                                 source={require('../../img/common/backarrow.png')}
-                                style={{ width: scaleWidth(24), height: scaleHeight(24) }}
+                                style={[layout.icon24]}
                                 resizeMode="contain"
                             />
                         </TouchableOpacity>
                         <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                            <Text style={layout.topText}>이용권 구매</Text>
+                            <Text style={[layout.topTxt]}>이용권 구매</Text>
                         </View>
                     </View>
                 </View>
-                <View style={{ width: scaleWidth(360), justifyContent: 'center', alignItems: 'center', paddingVertical: scaleWidth(21) }}>
+                <View style={{ width: scaleWidth(360), justifyContent: 'center', alignItems: 'center', paddingVertical: scaleHeight(20) }}>
                     <Text style={{
                         fontSize: scaleFont(16),
                         lineHeight: scaleFont(24),
-                        color: color.blackGray
+                        color: color.gray900
                     }}>시작 스터디카페 인천 송도점</Text>
                     <Text style={{
                         fontSize: scaleFont(12),
                         lineHeight: scaleFont(24),
-                        color: color.blackGray
+                        color: color.gray900
                     }}>인천 연수구 해돋이로 165 8층 (803호)</Text>
 
                 </View>
@@ -79,9 +81,9 @@ export default function OneDayPass({ navigation }) {
                                     style={styles.passCard}
                                     resizeMode="contain"
                                 >
-                                    <Text style={[styles.title, { color: color.blackGray }]}>신규구매</Text>
-                                    <Text style={[styles.text1, { color: color.blackGray }]}>아직 이용중인 좌석이 없으시면 선택해주세요.</Text>
-                                    <Text style={[styles.text2, { color: color.blackGray }]}>- 신규 방문/보유 이용권 시간을 모두 소진한 회원님</Text>
+                                    <Text style={[styles.title, { color: color.gray900 }]}>신규구매</Text>
+                                    <Text style={[styles.text1, { color: color.gray900 }]}>아직 이용중인 좌석이 없으시면 선택해주세요.</Text>
+                                    <Text style={[styles.text2, { color: color.gray900 }]}>- 신규 방문/보유 이용권 시간을 모두 소진한 회원님</Text>
 
                                 </ImageBackground>
                             </TouchableOpacity>
@@ -97,9 +99,9 @@ export default function OneDayPass({ navigation }) {
                                         style={styles.passCard}
                                         resizeMode="contain"
                                     >
-                                        <Text style={[styles.title, { color: '#5e6165' }]}>연장구매</Text>
-                                        <Text style={[styles.text1, { color: '#5e6165' }]}>현재 1일 이용권을 이용중이시면 선택해주세요.</Text>
-                                        <Text style={[styles.text2, { color: '#5e6165' }]}>- 구매한 보유 이용권의 잔여시간이 존재하는 회원님</Text>
+                                        <Text style={[styles.title, { color: color.gray700 }]}>연장구매</Text>
+                                        <Text style={[styles.text1, { color: color.gray700 }]}>현재 1일 이용권을 이용중이시면 선택해주세요.</Text>
+                                        <Text style={[styles.text2, { color: color.gray700 }]}>- 구매한 보유 이용권의 잔여시간이 존재하는 회원님</Text>
 
                                     </ImageBackground>
                                 </TouchableOpacity>
@@ -113,7 +115,7 @@ export default function OneDayPass({ navigation }) {
                             }}>
                                 <Image
                                     source={require('../../img/home/information.png')}
-                                    style={{ width: scaleWidth(14), height: scaleHeight(14), marginRight: 4 }}
+                                    style={[layout.icon14]}
                                     resizeMode="contain"
                                 />
                                 <Text style={{ fontSize: scaleFont(12), lineHeight: scaleFont(20), color: color.black }}>
@@ -126,10 +128,10 @@ export default function OneDayPass({ navigation }) {
                 </View>
             </KeyboardAvoidingView>
             {/* 하단 버튼 */}
-            <View style={styles.bottomButtonWrapper}>
+            {/* <View style={styles.bottomButtonMain2}>
                 <TouchableOpacity onPress={() => setPassVisible(true)}
                 >
-                    <Text style={styles.bottomButtonText}>다음 단계로</Text>
+                    <Text style={styles.bottomButtonTxt}>다음 단계로</Text>
                 </TouchableOpacity>
                 <Dialog
                     visible={passVisible}
@@ -138,6 +140,12 @@ export default function OneDayPass({ navigation }) {
                     onClose={() => setPassVisible(false)}
                     type="oneBtn"
                 />
+            </View> */}
+
+            <View style={styles.bottomButtonMain2}>
+                <TouchableOpacity onPress={() => movePage('SelectSeat')} >
+                    <Text style={styles.bottomButtonTxt}>다음 단계로</Text>
+                </TouchableOpacity>
             </View>
         </SafeAreaView >
     );
@@ -168,16 +176,16 @@ const styles = StyleSheet.create({
         lineHeight: scaleFont(16),
         fontWeight: 350,
     },
-    bottomButtonWrapper: {
+    bottomButtonMain2: {
         width: scaleWidth(360),
         height: scaleHeight(52),
-        backgroundColor: color.mainColor,
         justifyContent: 'center',
         alignItems: 'center',
+        backgroundColor: color.mainColor,
     },
-    bottomButtonText: {
+    bottomButtonTxt: {
         fontSize: scaleFont(16),
         lineHeight: scaleFont(26),
-        color: color.blackGray
+        color: color.gray900
     }
 });

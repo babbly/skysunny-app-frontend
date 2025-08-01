@@ -48,22 +48,6 @@ const layout = StyleSheet.create({
         alignItems: 'center',
         marginRight: scaleWidth(5),
     },
-    inputInnerButton: {
-        position: 'absolute',
-        right: scaleWidth(14),
-        top: scaleHeight(19),
-        backgroundColor: color.black,
-        paddingHorizontal: scaleWidth(10),
-        paddingVertical: scaleHeight(5),
-        borderRadius: 4,
-    },
-    inputInnerButtonTxt: {
-        color: color.white,
-        fontFamily: 'NotoSans KR',
-        fontWeight: '300',
-        fontSize: scaleFont(12),
-        lineHeight: scaleFont(20),
-    },
 
     line: {
         borderBottomWidth: 1,
@@ -188,6 +172,15 @@ const layout = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
+    bottomButtonGray1: {
+        width: scaleWidth(240),
+        height: scaleHeight(52),
+        backgroundColor: color.gray100,
+        borderLeftWidth: 1,
+        borderLeftColor: color.gray200,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
     bottomButtonGray2: {
         width: scaleWidth(120),
         height: scaleHeight(52),
@@ -229,7 +222,7 @@ const layout = StyleSheet.create({
         height: scaleHeight(50),
         marginBottom: scaleHeight(7)
     },
-    errorView: {
+    alertView: {
         width: scaleWidth(320),
         flexDirection: 'row',
         alignItems: 'center'

@@ -65,15 +65,15 @@ export default function StoreInquiryDetail({ navigation, route }) {
                 >
                     {/* 안내 문구 */}
                     <View style={{ marginTop: 20, }}>
-                        <Text style={styles.boldTxt}>
+                        <Text style={[layout.titleTxt]}>
                             지점 문의 내용을 남겨주세요.
                         </Text>
                         <View style={{ flexDirection: 'row', marginTop: scaleHeight(11), marginBottom: scaleHeight(20) }}>
-                            <Text style={[layout.guideTxt]}>
+                            <Text style={[layout.f12w300]}>
                                 - 매장명
                             </Text>
                             <View style={[layout.rightLine, { marginHorizontal: 5, alignSelf: 'center' }]} />
-                            <Text style={[layout.guideTxt]}>{store.name}</Text>
+                            <Text style={[layout.f12w300]}>{store.name}</Text>
                         </View>
                     </View>
 
@@ -118,13 +118,6 @@ export default function StoreInquiryDetail({ navigation, route }) {
     );
 }
 const styles = StyleSheet.create({
-    boldTxt: {
-        color: color.black,
-        fontFamily: 'Noto Sans KR',
-        fontSize: scaleFont(15),
-        fontWeight: '500',
-        lineHeight: scaleFont(24)
-    },
     contentInput: {
         borderWidth: 1,
         borderColor: color.grey80,

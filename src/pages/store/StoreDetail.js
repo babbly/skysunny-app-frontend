@@ -7,8 +7,8 @@ import layout, { scaleFont, scaleHeight, scaleWidth } from '../../res/layout';
 
 export default function StoreDetail({ navigation }) {
 
-    const update = () => {
-        navigation.navigate('PageStack', { screen: 'Update' });
+    const movePage = (screen) => {
+        navigation.navigate('PageStack', { screen });
     };
 
     const out = () => {
@@ -16,18 +16,6 @@ export default function StoreDetail({ navigation }) {
         setTimeout(() => {
             navigation.navigate('PageStack', { screen: 'Out' });
         }, 200);
-    };
-
-    const oneDay = () => {
-        navigation.navigate('PageStack', { screen: 'OneDayPass' });
-    };
-
-    const pass = () => {
-        navigation.navigate('PageStack', { screen: 'Pass' });
-    };
-
-    const studyRoom = () => {
-        navigation.navigate('PageStack', { screen: 'StudyRoomPass' });
     };
 
     const [kakaoVisible, setKakaoVisible] = useState(false);
@@ -42,8 +30,6 @@ export default function StoreDetail({ navigation }) {
         require('../../img/home/banner2.png'),
         require('../../img/home/banner2.png'),
     ];
-
-
 
 
     return (
@@ -143,10 +129,7 @@ export default function StoreDetail({ navigation }) {
                             >
                                 <Image
                                     source={require('../../img/home/talk.png')}
-                                    style={{
-                                        width: scaleWidth(24),
-                                        height: scaleHeight(20),
-                                    }}
+                                    style={[styles.iocnImg]}
                                     resizeMode="contain"
                                 />
                             </TouchableOpacity>
@@ -162,10 +145,7 @@ export default function StoreDetail({ navigation }) {
                             >
                                 <Image
                                     source={require('../../img/home/call.png')}
-                                    style={{
-                                        width: scaleWidth(24),
-                                        height: scaleHeight(20),
-                                    }}
+                                    style={[styles.iocnImg]}
                                     resizeMode="contain"
                                 />
                             </TouchableOpacity>
@@ -222,7 +202,7 @@ export default function StoreDetail({ navigation }) {
                                     type="oneBtn"
                                 /> */}
 
-                                <TouchableOpacity onPress={oneDay}
+                                <TouchableOpacity onPress={() => movePage('OneDayPass')}
                                     style={{
                                         paddingHorizontal: scaleWidth(12),
                                         borderRadius: 4,
@@ -245,7 +225,7 @@ export default function StoreDetail({ navigation }) {
                                     />
                                     <Text>1일권 사용</Text>
                                 </TouchableOpacity>
-                                <TouchableOpacity onPress={pass}
+                                <TouchableOpacity onPress={() => movePage('Pass')}
                                     style={{
                                         paddingHorizontal: scaleWidth(12),
                                         borderRadius: 4,
@@ -307,7 +287,7 @@ export default function StoreDetail({ navigation }) {
 
 
                         <View style={{ flexDirection: 'row' }}>
-                            <TouchableOpacity onPress={studyRoom}
+                            <TouchableOpacity onPress={() => movePage('StudyRoom')}
                                 style={{
                                     paddingHorizontal: scaleWidth(12),
                                     paddingVertical: scaleHeight(9),
@@ -379,8 +359,6 @@ export default function StoreDetail({ navigation }) {
 
 
 
-
-
                     {/* 편의시설 */}
                     <View style={{
                         width: scaleWidth(360),
@@ -398,7 +376,7 @@ export default function StoreDetail({ navigation }) {
                         <View style={{
                             justifyContent: 'space-between', flexDirection: 'row',
                         }}>
-                            <TouchableOpacity onPress={update}>
+                            <TouchableOpacity onPress={() => movePage('Update')} >
                                 <Image
                                     source={require("../../img/home/g-payment.png")}
                                     style={{ width: scaleWidth(50), height: scaleHeight(50), }}
@@ -406,7 +384,7 @@ export default function StoreDetail({ navigation }) {
                                 />
                                 <Text style={{ fontSize: scaleFont(12), lineHeight: scaleFont(13), textAlign: 'center' }}>임시</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity onPress={update}>
+                            <TouchableOpacity onPress={() => movePage('Update')} >
                                 <Image
                                     source={require("../../img/home/g-studytime.png")}
                                     style={{ width: scaleWidth(50), height: scaleHeight(50), }}
@@ -414,7 +392,7 @@ export default function StoreDetail({ navigation }) {
                                 />
                                 <Text style={{ fontSize: scaleFont(12), lineHeight: scaleFont(13), textAlign: 'center' }}>임시</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity onPress={update}>
+                            <TouchableOpacity onPress={() => movePage('Update')} >
                                 <Image
                                     source={require("../../img/home/g-coupon.png")}
                                     style={{ width: scaleWidth(50), height: scaleHeight(50), }}
@@ -422,7 +400,7 @@ export default function StoreDetail({ navigation }) {
                                 />
                                 <Text style={{ fontSize: scaleFont(12), lineHeight: scaleFont(13), textAlign: 'center' }}>임시</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity onPress={update}>
+                            <TouchableOpacity onPress={() => movePage('Update')} >
                                 <Image
                                     source={require("../../img/home/g-point.png")}
                                     style={{ width: scaleWidth(50), height: scaleHeight(50), }}
@@ -430,7 +408,7 @@ export default function StoreDetail({ navigation }) {
                                 />
                                 <Text style={{ fontSize: scaleFont(12), lineHeight: scaleFont(13), textAlign: 'center' }}>임시</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity onPress={update}>
+                            <TouchableOpacity onPress={() => movePage('Update')} >
                                 <Image
                                     source={require("../../img/home/g-notice.png")}
                                     style={{ width: scaleWidth(50), height: scaleHeight(50), }}
@@ -470,7 +448,7 @@ export default function StoreDetail({ navigation }) {
                     </View>
                     {/* 지도 */}
                     <View style={{ flex: 1, paddingTop: scaleHeight(20), height: scaleHeight(270) }}>
-                        <Map
+                        <GoogleMap
                             width={scaleWidth(360)}
                             height={scaleHeight(500)}
                             centerPoint={{ lat: 37.5665, lng: 126.9780 }}

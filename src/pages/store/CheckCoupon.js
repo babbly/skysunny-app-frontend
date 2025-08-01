@@ -15,8 +15,8 @@ export default function CheckCoupon({ navigation }) {
             store: '시작 스터디카페 인천 송도점',
             validDays: 10,
             amount: '5,000원',
-            minUse: '10,000원 이상 사용가능',
-            type: '사용가능',
+            minUse: '10,000원 이상 이용가능',
+            type: '이용가능',
         },
         {
             id: '2',
@@ -25,7 +25,7 @@ export default function CheckCoupon({ navigation }) {
             store: '시작 스터디카페 인천 송도점',
             validDays: -1,
             amount: '3,000원',
-            minUse: '5,000원 이상 사용가능',
+            minUse: '5,000원 이상 이용가능',
             type: '만료',
         },
         {
@@ -35,8 +35,8 @@ export default function CheckCoupon({ navigation }) {
             store: '시작 스터디카페 인천 송도점',
             validDays: 10,
             amount: '5,000원',
-            minUse: '10,000원 이상 사용가능',
-            type: '사용가능',
+            minUse: '10,000원 이상 이용가능',
+            type: '이용가능',
         },
         {
             id: '4',
@@ -45,8 +45,8 @@ export default function CheckCoupon({ navigation }) {
             store: '시작 스터디카페 인천 송도점',
             validDays: 10,
             amount: '5,000원',
-            minUse: '10,000원 이상 사용가능',
-            type: '사용가능',
+            minUse: '10,000원 이상 이용가능',
+            type: '이용가능',
         },
         {
             id: '5',
@@ -55,8 +55,8 @@ export default function CheckCoupon({ navigation }) {
             store: '시작 스터디카페 인천 송도점',
             validDays: 10,
             amount: '5,000원',
-            minUse: '10,000원 이상 사용가능',
-            type: '사용가능',
+            minUse: '10,000원 이상 이용가능',
+            type: '이용가능',
         },
         {
             id: '6',
@@ -65,12 +65,12 @@ export default function CheckCoupon({ navigation }) {
             store: '시작 스터디카페 인천 송도점',
             validDays: 10,
             amount: '5,000원',
-            minUse: '10,000원 이상 사용가능',
-            type: '사용가능',
+            minUse: '10,000원 이상 이용가능',
+            type: '이용가능',
         },
     ];
 
-    const filteredCoupons = couponData.filter(coupon => coupon.type === '사용가능');
+    const filteredCoupons = couponData.filter(coupon => coupon.type === '이용가능');
 
 
     const renderCouponItem = ({ item }) => (
@@ -90,7 +90,7 @@ export default function CheckCoupon({ navigation }) {
                 borderBottomWidth: 1,
                 paddingBottom: scaleHeight(10),
                 marginBottom: scaleHeight(10),
-                borderColor: '#e5e5e5'
+                borderColor: color.mediumGray
             }}>
                 <Text style={{
                     fontWeight: '400',
@@ -109,7 +109,7 @@ export default function CheckCoupon({ navigation }) {
                     <Text style={{
                         fontSize: scaleFont(12),
                         textAlign: 'center',
-                        color: color.blackGray
+                        color: color.gray900
                     }}>{item.type}</Text>
                 </View>
             </View>
@@ -126,7 +126,7 @@ export default function CheckCoupon({ navigation }) {
                     <Text style={{
                         fontSize: scaleFont(12),
                         textAlign: 'center',
-                        color: color.blackGray
+                        color: color.gray900
                     }}>매장전용</Text>
                 </View>
                 <Text style={{
@@ -138,7 +138,7 @@ export default function CheckCoupon({ navigation }) {
             </View>
 
             <Text style={{
-                fontWeight: '350',
+                fontWeight: '300',
                 fontSize: scaleFont(12),
                 lineHeight: scaleFont(20),
                 color: color.fontGray,
@@ -151,7 +151,7 @@ export default function CheckCoupon({ navigation }) {
             }}>
                 <Image
                     source={require("../../img/mypage/redclock.png")}
-                    style={{ width: 14, height: 14, marginRight: 3 }}
+                    style={[layout.icon14]}
                     resizeMode="contain"
                 />
                 <Text style={{
@@ -197,17 +197,17 @@ export default function CheckCoupon({ navigation }) {
         <SafeAreaView style={{ flex: 1, backgroundColor: color.white }}>
 
             {/* 상단 바 */}
-            <View style={layout.topBar}>
+            <View style={[layout.topBar]}>
                 <View style={{ flexDirection: 'row' }}>
-                    <TouchableOpacity style={layout.backBox} onPress={() => navigation.goBack()}>
+                    <TouchableOpacity style={[layout.backBox]} onPress={() => navigation.goBack()}>
                         <Image
                             source={require("../../img/common/backarrow.png")}
-                            style={{ width: scaleWidth(24), height: scaleHeight(24) }}
+                            style={[layout.icon24]}
                             resizeMode="contain"
                         />
                     </TouchableOpacity>
                     <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                        <Text style={layout.topText}>쿠폰선택</Text>
+                        <Text style={[layout.topTxt]}>쿠폰선택</Text>
                     </View>
                 </View>
             </View>
@@ -237,7 +237,7 @@ export default function CheckCoupon({ navigation }) {
                         <Text style={{
                             fontSize: scaleFont(14),
                             lineHeight: scaleFont(16),
-                            color: color.mediumGray,
+                            color: color.grey30,
                         }}>
                             사용 가능한 쿠폰이 없어요.
                         </Text>
@@ -254,7 +254,7 @@ const styles = StyleSheet.create({
     detailButton: {
         backgroundColor: color.mainColor,
         borderWidth: 1,
-        borderColor: color.blackGray,
+        borderColor: color.gray900,
         borderRadius: 6,
         height: scaleHeight(36),
         justifyContent: 'center',
@@ -262,6 +262,6 @@ const styles = StyleSheet.create({
     },
     detailText: {
         textAlign: 'center',
-        color: color.blackGray
+        color: color.gray900
     }
 });

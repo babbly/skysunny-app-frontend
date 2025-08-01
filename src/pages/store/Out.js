@@ -10,10 +10,9 @@ import color from '../../res/color';
 import layout, { scaleFont, scaleHeight, scaleWidth } from '../../res/layout';
 
 export default function Out({ navigation }) {
-    const storeDetail = () => {
-        navigation.navigate('PageStack', {
-            screen: 'StoreDetail'
-        });
+
+    const movePage = (screen) => {
+        navigation.navigate('PageStack', { screen });
     };
 
 
@@ -36,7 +35,7 @@ export default function Out({ navigation }) {
                         <Text style={{
                             fontSize: scaleFont(12),
                             lineHeight: scaleFont(16),
-                            color: color.blackGray,
+                            color: color.gray900,
                             textAlign: 'left',
 
                         }}>
@@ -48,7 +47,7 @@ export default function Out({ navigation }) {
                         width: scaleWidth(330),
                         borderRadius: 6,
                         borderWidth: 1,
-                        borderColor: '#dbdcdd',
+                        borderColor: color.gray200,
                         backgroundColor: color.white,
                         paddingHorizontal: scaleWidth(15),
                         paddingTop: scaleHeight(15),
@@ -95,11 +94,9 @@ export default function Out({ navigation }) {
                 </View>
 
                 {/* 하단 버튼 */}
-                <View style={styles.bottomButtonWrapper}>
-                    <TouchableOpacity
-                        onPress={storeDetail}
-                    >
-                        <Text style={styles.bottomButtonText}>닫기</Text>
+                <View style={styles.bottomButtonMain2}>
+                    <TouchableOpacity onPress={() => movePage('StoreDetail')} >
+                        <Text style={styles.bottomButtonTxt}>닫기</Text>
                     </TouchableOpacity>
                 </View>
             </KeyboardAvoidingView>
@@ -122,7 +119,7 @@ const styles = StyleSheet.create({
         lineHeight: scaleFont(16),
         color: color.darkGray
     },
-    bottomButtonWrapper: {
+    bottomButtonMain2: {
         position: 'absolute',
         bottom: 0,
         width: '100%',
@@ -131,10 +128,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center'
     },
-    bottomButtonText: {
+    bottomButtonTxt: {
         fontSize: scaleFont(16),
         lineHeight: scaleFont(26),
-        color: color.blackGray
+        color: color.gray900
     },
     textBox: {
         flexDirection: 'row',
@@ -148,7 +145,7 @@ const styles = StyleSheet.create({
         color: color.black
     },
     text: {
-        color: color.blackGray,
+        color: color.gray900,
         fontSize: scaleFont(12),
         lineHeight: scaleFont(16)
     }

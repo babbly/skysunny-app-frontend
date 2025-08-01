@@ -80,7 +80,7 @@ export default function StudyTime({ navigation }) {
                         </View>
                     </View>
 
-                    <View style={styles.graphBox}>
+                    <View>
                         <Graph />
                     </View>
                     <View style={styles.timeBox}>

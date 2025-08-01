@@ -3,7 +3,6 @@ import {
     Image,
     SafeAreaView,
     ScrollView,
-    StyleSheet,
     Text,
     TouchableOpacity,
     View
@@ -112,7 +111,7 @@ export default function StoreInquiry({ navigation }) {
                 keyboardShouldPersistTaps="handled"
             >
                 <View style={{ marginTop: scaleHeight(20) }}>
-                    <Text style={styles.boldTxt}>
+                    <Text style={[layout.titleTxt]}>
                         문의하실 지점을 선택해주세요.
                     </Text>
                 </View>
@@ -145,7 +144,7 @@ export default function StoreInquiry({ navigation }) {
                         <View style={{ paddingLeft: 10, paddingVertical: 5 }}>
                             <Text style={{
                                 color: color.black,
-                                fontFamily: 'Noto Sans KR',
+                                fontFamily: 'NotoSans KR',
                                 fontSize: scaleFont(13),
                                 fontWeight: '500',
                                 lineHeight: scaleFont(20),
@@ -154,7 +153,7 @@ export default function StoreInquiry({ navigation }) {
                             </Text>
                             <Text style={{
                                 color: color.fontGray,
-                                fontFamily: 'Noto Sans KR',
+                                fontFamily: 'NotoSans KR',
                                 fontSize: scaleFont(12),
                                 fontWeight: '300',
                                 lineHeight: scaleFont(20),
@@ -169,12 +168,3 @@ export default function StoreInquiry({ navigation }) {
         </SafeAreaView>
     );
 }
-const styles = StyleSheet.create({
-    boldTxt: {
-        color: color.black,
-        fontFamily: 'Noto Sans KR',
-        fontSize: scaleFont(15),
-        fontWeight: '500',
-        lineHeight: scaleFont(24)
-    }
-});

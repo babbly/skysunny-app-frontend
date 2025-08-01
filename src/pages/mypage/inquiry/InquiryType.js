@@ -67,7 +67,7 @@ export default function InquiryType({ navigation }) {
                     <View style={{ marginTop: 20 }}>
                         <Text style={{
                             color: color.black,
-                            fontFamily: 'Noto Sans KR',
+                            fontFamily: 'NotoSans KR',
                             fontSize: scaleFont(15),
                             fontWeight: '500',
                             lineHeight: scaleFont(24),
@@ -75,7 +75,7 @@ export default function InquiryType({ navigation }) {
                         }}>
                             스카스카에게 문의를 남겨주세요.
                         </Text>
-                        <Text style={[layout.guideTxt]}>
+                        <Text style={[layout.f12w300]}>
                             - 원하시는 문의 유형을 선택하신 후 작성해주세요.{"\n"}
                             운영자 검토 후 최대한 신속하게 답변해드릴게요.
                         </Text>
