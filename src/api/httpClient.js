@@ -113,19 +113,19 @@ const serverUrl =
 const httpUrl = {
     // login
     login: '/auth/login',
-    logout: '/logout',
-    userResendEmailSignup: '/user/resend/email/signup/%s',
+
+
     snsLogin: '/snslogin',
     tokenRegist: '/push/token',
 
     // signup
-    signup: '/user/create',
-    userCheckId: '/user/check/id/%s',
+    findId: '/find-id',
+    findPwd: '/find-password',
+    checkEmail: '/user/check-email',
+
 
     // findIdPw
-    findId: '/user/findId?name=%s&tel=%s',
-    findPw: '/user/findPw?id=%s&name=%s&tel=%s',
-    changePw: '/user/updatePw',
+
 
     favoriteStore: '/favorites?sortType=%s&keyword=%s',
     storeDetail: '/stores/2'

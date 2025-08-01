@@ -6,7 +6,7 @@ import { scaleFont, scaleHeight, scaleWidth } from '../res/layout';
 
 const { width, height } = Dimensions.get('window');
 
-export default function Map() {
+export default function GoogleMap() {
   const [markers, setMarkers] = useState([]);
 
   useEffect(() => {
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
   },
   calloutText: {
     color: color.black,
-    fontFamily: 'BM DoHyeon OTF',
+    fontFamily: 'BMDoHyeon',
     fontWeight: '400',
     fontSize: scaleFont(13),
     lineHeight: scaleFont(16),
