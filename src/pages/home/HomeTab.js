@@ -441,6 +441,9 @@ const styles = StyleSheet.create({
         textAlign: 'center'
     },
     iconTxt: {
+        color: color.gray900,
+        fontFamily: 'NotoSans KR',
+        fontWeight: '300',
         fontSize: scaleFont(12),
         lineHeight: scaleFont(13),
         textAlign: 'center'

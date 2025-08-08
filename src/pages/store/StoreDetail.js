@@ -79,18 +79,52 @@ export default function StoreDetail({ navigation }) {
                 {/* 배너부터  */}
                 <View style={[layout.container, { backgroundColor: color.white }]}>
                     {/* 매장명 */}
-                    <View style={{ width: scaleWidth(200), paddingTop: scaleHeight(20), justifyContent: 'center', alignItems: 'center' }}>
-                        <Text style={{ marginBottom: 5, fontSize: scaleFont(16), lineHeight: scaleFont(24), color: color.black }}>{item.name}</Text>
-                        <Text style={{ fontSize: scaleFont(12), lineHeight: scaleFont(16), color: color.black }}>{item.address}</Text>
+                    <View style={{ paddingTop: scaleHeight(20), justifyContent: 'center', alignItems: 'center' }}>
+                        <Text style={{
+                            marginBottom: 5,
+                            color: color.black,
+                            fontFamily: 'BMDoHyeon',
+                            fontWeight: '400',
+                            fontSize: scaleFont(16),
+                            lineHeight: scaleFont(24),
+                        }}>
+                            {/* {item.name} */} 시작 스터디카페 인천 송도점
+                        </Text>
+                        <Text style={{
+                            color: color.black,
+                            fontFamily: 'NotoSans KR',
+                            fontWeight: '300',
+                            fontSize: scaleFont(12),
+                            lineHeight: scaleFont(16),
+                        }}>
+                            {/* {item.address} */}인천 연수구 해돋이로 165 8층 (803호)
+                        </Text>
                     </View>
                     {/* 좌석,스터디룸,사물함 정보 */}
-                    <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: scaleHeight(20) }}>
+                    <View style={{ width: scaleWidth(250), flexDirection: 'row', alignItems: 'center', marginTop: scaleHeight(20) }}>
                         <Image source={require("../../img/mypage/seat.png")} style={[layout.icon14]} />
-                        <Text style={{ fontSize: scaleFont(12), marginRight: 5 }}>{item.seats} |</Text>
+                        <Text style={[layout.f12w400, {
+                            marginRight: 5,
+                            color: color.gray900,
+                        }]}>
+                            {/* {item.seats}  */} 30/90
+                        </Text>
+                        <View style={[layout.rightLine, { marginHorizontal: scaleWidth(22) }]} />
                         <Image source={require("../../img/mypage/studyroom.png")} style={[layout.icon14]} />
-                        <Text style={{ fontSize: scaleFont(12), marginRight: 5 }}>{item.studyRooms} |</Text>
+                        <Text style={[layout.f12w400, {
+                            marginRight: 5,
+                            color: color.gray900,
+                        }]}>
+                            {/* {item.studyRooms}  */}01/05
+                        </Text>
+                        <View style={[layout.rightLine, { marginHorizontal: scaleWidth(22) }]} />
                         <Image source={require("../../img/mypage/locker.png")} style={[layout.icon14]} />
-                        <Text style={{ fontSize: scaleFont(12) }}>{item.lockers}</Text>
+                        <Text style={[layout.f12w400, {
+                            color: color.gray900,
+                        }]}>
+                            {/* {item.lockers} */} 10/45
+
+                        </Text>
                     </View>
                     {/* 이벤트문구 */}
                     <View style={{
@@ -105,8 +139,16 @@ export default function StoreDetail({ navigation }) {
 
                     }}>
                         <Image source={require("../../img/mypage/discount.png")} style={[layout.icon14]} />
-                        <Text style={{ fontSize: scaleFont(12), color: color.black, marginRight: 5 }}>
-                            {item.eventDescription}
+                        <Text style={{
+                            color: color.black,
+                            fontFamily: 'NotoSans KR',
+                            fontWeight: '500',
+                            fontSize: scaleFont(12),
+                            lineHeight: scaleFont(16),
+                            marginLeft: scaleWidth(12)
+                        }}>
+                            {/* {item.eventDescription} */}
+                            캐시정기권 이용시 좌석당 최대 20% 할인
                         </Text>
                     </View>
                     {/* 시간, 문의 */}
@@ -121,7 +163,10 @@ export default function StoreDetail({ navigation }) {
                                 }}
                                 resizeMode="contain"
                             />
-                            <Text>{item.businessHours}</Text>
+                            <Text>
+                                {/* {item.businessHours} */}
+                                00:00 ~ 24:00
+                            </Text>
                         </View>
                         <View style={{ flexDirection: 'row' }}>
                             {/* 카카오 */}
@@ -129,7 +174,7 @@ export default function StoreDetail({ navigation }) {
                             >
                                 <Image
                                     source={require('../../img/home/talk.png')}
-                                    style={[styles.iocnImg]}
+                                    style={[layout.icon24]}
                                     resizeMode="contain"
                                 />
                             </TouchableOpacity>
@@ -145,7 +190,7 @@ export default function StoreDetail({ navigation }) {
                             >
                                 <Image
                                     source={require('../../img/home/call.png')}
-                                    style={[styles.iocnImg]}
+                                    style={[layout.icon24]}
                                     resizeMode="contain"
                                 />
                             </TouchableOpacity>
@@ -178,7 +223,7 @@ export default function StoreDetail({ navigation }) {
                                         }}
                                         resizeMode="contain"
                                     />
-                                    <Text>정기권 사용</Text>
+                                    <Text style={styles.btnText}>정기권 사용</Text>
                                 </TouchableOpacity>
                                 <Dialog
                                     visible={usePassVisible}
@@ -223,7 +268,7 @@ export default function StoreDetail({ navigation }) {
                                         }}
                                         resizeMode="contain"
                                     />
-                                    <Text>1일권 사용</Text>
+                                    <Text style={styles.btnText}>1일권 사용</Text>
                                 </TouchableOpacity>
                                 <TouchableOpacity onPress={() => movePage('Pass')}
                                     style={{
@@ -246,7 +291,7 @@ export default function StoreDetail({ navigation }) {
                                         }}
                                         resizeMode="contain"
                                     />
-                                    <Text>정기권 구매</Text>
+                                    <Text style={styles.btnText}>정기권 구매</Text>
                                 </TouchableOpacity>
                             </View>
                             <View style={{}}>
@@ -271,7 +316,7 @@ export default function StoreDetail({ navigation }) {
                                         }}
                                         resizeMode="contain"
                                     />
-                                    <Text>퇴실하기</Text>
+                                    <Text style={styles.btnText}>퇴실하기</Text>
                                 </TouchableOpacity>
                                 {/* dialog */}
                                 <Dialog
@@ -287,7 +332,7 @@ export default function StoreDetail({ navigation }) {
 
 
                         <View style={{ flexDirection: 'row' }}>
-                            <TouchableOpacity onPress={() => movePage('StudyRoom')}
+                            <TouchableOpacity onPress={() => movePage('StudyRoomPass')}
                                 style={{
                                     paddingHorizontal: scaleWidth(12),
                                     paddingVertical: scaleHeight(9),
@@ -307,7 +352,7 @@ export default function StoreDetail({ navigation }) {
                                     }}
                                     resizeMode="contain"
                                 />
-                                <Text>스터디룸</Text>
+                                <Text style={styles.btnText}>스터디룸</Text>
                             </TouchableOpacity>
                             <TouchableOpacity style={{
                                 paddingHorizontal: scaleWidth(12),
@@ -328,7 +373,7 @@ export default function StoreDetail({ navigation }) {
                                     }}
                                     resizeMode="contain"
                                 />
-                                <Text>사물함</Text>
+                                <Text style={styles.btnText}>사물함</Text>
                             </TouchableOpacity>
                             <TouchableOpacity style={{
                                 paddingHorizontal: scaleWidth(12),
@@ -349,7 +394,7 @@ export default function StoreDetail({ navigation }) {
                                     }}
                                     resizeMode="contain"
                                 />
-                                <Text>자리이동</Text>
+                                <Text style={styles.btnText}>자리이동</Text>
                             </TouchableOpacity>
 
                         </View>
@@ -366,9 +411,11 @@ export default function StoreDetail({ navigation }) {
                         paddingHorizontal: scaleWidth(15),
                     }}>
                         <Text style={{
+                            color: color.black,
+                            fontFamily: 'BMDoHyeon',
+                            fontWeight: '400',
                             fontSize: scaleFont(13),
                             lineHeight: scaleFont(24),
-                            color: color.black,
                             paddingTop: scaleHeight(20),
                             paddingBottom: scaleHeight(10)
                         }}>편의시설</Text>
@@ -379,42 +426,42 @@ export default function StoreDetail({ navigation }) {
                             <TouchableOpacity onPress={() => movePage('Update')} >
                                 <Image
                                     source={require("../../img/home/g-payment.png")}
-                                    style={{ width: scaleWidth(50), height: scaleHeight(50), }}
+                                    style={[layout.icon50]}
                                     resizeMode="contain"
                                 />
-                                <Text style={{ fontSize: scaleFont(12), lineHeight: scaleFont(13), textAlign: 'center' }}>임시</Text>
+                                <Text style={[styles.iconTxt]}>임시</Text>
                             </TouchableOpacity>
                             <TouchableOpacity onPress={() => movePage('Update')} >
                                 <Image
                                     source={require("../../img/home/g-studytime.png")}
-                                    style={{ width: scaleWidth(50), height: scaleHeight(50), }}
+                                    style={[layout.icon50]}
                                     resizeMode="contain"
                                 />
-                                <Text style={{ fontSize: scaleFont(12), lineHeight: scaleFont(13), textAlign: 'center' }}>임시</Text>
+                                <Text style={[styles.iconTxt]}>임시</Text>
                             </TouchableOpacity>
                             <TouchableOpacity onPress={() => movePage('Update')} >
                                 <Image
                                     source={require("../../img/home/g-coupon.png")}
-                                    style={{ width: scaleWidth(50), height: scaleHeight(50), }}
+                                    style={[layout.icon50]}
                                     resizeMode="contain"
                                 />
-                                <Text style={{ fontSize: scaleFont(12), lineHeight: scaleFont(13), textAlign: 'center' }}>임시</Text>
+                                <Text style={[styles.iconTxt]}>임시</Text>
                             </TouchableOpacity>
                             <TouchableOpacity onPress={() => movePage('Update')} >
                                 <Image
                                     source={require("../../img/home/g-point.png")}
-                                    style={{ width: scaleWidth(50), height: scaleHeight(50), }}
+                                    style={[layout.icon50]}
                                     resizeMode="contain"
                                 />
-                                <Text style={{ fontSize: scaleFont(12), lineHeight: scaleFont(13), textAlign: 'center' }}>임시</Text>
+                                <Text style={[styles.iconTxt]}>임시</Text>
                             </TouchableOpacity>
                             <TouchableOpacity onPress={() => movePage('Update')} >
                                 <Image
                                     source={require("../../img/home/g-notice.png")}
-                                    style={{ width: scaleWidth(50), height: scaleHeight(50), }}
+                                    style={[layout.icon50]}
                                     resizeMode="contain"
                                 />
-                                <Text style={{ fontSize: scaleFont(12), lineHeight: scaleFont(13), textAlign: 'center' }}>임시</Text>
+                                <Text style={[styles.iconTxt]}>임시</Text>
                             </TouchableOpacity>
 
                         </View>
@@ -428,9 +475,11 @@ export default function StoreDetail({ navigation }) {
                         paddingHorizontal: scaleWidth(15),
                     }}>
                         <Text style={{
+                            color: color.black,
+                            fontFamily: 'BMDoHyeon',
+                            fontWeight: '400',
                             fontSize: scaleFont(13),
                             lineHeight: scaleFont(24),
-                            color: color.black,
                             paddingTop: scaleHeight(20),
                             paddingBottom: scaleHeight(10)
                         }}>이용안내</Text>
@@ -438,21 +487,20 @@ export default function StoreDetail({ navigation }) {
                         <View style={{
                             justifyContent: 'space-between', flexDirection: 'row',
                         }}>
-                            <Text>
+                            <Text style={[layout.f12w300, { color: color.black, textAlign: 'left' }]}>
                                 시작 스터디카페는 개읜의 학습 취향과 컨디션, 학습패턴에 따라 선택 가능한 다양한 유형의 프리미엄 공간을 제공합니다.{"\n"}
                                 시작 스터디카페 인천 송도점에서 최적의 학습 효과를 경험하세요.
-                                {item.guide}
+                                {/* {item.guide} */}
                             </Text>
 
                         </View>
                     </View>
                     {/* 지도 */}
-                    <View style={{ flex: 1, paddingTop: scaleHeight(20), height: scaleHeight(270) }}>
-                        <GoogleMap
+                    <View style={{ paddingTop: scaleHeight(20), height: scaleHeight(270) }}>
+                        {/* <GoogleMap
                             width={scaleWidth(360)}
-                            height={scaleHeight(500)}
                             centerPoint={{ lat: 37.5665, lng: 126.9780 }}
-                        />
+                        /> */}
 
 
 
@@ -478,5 +526,21 @@ const styles = StyleSheet.create({
         zIndex: 10,
         justifyContent: 'space-between'
     },
+    btnText: {
+        color: color.black,
+        fontFamily: 'BMDoHyeon',
+        fontWeight: '400',
+        fontSize: scaleFont(12),
+        lineHeight: scaleFont(24),
+
+    },
+    iconTxt: {
+        color: color.gray900,
+        fontFamily: 'NotoSans KR',
+        fontWeight: '300',
+        fontSize: scaleFont(12),
+        lineHeight: scaleFont(13),
+        textAlign: 'center'
+    }
 
 });
