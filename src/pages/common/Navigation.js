@@ -2,6 +2,7 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from 'react';
 import { Image } from 'react-native';
+import { useSelector } from 'react-redux';
 
 import CommunityTab from '../community/CommunityTab';
 import HistoryTab from '../history/HistoryTab';
@@ -12,6 +13,8 @@ import SearchTab from '../search/SearchTab';
 const Tab = createBottomTabNavigator();
 
 export default function TabNavigator() {
+    const user = useSelector(state => state.auth.user);
+    console.log('🟡 TabNavigatorTabNavigator user:', user)
     return (
         <Tab.Navigator
             initialRouteName='홈'

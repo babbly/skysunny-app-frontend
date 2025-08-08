@@ -1,6 +1,8 @@
 import Axios from 'axios';
+import { Alert } from 'react-native';
 import util from 'util';
 import Const from '../const';
+
 
 const makeUrl = (url, params) => {
     // let result = serverUrl + url;
@@ -112,7 +114,7 @@ const serverUrl =
 
 const httpUrl = {
     // login
-    login: '/auth/login',
+    login: '/user/auth/login',
 
 
     snsLogin: '/snslogin',
